@@ -1,0 +1,36 @@
+<fieldset class="rule_option" id="repeats_monthly_options">
+  <%= f.number_field :repeats_every_n_months %>
+  <%= f.select :repeats_monthly, ['each','on'] %>
+  <div class="control-group" id="rule_repeats_monthly_each">
+    <label class="control-label">Each</label>
+    <div class="controls">
+      <% (1..31).to_a.each do |day_of_the_month| %>
+        <%= label_tag "rule_repeats_monthly_each_days_of_the_month_#{day_of_the_month}", day_of_the_month, :class => 'checkbox-inline' do %>
+          <%= check_box_tag "rule[repeats_monthly_each_days_of_the_month][#{day_of_the_month}]", day_of_the_month, f.object.repeats_monthly_each_days_of_the_month.include?(day_of_the_month), {:name => "rule[repeats_monthly_each_days_of_the_month][]"} %>
+          <%= day_of_the_month %>
+        <% end %>
+      <% end %>
+      <%= hidden_field_tag "rule[repeats_monthly_each_days_of_the_month][]", "" %>
+    </div>
+  </div>
+  <div class="control-group" id="rule_repeats_monthly_on">
+    <label class="control-label">On the</label>
+    <div class="controls">
+      <% [1,2,3,4,-1].each_with_index do |ordinal,index| %>
+        <%= label_tag "rule_repeats_monthly_on_ordinals_#{ordinal}", ordinal, :class => 'checkbox-inline' do %>
+          <%= check_box_tag "rule[repeats_monthly_on_ordinals][#{ordinal}]", ordinal, f.object.repeats_monthly_on_ordinals.include?(ordinal), {:name => "rule[repeats_monthly_on_ordinals][]"} %>
+          <%= ['first','second','third','fourth','last'][index] %>
+        <% end %>
+      <% end %>
+      <%= hidden_field_tag "rule[repeats_monthly_on_ordinals][]", "" %>
+      <hr/>
+      <% %w[sunday monday tuesday wednesday thursday friday saturday].each do |day_of_the_week| %>
+        <%= label_tag "rule_repeats_monthly_on_days_of_the_week_#{day_of_the_week}", day_of_the_week.humanize, :class => 'checkbox-inline' do %>
+          <%= check_box_tag "rule[repeats_monthly_on_days_of_the_week][#{day_of_the_week}]", day_of_the_week, f.object.repeats_monthly_on_days_of_the_week.include?(day_of_the_week), {:name => "rule[repeats_monthly_on_days_of_the_week][]"} %>
+          <%= day_of_the_week.humanize %>
+        <% end %>
+      <% end %>
+      <%= hidden_field_tag "rule[repeats_monthly_on_days_of_the_week][]", "" %>
+    </div>
+  </div>
+</fieldset>

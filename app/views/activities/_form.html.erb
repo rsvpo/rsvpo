@@ -1,0 +1,20 @@
+<%= bootstrap_form_for(@activity) do |f| %>
+  <div class="form-inputs">
+    <%= f.attachinary_file_field :photos %>
+    <%= f.text_field :title %>
+    <%= f.text_area :about %>
+    <%= f.number_field :price %>
+    <%= f.text_area :bookmsg %>
+    <%= f.number_field :duration %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+   $('.attachinary-input').attachinary()
+  });
+</script>

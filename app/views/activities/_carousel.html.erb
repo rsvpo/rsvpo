@@ -1,0 +1,37 @@
+<% if activity.photos.blank? %>
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    </ol>
+    
+    <div class="carousel-inner">
+      <div class="item active" style="background-image: url(<%= ENV['CF'] %>stock/activity/question.jpg)">
+    </div>
+
+<% else %>
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <% (1..activity.photos.count).each do |index| %>
+        <li data-target="#carousel-example-generic" data-slide-to="<%= index - 1 %>" <% if index == 1 %>class="active"<% end %>></li>
+      <% end %>
+    </ol>
+    
+    <div class="carousel-inner">
+      <% activity.photos.each_with_index do |photo, index| %>
+        <div class="item <% if index == 0 %>active<% end %>">
+          <%= cl_image_tag(photo.path, { size: '1024x436', crop: :fit }) %>
+        </div>
+      <% end %>
+    </div>
+<% end %>
+
+<% if activity.photos.count > 1 %>
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+<% end %>
+</div>

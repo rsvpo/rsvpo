@@ -1,0 +1,85 @@
+<script src="<%= ENV['CF'] %>fullcalendar.min.js"></script>
+<link href="<%= ENV['CF'] %>fullcalendar.css" rel="stylesheet">
+
+<div class="carousel_wrapper">
+  <%= render 'carousel', activity: @activity %>
+</div>
+
+<div class="descriptions_wrapper">
+  <div class="activity_title">
+    <%= @activity.title %> - <%= @activity.price %> (<%= @activity.duration %> minutes)
+  </div>
+  <div class="activity_about">
+    <%= @activity.about %>
+  </div>
+</div>
+
+<% if @activity.active %>
+  <div class="actions_wrapper">
+    <div class="like_btn_wrapper">
+      <%= render 'like', activity: @activity %>
+    </div>
+
+    <span class="share_btn_wrapper">
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#share">
+        Share
+      </button>
+    </span>
+
+    <span class="rsvp_btn_wrapper">
+      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rsvp">
+        RSVP
+      </button>
+    </span>
+  </div>
+
+  <div class="calendar_wrapper container">
+    <div id='calendar'></div>
+  </div>
+<% else %>
+<% end %>
+
+<span class="thumbnail">
+  <% if @activity.merchant.logo? %>
+    <%= cl_image_tag(@activity.merchant.logo.path, { size: '50x50', crop: :fill}) %>
+  <% end %>
+</span>
+
+<%= @activity.merchant.name %>
+
+<%= render 'sharemodal' %>
+<%= render 'rsvpmodal', activity: @activity %>
+<script>
+  function reload_calendar(){
+    var source = new Array();
+    var new_rule_link = "<%= new_rule_path %>"
+    $('#calendar').fullCalendar({
+      dayClick: function(date, allDay, jsEvent, view) {
+        document.location.href=new_rule_link + "?start_date=" + date;
+      },
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        ignoreTimezone: false,
+        select: this.select,
+        eventClick: this.eventClick,
+        eventSources: [
+          {url: '<%= activity_path(@activity, format: :json) %>',
+          error: function() {
+            alert('there was an error while fetching events!');
+          }}
+        ],
+        timeFormat: 'h:mmtt{ - h:mmtt} '
+    });
+  }
+</script>
+<script>
+  $(document).ready(function() {
+    reload_calendar();
+  });
+</script>

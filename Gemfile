@@ -14,6 +14,16 @@ gem 'devise'
 gem 'figaro', :github=>"laserlemon/figaro"
 gem 'pg'
 gem 'simple_form'
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'ice_cube'
+gem 'bootstrap_form'
+gem 'redis'
+gem 'carrierwave'
+gem 'cloudinary'
+gem 'fog'
+gem 'sidekiq'
+gem 'attachinary'
+gem 'acts_as_commentable_with_threading'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -21,7 +31,10 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'rspec-rails', '>= 3.0.0.beta2'
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'spork-rails'
+  gem 'guard-spork'
 end
 group :production do
   gem 'unicorn'

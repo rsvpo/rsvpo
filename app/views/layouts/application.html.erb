@@ -2,13 +2,16 @@
 <html>
 <head>
   <title>Rsvp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= cloudinary_js_config %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="<%= "#{params[:controller]}_#{params[:action]}" %>">
+  <%= render 'layouts/nav' %>
+  <%= render 'layouts/flash' %>
+  <%= yield %>
 </body>
+  <%= render "layouts/footer" unless @skip_footer %>
 </html>
