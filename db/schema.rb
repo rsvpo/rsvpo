@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520134239) do
+ActiveRecord::Schema.define(version: 20140525134512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,11 +39,36 @@ ActiveRecord::Schema.define(version: 20140520134239) do
     t.integer  "duration"
     t.boolean  "active",      default: true
     t.integer  "merchant_id"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "activities", ["category_id"], name: "index_activities_on_category_id", using: :btree
   add_index "activities", ["merchant_id"], name: "index_activities_on_merchant_id", using: :btree
+
+  create_table "activities_addresses", id: false, force: true do |t|
+    t.integer "activity_id"
+    t.integer "address_id"
+  end
+
+  add_index "activities_addresses", ["activity_id", "address_id"], name: "index_activities_addresses_on_activity_id_and_address_id", using: :btree
+  add_index "activities_addresses", ["address_id", "activity_id"], name: "index_activities_addresses_on_address_id_and_activity_id", using: :btree
+
+  create_table "addresses", force: true do |t|
+    t.string   "address"
+    t.string   "phone"
+    t.string   "locality"
+    t.string   "province"
+    t.string   "country"
+    t.decimal  "lat"
+    t.decimal  "lng"
+    t.integer  "merchant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["merchant_id"], name: "index_addresses_on_merchant_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -79,6 +104,27 @@ ActiveRecord::Schema.define(version: 20140520134239) do
 
   add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
 
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "merchants", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -97,12 +143,6 @@ ActiveRecord::Schema.define(version: 20140520134239) do
 
   add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree
   add_index "merchants", ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true, using: :btree
-
-  create_table "pics", force: true do |t|
-    t.string   "picture"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "rules", force: true do |t|
     t.text     "description"

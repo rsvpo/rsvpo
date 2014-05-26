@@ -1,0 +1,24 @@
+<span class="comments">
+  <ul class="media-list container">
+    <% if all_comments %>
+      <% all_comments.each do |comment| %>
+        <li class="media">
+          <a class="pull-left" href="#">
+            <% if User.find(comment.title).avatar %>
+              <%= cl_image_tag(User.find(comment.title).avatar.path, { size: '50x50', crop: :fill}) %>
+            <% else %>
+              <img src="<%= ENV['CF'] %>stock/unknown/user-1.png" alt="" style="width:50px; height 50px;"/>
+            <% end %>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><%= User.find(comment.title).name %></h4>
+            <%= comment.comment %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <div class="paginate-wrapper text-center">
+    <%= paginate all_comments, :remote => true %>
+  </div>
+</span>

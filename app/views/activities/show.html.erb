@@ -1,21 +1,21 @@
 <script src="<%= ENV['CF'] %>fullcalendar.min.js"></script>
 <link href="<%= ENV['CF'] %>fullcalendar.css" rel="stylesheet">
 
-<div class="carousel_wrapper">
+<div class="carousel-wrapper">
   <%= render 'carousel', activity: @activity %>
 </div>
 
-<div class="descriptions_wrapper">
-  <div class="activity_title">
+<div class="descriptions-wrapper text-center">
+  <h3 class="activity-title">
     <%= @activity.title %> - <%= @activity.price %> (<%= @activity.duration %> minutes)
-  </div>
-  <div class="activity_about">
+  </h3>
+  <p class="activity-about">
     <%= @activity.about %>
-  </div>
+  </p>
 </div>
 
 <% if @activity.active %>
-  <div class="actions_wrapper">
+  <div class="actions-wrapper text-center">
     <div class="like_btn_wrapper">
       <%= render 'like', activity: @activity %>
     </div>
@@ -26,26 +26,31 @@
       </button>
     </span>
 
-    <span class="rsvp_btn_wrapper">
+    <span class="rsvp-btn-wrapper">
       <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rsvp">
         RSVP
       </button>
     </span>
   </div>
 
-  <div class="calendar_wrapper container">
+  <div class="calendar-wrapper container">
     <div id='calendar'></div>
   </div>
 <% else %>
 <% end %>
 
-<span class="thumbnail">
+<div class="merchant container text-center">
   <% if @activity.merchant.logo? %>
-    <%= cl_image_tag(@activity.merchant.logo.path, { size: '50x50', crop: :fill}) %>
+    <span class="thumbnail">
+      <%= cl_image_tag(@activity.merchant.logo.path, { size: '50x50', crop: :fill}) %>
+    </span>
   <% end %>
-</span>
+  <h2><%= @activity.merchant.name %></h2>
+</div>
 
-<%= @activity.merchant.name %>
+<div class="comments-wrapper">
+  <%= render 'comments', all_comments: @all_comments %>
+</div>
 
 <%= render 'sharemodal' %>
 <%= render 'rsvpmodal', activity: @activity %>

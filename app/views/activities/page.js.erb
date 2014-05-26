@@ -1,0 +1,8 @@
+$('.comments').remove();
+$('.comments-wrapper').prepend('<%=j render 'comments', all_comments: @all_comments %>');
+$(function() {
+  $(".pagination .page a").on("click", function() {
+    $.getScript(this.href);
+    return false;
+  });
+});

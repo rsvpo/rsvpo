@@ -1,0 +1,54 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.7/jquery-ui.js"></script>
+
+<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script src="<%= ENV['CF'] %>addresspicker3.js"></script>
+
+
+<div id="map" style="height: 300px"></div>
+
+<div class="container">
+  <%= bootstrap_form_for(@address, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
+    <%= f.text_field :address, :placeholder => "Address", id: "address_address", class: "addresspicker_map" %>
+    <%= f.text_field :phone, :placeholder => "Phone" %>
+    <%= f.text_field :locality, :placeholder => "Locality", class: 'locality' %>
+    <%= f.text_field :province, :placeholder => "Province", class:  'administrative_area_level_1' %>
+    <%= f.text_field :country, :as => :string, :placeholder => "Country", class:  'country' %>
+    <%= f.text_field :lat, :placeholder => "Latitute", class: 'lat' %>
+    <%= f.text_field :lng, :placeholder => "Langitude", class: 'lng' %>
+    <%= f.form_group do %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  $(function() {
+    var addresspicker = $( ".addresspicker" ).addresspicker();
+    var addresspickerMap = $( ".addresspicker_map" ).addresspicker({
+      regionBias: "fr",
+      updateCallback: showCallback,
+      elements: {
+        map:      "#map",
+        lat:      ".lat",
+        lng:      ".lng",
+        street_number: '.street_number',
+        route: '.route',
+        locality: '.locality',
+        administrative_area_level_2: '.administrative_area_level_2',
+        administrative_area_level_1: '.administrative_area_level_1',
+        country:  '.country',
+        postal_code: '.postal_code',
+        type:    '.type' 
+      }
+    });
+
+    var gmarker = addresspickerMap.addresspicker( "marker");
+    gmarker.setVisible(true);
+    addresspickerMap.addresspicker( "updatePosition");
+
+    function showCallback(geocodeResult, parsedGeocodeResult){
+      $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+    }
+  });
+</script>

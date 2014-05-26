@@ -1,37 +1,69 @@
-<h1>Listing activities</h1>
+<div class="categories text-center">
+  <div class="btn-group">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+      <% if params[:category].nil? %>
+		    All Activities
+		  <% else %>
+		  	<%= @categories[params[:category].to_i - 1].name %>
+		  <% end %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% if !params[:category].nil? %>
+      <li><%= link_to "All Activities", params.except(:category) %></li>
+			<% end %>
+      <% @categories.each do |catorgory| %>
+        <li><%= link_to catorgory.name, params.merge({:category => catorgory.id}) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>About</th>
-      <th>Price</th>
-      <th>Bookmsg</th>
-      <th>Duration</th>
-      <th>Active</th>
-      <th>Merchant</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_tag activities_path, method: :get do %>
+  <p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", name: nil %>
+  </p>
+<% end %>
 
-  <tbody>
-    <% @activities.each do |activity| %>
-      <tr>
-        <td><%= activity.title %></td>
-        <td><%= activity.about %></td>
-        <td><%= activity.price %></td>
-        <td><%= activity.bookmsg %></td>
-        <td><%= activity.duration %></td>
-        <td><%= activity.active %></td>
-        <td><%= activity.merchant %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if params[:query].present? %>
+  <div id="facets">
+    <h3>Categories</h3>
+    <ul>
+      <% @activities.facets['categories']['terms'].each do |facet| %>
+        <li>
+          <%= link_to_unless_current Category.find(facet['term']).name, params.merge(category_id: facet['term']) %>
+          <% if params[:category_id] == facet['term'].to_s %>
+            (<%= link_to "remove", category_id: nil %>)
+          <% else %>
+            (<%= facet['count'] %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-<br>
+<div class="container">
+  <div class="row">
+    <div class="activities-wrapper">
+      <%= render 'activities', activities: @activities %>
+    </div>
+  </div>
+  <div class="paginate-wrap text-center">
+    <%= render 'infinity', activities: @activities %>
+  </div>
+</div>
 
-<%= link_to 'New Activity', new_activity_path %>
+<script>
+  $(window).scroll(function() {
+    var url;
+    url = $('.pagination .next_page a').attr('href');
+    if (url && $(window).scrollTop() >= $(document).height() - $(window).height()) {
+      $('.pagination').text(" Loading");
+      return $.getScript(url);
+    }
+  });
+
+  $(window).scroll();
+</script>

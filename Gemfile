@@ -23,7 +23,9 @@ gem 'cloudinary'
 gem 'fog'
 gem 'sidekiq'
 gem 'attachinary'
-gem 'acts_as_commentable_with_threading'
+gem 'acts_as_commentable'
+gem 'kaminari'
+gem 'tire'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

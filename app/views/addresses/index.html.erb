@@ -1,0 +1,41 @@
+<h1>Listing addresses</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Locality</th>
+      <th>Province</th>
+      <th>Country</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th>Activity</th>
+      <th>Merchant</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.address %></td>
+        <td><%= address.phone %></td>
+        <td><%= address.locality %></td>
+        <td><%= address.province %></td>
+        <td><%= address.country %></td>
+        <td><%= address.lat %></td>
+        <td><%= address.lng %></td>
+        <td><%= address.activity %></td>
+        <td><%= address.merchant %></td>
+        <td><%= link_to 'Show', address %></td>
+        <td><%= link_to 'Edit', edit_address_path(address) %></td>
+        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Address', new_address_path %>

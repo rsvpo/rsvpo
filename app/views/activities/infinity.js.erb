@@ -1,0 +1,3 @@
+$('.activities-wrapper').append('<%=j render 'activities', activities: @activities %>');
+$('.pagination').remove();
+$('.paginate-wrap').append('<%=j render 'infinity', activities: @activities %>');

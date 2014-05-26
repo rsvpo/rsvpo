@@ -1,5 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  Tire.configure do
+    url ENV["SEARCHLY_URL"]
+  end
+  
   config.serve_static_assets = false
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

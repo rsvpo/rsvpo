@@ -1,6 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  Tire.configure do
+    url 'http://site:<%= ENV['SEARCHLY_API_KEY'] %>api.searchbox.io/'
+  end
   # Code is not reloaded between requests.
   config.cache_classes = true
 

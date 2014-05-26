@@ -8,6 +8,7 @@ class CreateActivities < ActiveRecord::Migration
       t.integer :duration
       t.boolean :active, :default => true
       t.references :merchant, index: true
+      t.references :category, index: true
 
       t.timestamps
     end
