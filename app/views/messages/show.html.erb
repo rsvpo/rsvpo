@@ -1,19 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% @messages.each do |message| %>
+<% if message.mu %><div class="sent"><% else %><div class="receive"><% end %>
+  <%= message.content %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Content:</strong>
-  <%= @message.content %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @message.user %>
-</p>
-
-<p>
-  <strong>Merchant:</strong>
-  <%= @message.merchant %>
-</p>
-
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
+<%= link_to 'Back', mailbox_path %>

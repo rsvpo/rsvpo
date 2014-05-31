@@ -12,6 +12,7 @@ namespace :db do
     create_comments
     customers_view_activities
     message_semd_to_each_other
+    share_activities
   end
 end
 
@@ -129,6 +130,18 @@ def message_semd_to_each_other
       receive.save
       sent = merchant.messages.build(user_id: user.id, content: "Hey how is it going?", mu: true)
       sent.save
+    end
+  end
+end
+
+def share_activities
+  activities = Activity.all
+  users = User.all
+  activities.each do |activity|
+    rand(1..3).times do |n|
+      users.each do |user|
+        share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id)
+      end
     end
   end
 end
