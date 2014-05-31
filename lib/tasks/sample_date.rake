@@ -9,6 +9,7 @@ namespace :db do
     create_categories
     create_addresses
     create_activities
+    add_slots
     create_comments
     customers_view_activities
     message_semd_to_each_other
@@ -142,6 +143,38 @@ def share_activities
       users.each do |user|
         share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id)
       end
+    end
+  end
+end
+
+def add_slots
+  activities = Activity.all
+  d = Date.today
+  t = Time.now
+  fromdate = d 
+  todate = fromdate + rand(20..50).days
+  fromtime = t + (60.minutes * rand(1..10))
+  starttime.change(:sec => 0, :min => 0, :hour => 0)
+  endtime = starttime + 60.minutes
+  activities.each do |activity|
+      rule =  Rule.create!( description: '',
+                           is_all_day: false,
+                           from_date: fromdate,
+                           from_time: fromtime,
+                           to_date: 'Mon, 17 Jun 2013',
+                           to_time: '2000-01-01 17:00:00 UTC',
+                           repeats: 'weekly',
+                           repeats_every_n_days: nil,
+                           repeats_every_n_weeks: 1,
+                           repeats_weekly_each_days_of_the_week_mask: 65,
+                           repeats_every_n_months: nil,
+                           repeats_monthly: 'each',
+                           repeats_every_n_years: nil,
+                           repeats_yearly_on: false,
+                           repeat_ends: 'never',
+                           repeat_ends_on: 'Mon, 17 Jun 2013',
+                           time_zone: 'Eastern Time (US & Canada)',
+                           activity_id: activity.id)
     end
   end
 end

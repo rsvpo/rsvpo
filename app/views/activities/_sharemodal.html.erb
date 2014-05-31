@@ -6,14 +6,7 @@
         <h4 class="modal-title" id="myModalLabel">Share</h4>
       </div>
       <div class="modal-body">
-        <%= bootstrap_form_for(share, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
-          <%= f.text_field :receiver %>
-          <%= f.text_area :message %>
-          <%= f.hidden_field :activity_id, :value => activity.id %>
-          <%= f.form_group do %>
-            <%= f.submit %>
-          <% end %>
-        <% end %>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
