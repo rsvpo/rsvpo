@@ -1,6 +1,7 @@
 class Activity < ActiveRecord::Base
   belongs_to :merchant
   has_many :rules
+  has_many :views
   has_many :slots
   belongs_to :category
   
@@ -28,13 +29,16 @@ class Activity < ActiveRecord::Base
     indexes :id, type: 'integer'
     indexes :merchant_name
     indexes :category_name
+    indexes :address_province
+    indexes :view_count
     indexes :title, boost: 10
+    indexes :price
     indexes :about # analyzer: 'snowball'
     indexes :created_at, type: 'date'
   end
   
   def self.search(params)
-    tire.search(load: true, page: params[:page], per_page: 2) do
+    tire.search(load: true, page: params[:infinity], per_page: 6) do
       query do
         boolean do
           must { string params[:query], default_operator: "AND" } if params[:query].present?
@@ -42,15 +46,15 @@ class Activity < ActiveRecord::Base
           must { term :category_id, params[:category_id] } if params[:category_id].present?
         end
       end
-      sort { by :created_at, "desc" } if params[:query].blank?
-      facet "categories" do
-        terms :category_id
-      end
+      sort { by :view_count, "desc" } if params[:query].blank?
+      sort { by :view_count, "desc" } if params[:order].blank?
+      sort { by :price, "asc" } if (params[:order] == "cheapest")
+      sort { by :created_at, "desc" } if (params[:order] == "recent")
     end
   end
   
   def to_indexed_json
-    to_json(methods: [:merchant_name, :category_name])
+    to_json(methods: [:merchant_name, :category_name, :view_count])
   end
 
   def merchant_name
@@ -59,5 +63,13 @@ class Activity < ActiveRecord::Base
   
   def category_name
     category.name
+  end
+  
+  def view_count
+    views.count
+  end
+  
+  def address_province
+    addresses_province
   end
 end

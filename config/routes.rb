@@ -1,10 +1,12 @@
 Rsvp::Application.routes.draw do
+  get "mailbox", to: 'mailbox#index'
+  get 'mailbox/:id', to: 'mailbox#show'
+  
+  resources :messages
+  resources :views
   resources :addresses
-
   resources :categories
-
   resources :slots
-
   resources :rules
   resources :activities
   resources :rule_instances

@@ -4,5 +4,7 @@ class Merchant < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :activities
+  has_many :addresses
+  has_many :messages
   has_attachment  :logo, accept: [:jpg, :png, :gif]
 end

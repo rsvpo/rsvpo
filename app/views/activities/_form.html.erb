@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@activity) do |f| %>
+<%= bootstrap_form_for(@activity, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
   <%= f.attachinary_file_field :photos %>
   <%= f.text_field :title %>
   <%= f.text_area :about %>

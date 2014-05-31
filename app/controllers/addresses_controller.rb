@@ -8,4 +8,19 @@ class AddressesController < InheritedResources::Base
       render :action => 'new'
     end
   end
+  
+  private
+
+  def safe_params
+    address_attributes = [
+      :address,
+      :phone,
+      :locality,
+      :province,
+      :country,
+      :lat,
+      :lng
+    ]
+    params.require(:address).permit(*address_attributes)
+  end
 end

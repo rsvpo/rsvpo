@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @view.activity %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @view.user %>
+</p>
+
+<%= link_to 'Edit', edit_view_path(@view) %> |
+<%= link_to 'Back', views_path %>

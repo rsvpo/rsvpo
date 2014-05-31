@@ -1,49 +1,8 @@
 <div class="categories text-center">
-  <div class="btn-group">
-    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
-      <% if params[:category].nil? %>
-		    All Activities
-		  <% else %>
-		  	<%= @categories[params[:category].to_i - 1].name %>
-		  <% end %>
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <% if !params[:category].nil? %>
-      <li><%= link_to "All Activities", params.except(:category) %></li>
-			<% end %>
-      <% @categories.each do |catorgory| %>
-        <li><%= link_to catorgory.name, params.merge({:category => catorgory.id}) %></li>
-      <% end %>
-    </ul>
-  </div>
+  <%= render 'categories', categories: @categories %>
 </div>
 
-<%= form_tag activities_path, method: :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil %>
-  </p>
-<% end %>
-
-<% if params[:query].present? %>
-  <div id="facets">
-    <h3>Categories</h3>
-    <ul>
-      <% @activities.facets['categories']['terms'].each do |facet| %>
-        <li>
-          <%= link_to_unless_current Category.find(facet['term']).name, params.merge(category_id: facet['term']) %>
-          <% if params[:category_id] == facet['term'].to_s %>
-            (<%= link_to "remove", category_id: nil %>)
-          <% else %>
-            (<%= facet['count'] %>)
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
+<%= render 'navigation' %>
 <div class="container">
   <div class="row">
     <div class="activities-wrapper">

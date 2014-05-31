@@ -1,0 +1,5 @@
+<% @messages.each do |message| %>
+<% if message.mu %><div class="sent"><% else %><div class="receive"><% end %>
+  <%= message.content %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= "#{params[:controller]}_#{params[:action]}" %>">
-  <%= render 'layouts/nav' %>
+  <%= render 'layouts/nav' unless @skip_header %>
   <%= render 'layouts/flash' %>
   <%= yield %>
 </body>
