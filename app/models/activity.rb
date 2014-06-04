@@ -3,13 +3,14 @@ class Activity < ActiveRecord::Base
   has_many :rules
   has_many :views
   has_many :slots
+  has_many :likes
   belongs_to :category
   
   has_many :activities_addresses, :foreign_key => "activity_id", :class_name => "ActivitiesAddresses"
-  has_many :acategories, :through => :activities_addresses
+  has_many :addresses, :through => :activities_addresses
   
   validates :merchant_id, presence: true
-  default_scope -> { order('created_at DESC') }
+#   default_scope -> { order('created_at DESC') }
   validates :title, presence: true, length: { maximum: 50 }
   validates :about, presence: true, length: { maximum: 500 }
   validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }

@@ -1,13 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Activity:</strong>
+  <%= @slot.activity.title %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @slot.description %>
 </p>
 
+<% if @slot.is_all_day %>
+  <strong>All day</strong>
+<% else %>
+  <p>
+    <strong>Start:</strong>
+    <%= @slot.start %>
+  </p>
+<% end %>
+
 <p>
-  <strong>Activity:</strong>
-  <%= @slot.activity.title %>
+  <strong>Finish:</strong>
+  <%= @slot.finish %>
+</p>
+
+<p>
+  <strong>Inventory:</strong>
+  <%= @slot.inventory %>
 </p>
 
 <%= link_to 'Edit', edit_slot_path(@slot) %> |

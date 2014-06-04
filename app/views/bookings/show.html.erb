@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Merchant:</strong>
+  <%= @booking.slot.activity.merchant.name %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @booking.slot.activity.title %>
+</p>
+
+<p>
+  <strong>Slot:</strong>
+  <%= @booking.slot.start %> - <%= @booking.slot.finish %>
+</p>
+
+<p>
+  <strong>Optional:</strong>
+  <%= @booking.optional %>
+</p>
+
+<p>
+  <strong>Cancel:</strong>
+  <%= @booking.cancel %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @booking.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @booking.email %>
+</p>
+
+<p>
+  <strong>Friend:</strong>
+  <%= @booking.friend %>
+</p>
+
+<p>
+  <strong>Confirm:</strong>
+  <%= @booking.confirm %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @booking.phone %>
+</p>
+
+<p>
+  <strong>Slot:</strong>
+  <%= @booking.slot %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @booking.user %>
+</p>
+
+<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to 'Back', bookings_path %>

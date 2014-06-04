@@ -1,0 +1,3 @@
+<% @followings.each do |following| %>
+<%= link_to following.merchant.name, merchant_path(following.merchant) %>
+<% end %>

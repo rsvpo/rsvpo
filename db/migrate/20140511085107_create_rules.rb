@@ -2,6 +2,7 @@ class CreateRules < ActiveRecord::Migration
   def change
     create_table :rules do |t|
       t.text :description
+      t.integer :inventory
       t.boolean :is_all_day
       t.date :from_date
       t.time :from_time
@@ -25,6 +26,7 @@ class CreateRules < ActiveRecord::Migration
       t.date :repeat_ends_on
       t.string :time_zone, :default => "Hong Kong"
       t.references :activity, index: true
+      t.references :address, index: true
 
       t.timestamps
     end

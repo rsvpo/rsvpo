@@ -9,11 +9,15 @@ namespace :db do
     create_categories
     create_addresses
     create_activities
+    add_addresses_to_activities
     add_slots
     create_comments
     customers_view_activities
     message_semd_to_each_other
-    share_activities
+    book_activities
+    follow_merchants
+    like_activities
+#     share_activities
   end
 end
 
@@ -62,6 +66,22 @@ def create_activities
         category_id: category.id
         )
       activity.save
+    end
+  end
+end
+
+def add_addresses_to_activities
+  activities = Activity.all
+  activities.each do |activity| 
+    addresses = activity.merchant.addresses
+    addresses.each_with_index do |address, index|
+      if (index > 1)
+        if [true,false][rand(2)]
+          address.activities_addresses.create!(activity_id: activity.id)
+        end
+      else
+        address.activities_addresses.create!(activity_id: activity.id)
+      end
     end
   end
 end
@@ -135,46 +155,95 @@ def message_semd_to_each_other
   end
 end
 
-def share_activities
-  activities = Activity.all
-  users = User.all
-  activities.each do |activity|
-    rand(1..3).times do |n|
-      users.each do |user|
-        share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id)
-      end
-    end
-  end
-end
+# def share_activities
+#   activities = Activity.all
+#   users = User.all
+#   activities.each do |activity|
+#     rand(1..3).times do |n|
+#       users.each do |user|
+#         share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id)
+#       end
+#     end
+#   end
+# end
 
 def add_slots
   activities = Activity.all
   d = Date.today
   t = Time.now
-  fromdate = d 
-  todate = fromdate + rand(20..50).days
-  fromtime = t + (60.minutes * rand(1..10))
-  starttime.change(:sec => 0, :min => 0, :hour => 0)
-  endtime = starttime + 60.minutes
+  des = "Description" + rand(100000).to_s
+  todate = d + rand(30..60).days
+  fromtime = t.change(:sec => 0, :min => 0, :hour => 0)
+  totime = fromtime + 60.minutes
   activities.each do |activity|
-      rule =  Rule.create!( description: '',
-                           is_all_day: false,
-                           from_date: fromdate,
-                           from_time: fromtime,
-                           to_date: 'Mon, 17 Jun 2013',
-                           to_time: '2000-01-01 17:00:00 UTC',
-                           repeats: 'weekly',
-                           repeats_every_n_days: nil,
-                           repeats_every_n_weeks: 1,
-                           repeats_weekly_each_days_of_the_week_mask: 65,
-                           repeats_every_n_months: nil,
-                           repeats_monthly: 'each',
-                           repeats_every_n_years: nil,
-                           repeats_yearly_on: false,
-                           repeat_ends: 'never',
-                           repeat_ends_on: 'Mon, 17 Jun 2013',
-                           time_zone: 'Eastern Time (US & Canada)',
-                           activity_id: activity.id)
+    address = activity.addresses.sample
+    rule =  Rule.create!( description: des,
+                          inventory: rand(2..10),
+                          address_id: address.id,
+                          is_all_day: false,
+                          from_date: d,
+                          from_time: fromtime,
+                          to_date: d,
+                          to_time: totime,
+                          repeats: 'weekly',
+                          repeats_every_n_days: nil,
+                          repeats_every_n_weeks: 1,
+                          repeats_weekly_each_days_of_the_week_mask: 65,
+                          repeats_every_n_months: nil,
+                          repeats_monthly: 'each',
+                          repeats_every_n_years: nil,
+                          repeats_yearly_on: false,
+                          repeat_ends: 'never',
+                          repeat_ends_on: todate,
+                          time_zone: 'Eastern Time (US & Canada)',
+                          activity_id: activity.id)
+  end
+end
+
+def book_activities
+  slots = Slot.all
+  users = User.all
+  slots.each do |slot|
+    if rand(5) == 3
+      if [true,false][rand(2)]
+        rand(1..3).times do |n|
+          users.each do |user|
+            booking = user.bookings.create!(email: "bookerer#{n+1}@example.com",
+              name: "Whoever",
+              phone: "33807389",
+              optional: "This is optional text", 
+              slot_id: slot.id)
+          end
+        end
+      end
+    end
+  end
+end
+
+def like_activities
+  activities = Activity.all
+  users = User.all
+  activities.each do |activity|
+    if rand(5) == 3
+      if [true,false][rand(2)]
+        users.each do |user|
+          like = user.likes.create!(activity_id: activity.id)
+        end
+      end
+    end
+  end
+end
+
+def follow_merchants
+  merchants = Merchant.all
+  users = User.all
+  merchants.each do |merchant|
+    if rand(5) == 3
+      if [true,false][rand(2)]
+        users.each do |user|
+          follow = user.follows.create!(merchant_id: merchant.id)
+        end
+      end
     end
   end
 end

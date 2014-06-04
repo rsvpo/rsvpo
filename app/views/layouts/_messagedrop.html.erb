@@ -1,0 +1,48 @@
+<!-- begin MESSAGES DROPDOWN -->
+<li class="dropdown">
+  <a href="#" class="messages-link dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-envelope"></i>
+    <span class="number"><%= messages.count %></span> <i class="fa fa-caret-down"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-scroll dropdown-messages">
+
+    <!-- Messages Dropdown Heading -->
+    <li class="dropdown-header">
+      <i class="fa fa-envelope"></i> <%= messages.count %> New Messages
+    </li>
+
+    <!-- Messages Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
+    <li id="messageScroll">
+      <ul class="list-unstyled">
+        <% messages.first(5).each do |message| %>
+          <li>
+            <%= link_to message_path(message) do %>
+              <div class="row">
+                <div class="col-xs-2">
+                  <img class="img-circle" src="<%= ENV['CF'] %>admin/user-profile-1.jpg" alt="">
+                </div>
+                <div class="col-xs-10">
+                  <p>
+                    <strong><%= message.user.name %></strong>: <%= message.content %>
+                  </p>
+                  <p class="small">
+                    <i class="fa fa-clock-o"></i> <%= message.created_at %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+
+    <!-- Messages Dropdown Footer -->
+    <li class="dropdown-footer">
+      <%= link_to "Read All Messages", mailbox_path %>
+    </li>
+
+  </ul>
+  <!-- /.dropdown-menu -->
+</li>
+<!-- /.dropdown -->
+<!-- end MESSAGES DROPDOWN -->

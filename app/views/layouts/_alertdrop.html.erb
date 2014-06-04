@@ -1,0 +1,44 @@
+<!-- begin ALERTS DROPDOWN -->
+<li class="dropdown">
+  <a href="#" class="alerts-link dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-bell"></i> 
+    <span class="number"><%= alerts.count(:all)  %></span><i class="fa fa-caret-down"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-scroll dropdown-alerts">
+
+    <!-- Alerts Dropdown Heading -->
+    <li class="dropdown-header">
+      <i class="fa fa-bell"></i> <%= alerts.count(:all)  %> New Alerts
+    </li>
+
+    <!-- Alerts Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
+    <li id="alertScroll">
+      <ul class="list-unstyled">
+        <% alerts.first(10).each do |alert| %>
+          <li>
+            <%= link_to booking_path(alert.booking_id) do %>
+              <div class="alert-icon green pull-left">
+                <i class="fa fa-money"></i>
+              </div>
+              <%= Booking.find(alert.booking_id).user.name %>
+              <span class="small pull-right">
+                <strong>
+                  <em>3 mins ago</em>
+                </strong>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+
+    <!-- Alerts Dropdown Footer -->
+    <li class="dropdown-footer">
+      <%= link_to "View All Alerts", mybookings_path %>
+    </li>
+
+  </ul>
+  <!-- /.dropdown-menu -->
+</li>
+<!-- /.dropdown -->
+<!-- end ALERTS DROPDOWN -->

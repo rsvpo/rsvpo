@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_attachment  :avatar, accept: [:jpg, :png, :gif]
   has_many :views
+  has_many :bookings
   has_many :messages
+  has_many :follows
+  has_many :likes
+  
   
   def self.find_for_oauth(auth, signed_in_resource = nil)
 

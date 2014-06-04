@@ -1,0 +1,49 @@
+<script src="<%= ENV['CF'] %>fullcalendar.min.js"></script>
+<link href="<%= ENV['CF'] %>fullcalendar.css" rel="stylesheet">
+
+<div class="calendar-wrapper container">
+  <div id='calendar'></div>
+</div>
+
+<h3>Upcoming</h3>
+
+<% @mybookings.each do |booking| %>
+  <%= booking.slot.activity.title %>
+  <%= booking.slot.start %>
+  <%= booking.slot.finish %>
+<% end %>
+
+<script>
+  function reload_calendar(){
+    var source = new Array();
+    var new_rule_link = "<%= new_rule_path %>"
+    $('#calendar').fullCalendar({
+      dayClick: function(date, allDay, jsEvent, view) {
+        document.location.href=new_rule_link + "?start_date=" + date;
+      },
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        ignoreTimezone: false,
+        select: this.select,
+        eventClick: this.eventClick,
+        eventSources: [
+          {url: '<%= upcoming_path(@mybookings, format: :json) %>',
+          error: function() {
+            alert('there was an error while fetching events!');
+          }}
+        ],
+        timeFormat: 'h:mmtt{ - h:mmtt} '
+    });
+  }
+</script>
+<script>
+  $(document).ready(function() {
+    reload_calendar();
+  });
+</script>

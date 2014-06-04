@@ -1,21 +1,98 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Content</th>   
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
 
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.user.name %></td>
-        <td><%= message.content %></td>
-        <td><%= link_to 'Show', message_path(message) %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="page-content">
+
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            Mailbox
+            <small>Message Center</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+            </li>
+            <li class="active">Mailbox</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+
+            <nav class="navbar mailbox-topnav" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <a class="navbar-brand" href="mailbox.html"><i class="fa fa-inbox"></i> Inbox</a>
+              </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="mailbox-nav">
+                <%= link_to raw('<i class="fa fa-edit"></i>') + "Compose Message", new_message_path, :class => 'btn btn-white' %>
+              </div>
+            </nav>
+
+            <div id="mailbox">
+
+              <div id="mailbox-wrapper">
+
+                <div class="table-responsive mailbox-messages">
+                  <table class="table table-bordered table-striped table-hover">
+                    <tbody>
+                      <% @messages.each do |message| %>
+                          <tr class="unread-message clickableRow" data-link="<%= message_path(message) %>">     
+                              <td class="from-col"><%= message.user.name %></td>
+                              <td class="msg-col">
+                                <span class="label green">Orders</span><%= message.content %>
+                              </td>
+                              <td class="date-col"><i class="fa fa-paperclip"></i> <%= message.created_at %></td>
+                          </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+
+                <ul class="list-inline pull-right">
+                  <li><strong>1-10 of 1,392</strong>
+                  </li>
+                  <li>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-white"><i class="fa fa-chevron-left"></i>
+                      </button>
+                      <button type="button" class="btn btn-white"><i class="fa fa-chevron-right"></i>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.page-content -->
+
+</div>
+<!-- /#page-wrapper -->
+<!-- end MAIN PAGE CONTENT -->
+
+<script>
+  jQuery(function($) {
+    $("tr[data-link]").click(function() {
+      window.location = this.dataset.link
+    });
+  })
+</script>

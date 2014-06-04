@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@booking, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_area :optional %>
+  <%= f.number_field :phone %>
+  <%= f.hidden_field :slot_id, :value => params[:slot] %>
+  <%= f.form_group do %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+
+

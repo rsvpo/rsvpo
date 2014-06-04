@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531064659) do
+ActiveRecord::Schema.define(version: 20140604045958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 20140531064659) do
 
   add_index "addresses", ["merchant_id"], name: "index_addresses_on_merchant_id", using: :btree
 
+  create_table "addresses_merchants", force: true do |t|
+    t.integer "address_id"
+    t.integer "merchant_id"
+  end
+
+  add_index "addresses_merchants", ["address_id"], name: "index_addresses_merchants_on_address_id", using: :btree
+  add_index "addresses_merchants", ["merchant_id"], name: "index_addresses_merchants_on_merchant_id", using: :btree
+
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -104,6 +112,23 @@ ActiveRecord::Schema.define(version: 20140531064659) do
 
   add_index "attachinary_files", ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
 
+  create_table "bookings", force: true do |t|
+    t.text     "optional"
+    t.datetime "cancel"
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "friend",     default: false
+    t.boolean  "confirm",    default: false
+    t.string   "phone"
+    t.integer  "slot_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookings", ["slot_id"], name: "index_bookings_on_slot_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
+
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -125,6 +150,16 @@ ActiveRecord::Schema.define(version: 20140531064659) do
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
+  create_table "follows", force: true do |t|
+    t.integer  "merchant_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "follows", ["merchant_id"], name: "index_follows_on_merchant_id", using: :btree
+  add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
+
   create_table "identities", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -134,6 +169,16 @@ ActiveRecord::Schema.define(version: 20140531064659) do
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
+  create_table "likes", force: true do |t|
+    t.integer  "activity_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["activity_id"], name: "index_likes_on_activity_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "merchants", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -168,6 +213,7 @@ ActiveRecord::Schema.define(version: 20140531064659) do
 
   create_table "rules", force: true do |t|
     t.text     "description"
+    t.integer  "inventory"
     t.boolean  "is_all_day"
     t.date     "from_date"
     t.time     "from_time"
@@ -191,33 +237,40 @@ ActiveRecord::Schema.define(version: 20140531064659) do
     t.date     "repeat_ends_on"
     t.string   "time_zone",                                   default: "Hong Kong"
     t.integer  "activity_id"
+    t.integer  "address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "rules", ["activity_id"], name: "index_rules_on_activity_id", using: :btree
+  add_index "rules", ["address_id"], name: "index_rules_on_address_id", using: :btree
 
   create_table "shares", force: true do |t|
     t.string   "receiver"
     t.text     "message"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "shares", ["user_id"], name: "index_shares_on_user_id", using: :btree
-
-  create_table "slots", force: true do |t|
-    t.text     "description"
-    t.boolean  "is_all_day"
-    t.datetime "start"
-    t.datetime "finish"
     t.integer  "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "shares", ["activity_id"], name: "index_shares_on_activity_id", using: :btree
+  add_index "shares", ["user_id"], name: "index_shares_on_user_id", using: :btree
+
+  create_table "slots", force: true do |t|
+    t.text     "description"
+    t.integer  "inventory"
+    t.boolean  "is_all_day"
+    t.datetime "start"
+    t.datetime "finish"
+    t.integer  "activity_id"
+    t.integer  "address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   add_index "slots", ["activity_id"], name: "index_slots_on_activity_id", using: :btree
+  add_index "slots", ["address_id"], name: "index_slots_on_address_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

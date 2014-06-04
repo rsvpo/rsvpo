@@ -1,7 +1,15 @@
 Rsvp::Application.routes.draw do
+  resources :bookings
+
   resources :shares
 
   get "mailbox", to: 'mailbox#index'
+  get "upcoming", to: 'upcoming#index'
+  get "following", to: 'following#index'
+  get "favourite", to: 'favourite#index'
+  get "dashboard", to: 'dashboard#index'
+  get "schedule", to: 'schedule#index'
+  get "mybookings", to: 'mybookings#index'
   get 'mailbox/:id', to: 'mailbox#show'
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   

@@ -18,15 +18,15 @@ class RulesController < InheritedResources::Base
       end
     end
     if @rule.save
-      begin_date = Date.today
-      last_date = begin_date + 30.days
-      @rule.schedule.occurrences_between(begin_date,last_date).each do |t|
-        slot = @activity.slots.create!(description: @rule.description, 
-          is_all_day: @rule.is_all_day,
-          start: t,
-          finish: t + @rule.duration,
-          description: @rule.description)
-      end
+#       begin_date = Date.today
+#       last_date = begin_date + 30.days
+#       @rule.schedule.occurrences_between(begin_date,last_date).each do |t|
+#         slot = @activity.slots.create!(description: @rule.description, 
+#           is_all_day: @rule.is_all_day,
+#           start: t,
+#           finish: t + @rule.duration,
+#           description: @rule.description)
+#       end
       redirect_to rules_path, :notice => t('notice.success_rule_create')
     else
       render :action => 'new'
@@ -44,6 +44,7 @@ class RulesController < InheritedResources::Base
   def safe_params
     rule_attributes = [
       :description,
+      :inventory,
       :is_all_day,
       :from_date,
       :from_time,
