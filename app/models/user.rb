@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :follows
   has_many :likes
+  has_many :shares
   
   
   def self.find_for_oauth(auth, signed_in_resource = nil)

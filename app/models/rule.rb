@@ -2,6 +2,7 @@ class Rule < ActiveRecord::Base
   include IceCubeMethods
   belongs_to :activity
   after_save :add_slots
+  belongs_to :address
   
   def add_slots
     begin_date = Date.today
@@ -9,7 +10,7 @@ class Rule < ActiveRecord::Base
     self.schedule.occurrences_between(begin_date,last_date).each do |t|
       slot = self.activity.slots.create!(description: self.description, 
         is_all_day: self.is_all_day,
-        address_id: self.address.id,
+        address_id: self.address_id,
         start: t,
         finish: t + self.duration,
         inventory: self.inventory,

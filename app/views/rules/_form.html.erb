@@ -1,60 +1,65 @@
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
 <script src="<%= ENV['CF'] %>jquery.ui.timepicker.js"></script>
 
 <% start_date = params[:start_date].to_datetime.strftime('%F') if params[:start_date] %>
 <% start_time = params[:start_date].to_datetime.strftime('%I:%M %p') if params[:start_date] %>
 <% end_time = (params[:start_date].to_datetime + 30.minutes).strftime('%I:%M %p') if params[:start_date] %>
 
-
-<%= bootstrap_form_for @rule, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9", html: {novalidate: 'novalidate'} do |f| %>
-  <%= f.text_area :description, rows: 5 %>
-  <%= f.form_group :is_all_day do %>
-  <%= f.check_box :is_all_day, label: "Is all day" %>
-  <% end %>
-  <% if params[:start_date] %>
-    <%= f.text_field :from_date, {:class => 'datepicker', :value => "#{start_date}"} %>
-  <% else %>
-    <%= f.text_field :from_date, {:class => 'datepicker'} %>
-  <% end %>
-  <div class="rule_time">
-    <% if params[:start_date] %>
-      <%= f.text_field :from_time, {:class => 'timepicker', :value => "#{start_time}"} %>
-    <% else %>
-      <%= f.text_field :from_time, {:class => 'timepicker'} %>
-    <% end %>
-  </div>
-  <% if params[:start_date] %>
-    <%= f.text_field :to_date, {:class => 'datepicker', :value => "#{start_date}"} %>
-  <% else %>
-    <%= f.text_field :to_date, {:class => 'datepicker'} %>
-  <% end %>
-  <div class="rule_time">
-    <% if params[:start_date] %>
-      <%= f.text_field :to_time, {:class => 'timepicker', :value => "#{end_time}"} %>
-    <% else %>
-      <%= f.text_field :to_time, {:class => 'timepicker'} %>
-    <% end %>
-  </div>
-  <div class="event_time">
-    <%= f.hidden_field :time_zone, :value => "Hong Kong" %>
-  </div>
-  <%= f.select :repeats, ['never','daily','weekly','monthly','yearly'] %>
-  <%= render partial: 'repeats_daily_options', locals: {f: f} %>
-  <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
-  <%= render partial: 'repeats_monthly_options', locals: {f: f} %>
-  <%= render partial: 'repeats_yearly_options', locals: {f: f} %>
-  <div class="rule_option" id="repeats_options">
-    <%= f.select :repeat_ends, ['never','on'] %>
-    <div id="rule_repeat_ends_on">
-      <%= f.date_select :repeat_ends_on, {}, {style: 'width:auto;'} %>
-    </div>
-  </div>
-  <div class="form_group">
-    <%= link_to 'Cancel', root_path, :class => 'btn btn-danger' %>
-    <%= f.submit 'Save', :class => "btn btn-default" %>
+<div class="row">
+  <div class="col-lg-12">
+    <%= bootstrap_form_for @rule, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1", html: {novalidate: 'novalidate'} do |f| %>
+      <%= f.form_group :is_all_day do %>
+        <%= f.check_box :is_all_day, label: "全日活動" %>
+      <% end %>
+      <% if params[:start_date] %>
+        <%= f.text_field :from_date, {:label => "開始日期", :placeholder => "開始日期", :class => 'datepicker', :value => "#{start_date}"} %>
+      <% else %>
+        <%= f.text_field :from_date, {:label => "開始日期", :placeholder => "開始日期", :class => 'datepicker'} %>
+      <% end %>
+      <div class="rule_time">
+        <% if params[:start_date] %>
+          <%= f.text_field :from_time, {:label => "開始時間", :placeholder => "開始時間", :class => 'timepicker', :value => "#{start_time}"} %>
+        <% else %>
+          <%= f.text_field :from_time, {:label => "開始時間", :placeholder => "開始時間", :class => 'timepicker'} %>
+        <% end %>
+      </div>
+      <% if params[:start_date] %>
+        <%= f.text_field :to_date, {:label => "結束日期", :placeholder => "結束日期", :class => 'datepicker', :value => "#{start_date}"} %>
+      <% else %>
+        <%= f.text_field :to_date, {:label => "結束日期", :placeholder => "結束日期", :class => 'datepicker'} %>
+      <% end %>
+      <div class="rule_time">
+        <% if params[:start_date] %>
+          <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間", :class => 'timepicker', :value => "#{end_time}"} %>
+        <% else %>
+          <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間", :class => 'timepicker'} %>
+        <% end %>
+      </div>
+      <div class="event_time">
+        <%= f.hidden_field :time_zone, :value => "Hong Kong" %>
+      </div>
+      <%= f.select :repeats, ['永不','每日','每週','每月','每年'], :label => "重複" %>
+      <%= render partial: 'repeats_daily_options', locals: {f: f} %>
+      <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
+      <%= render partial: 'repeats_monthly_options', locals: {f: f} %>
+      <%= render partial: 'repeats_yearly_options', locals: {f: f} %>
+      <div class="rule_option" id="repeats_options">
+        <%= f.select :repeat_ends, ['never','on'], :label => "完結" %>
+        <div id="rule_repeat_ends_on">
+          <%= f.date_select :repeat_ends_on, {:label => "完結於"}, {style: 'width:auto;'} %>
+        </div>
+      </div>
+      <%= f.text_area :description, rows: 5, :label => "簡介", :placeholder => "簡介" %>
+      <%= f.number_field :inventory, :label => "空檔", :placeholder => "空檔" %>
+      <%= f.form_group do %>
+        <%= f.submit "確認時段" %>
+      <% end %>
+      <% end %>
   </div>
 </div>
 
-<% end %>
+
 
 <script>
   function toggle_repeats_yearly_on() {
@@ -75,22 +80,22 @@
     $('.rule_option').hide();
     switch ($('#rule_repeats').val())
     {
-    case 'never':
+    case '永不':
       // Nothing
       break;
-    case 'daily':
+    case '每日':
       $('#repeats_options').show();
       $('#repeats_daily_options').show();
       break;
-    case 'weekly':
+    case '每週':
       $('#repeats_options').show();
       $('#repeats_weekly_options').show();
       break;
-    case 'monthly':
+    case '每月':
       $('#repeats_options').show();
       $('#repeats_monthly_options').show();
       break;
-    case 'yearly':
+    case '每年':
       $('#repeats_options').show();
       $('#repeats_yearly_options').show();
       break;
@@ -144,5 +149,6 @@
       toggle_repeats_monthly();
     });
     $('.timepicker').timepicker();
+    $(".datepicker").datepicker();
   });
 </script>

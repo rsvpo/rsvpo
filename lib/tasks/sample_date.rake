@@ -6,10 +6,13 @@ namespace :db do
 
     creste_user(usercount)
     create_merchant(usercount)
+    add_details_to_merchants
     create_categories
     create_addresses
+    create_hosts
     create_activities
     add_addresses_to_activities
+    add_hosts_to_activities
     add_slots
     create_comments
     customers_view_activities
@@ -17,8 +20,25 @@ namespace :db do
     book_activities
     follow_merchants
     like_activities
-#     share_activities
+    share_activities
+    confirm_some_bookings
   end
+end
+
+def rand_int(from, to)
+  rand_in_range(from, to).to_i
+end
+
+def rand_price(from, to)
+  rand_in_range(from, to).round(2)
+end
+
+def rand_time(from, to=Time.now)
+  Time.at(rand_in_range(from.to_f, to.to_f))
+end
+
+def rand_in_range(from, to)
+  rand * (to - from) + from
 end
 
 def creste_user(x)
@@ -49,13 +69,27 @@ def create_merchant(x)
   end
 end
 
+def add_details_to_merchants
+  merchants = Merchant.all
+  merchants.each do |merchant|
+    merchant.phone = "9809" + rand(1000).to_s
+    merchant.save
+    merchant.description = "Whatever this is don't care, some basic desciption of the company"
+    merchant.save
+    merchant.site = "www.example" + rand(1000).to_s + ".com"
+    merchant.save
+    merchant.opening = "From 9am to 9pm"
+    merchant.save
+  end
+end
+
 def create_activities
   d = Date.today
   t = Time.now
 
   merchants = Merchant.all
   merchants.each do |merchant|
-    rand(1..5).times do |n|
+    rand(1..3).times do |n|
       category = Category.all.sample
       activity = merchant.activities.build(
         title: "Activity" + rand(100000).to_s,
@@ -75,12 +109,28 @@ def add_addresses_to_activities
   activities.each do |activity| 
     addresses = activity.merchant.addresses
     addresses.each_with_index do |address, index|
-      if (index > 1)
+      if index == 0
+        address.activities_addresses.create!(activity_id: activity.id)
+      else
         if [true,false][rand(2)]
           address.activities_addresses.create!(activity_id: activity.id)
         end
+      end
+    end
+  end
+end
+
+def add_hosts_to_activities
+  activities = Activity.all
+  activities.each do |activity| 
+    hosts = activity.merchant.hosts
+    hosts.each_with_index do |host, index|
+      if index == 0
+        host.activities_hosts.create!(activity_id: activity.id)
       else
-        address.activities_addresses.create!(activity_id: activity.id)
+        if [true,false][rand(2)]
+          host.activities_hosts.create!(activity_id: activity.id)
+        end
       end
     end
   end
@@ -118,7 +168,7 @@ def customers_view_activities
   activities.each do |activity|
     rand(1..3).times do |n|
       users.each do |user|
-        view = user.views.create!(activity_id: activity.id)
+        view = user.views.create!(activity_id: activity.id, created_at: rand_time(2.weeks.ago) )
       end
     end
   end
@@ -142,30 +192,44 @@ def create_addresses
   end
 end
 
+def create_hosts
+  merchants = Merchant.all
+  merchants.each do |merchant|
+    rand(1..5).times do |n|
+      host = merchant.hosts.build(
+        title: "Host" + rand(100000).to_s,
+        job: "Job" + rand(100000).to_s,
+        description: "Host Desciption" + rand(100000).to_s
+        )
+      host.save
+    end
+  end
+end
+
 def message_semd_to_each_other
   merchants = Merchant.all
   merchants.each do |merchant|
     rand(1..20).times do |n|
       user = User.all.sample
-      receive = user.messages.build(merchant_id: merchant.id, content: "I am fine, thank you!", mu: false)
+      receive = user.messages.build(merchant_id: merchant.id, content: "I am fine, thank you!", mu: false, created_at: rand_time(2.weeks.ago))
       receive.save
-      sent = merchant.messages.build(user_id: user.id, content: "Hey how is it going?", mu: true)
+      sent = merchant.messages.build(user_id: user.id, content: "Hey how is it going?", mu: true, created_at: rand_time(2.weeks.ago))
       sent.save
     end
   end
 end
 
-# def share_activities
-#   activities = Activity.all
-#   users = User.all
-#   activities.each do |activity|
-#     rand(1..3).times do |n|
-#       users.each do |user|
-#         share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id)
-#       end
-#     end
-#   end
-# end
+def share_activities
+  activities = Activity.all
+  users = User.all
+  activities.each do |activity|
+    rand(1..3).times do |n|
+      users.each do |user|
+        share = user.shares.create!(receiver: "receiver#{n+1}@example.com", message: "Hey, what do you think of this", activity_id: activity.id, created_at: rand_time(2.weeks.ago))
+      end
+    end
+  end
+end
 
 def add_slots
   activities = Activity.all
@@ -195,7 +259,7 @@ def add_slots
                           repeats_yearly_on: false,
                           repeat_ends: 'never',
                           repeat_ends_on: todate,
-                          time_zone: 'Eastern Time (US & Canada)',
+                          time_zone: "Hong Kong",
                           activity_id: activity.id)
   end
 end
@@ -204,15 +268,15 @@ def book_activities
   slots = Slot.all
   users = User.all
   slots.each do |slot|
-    if rand(5) == 3
-      if [true,false][rand(2)]
-        rand(1..3).times do |n|
-          users.each do |user|
+    users.each do |user|
+      if rand(15) == 3
+        if [true,false][rand(2)]
+          rand(1..3).times do |n|
             booking = user.bookings.create!(email: "bookerer#{n+1}@example.com",
               name: "Whoever",
               phone: "33807389",
               optional: "This is optional text", 
-              slot_id: slot.id)
+              slot_id: slot.id, created_at: rand_time(2.weeks.ago))
           end
         end
       end
@@ -227,7 +291,7 @@ def like_activities
     if rand(5) == 3
       if [true,false][rand(2)]
         users.each do |user|
-          like = user.likes.create!(activity_id: activity.id)
+          like = user.likes.create!(activity_id: activity.id, created_at: rand_time(2.weeks.ago))
         end
       end
     end
@@ -241,9 +305,18 @@ def follow_merchants
     if rand(5) == 3
       if [true,false][rand(2)]
         users.each do |user|
-          follow = user.follows.create!(merchant_id: merchant.id)
+          follow = user.follows.create!(merchant_id: merchant.id, created_at: rand_time(2.weeks.ago))
         end
       end
+    end
+  end
+end
+
+def confirm_some_bookings
+  bookings = Booking.all
+  bookings.each do |booking|
+    if rand(3) == 3
+      booking.confirm = true
     end
   end
 end

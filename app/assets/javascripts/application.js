@@ -20,3 +20,11 @@
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
 //= require_tree .
+
+var navigationFn = {
+    goToSection: function(id) {
+        $('html, body').animate({
+            scrollTop: $(id).offset().top
+        }, 0);
+    }
+}

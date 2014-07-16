@@ -9,5 +9,12 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find(params[:id])
+    @addresses = @merchant.addresses
+    @related = @merchant.activities
+    if params[:address]
+      @current_address = Address.find(params[:address])
+    else
+      @current_address = @merchant.addresses.first
+    end
   end
 end

@@ -1,11 +1,9 @@
 html {
   height: 100%;
-  background-color: #333;
 }
 
-.home_index {
+.landing_index {
   height: 100%;
-  background-color: #333;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
@@ -13,7 +11,6 @@ html {
   a {
     color: #fff;
     &:focus, &:hover {
-      color: #fff;
     }
   }
   .btn-default {

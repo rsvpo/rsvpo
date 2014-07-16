@@ -7,11 +7,11 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="page-title">
-          <h1>Timeslots for <%= @activity.title %></h1>
+          <h1><%= @activity.title %>的時間表</h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
             </li>
-            <li class="active">Calendar</li>
+            <li class="active"><%= @activity.title %>的時間表</li>
           </ol>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="portlet portlet-default">
           <div class="portlet-heading">
             <div class="portlet-title">
-              <h4>Calendar</h4>
+              <h4><%= @activity.title %>共有 <span class="badge green"><%= @slot.count %></span> 個空檔</h4>
             </div>
             <div class="clearfix"></div>
           </div>
@@ -43,23 +43,19 @@
         <div class="portlet portlet-default">
           <div class="portlet-heading">
             <div class="portlet-title">
-              <h4>Draggable Events</h4>
+              <h4>各時段的空檔</h4>
             </div>
             <div class="clearfix"></div>
           </div>
           <div class="portlet-body">
-            <%= select_tag(:activity, options_for_select(@activities.collect{|c| [c.title,c.id]}, @activity.id)) %>
-            <div id='external-events'>
-              <div class='external-event'>Lunch</div>
-              <div class='external-event'>Meeting</div>
-              <div class='external-event'>Break</div>
-              <div class='external-event'>Client</div>
-              <div class='external-event'>Interview</div>
-              <p>
-                <input type='checkbox' id='drop-remove' />
-                <label for='drop-remove'>Remove After Drop</label>
-              </p>
+            <div class="text-center">
+              <%= link_to raw('<i class="fa fa-edit"></i>') + " 新時段", new_rule_path, :class => 'btn btn-green' %>
             </div>
+            <ul>
+              <% @slot.each do |slot| %>
+                <%= render 'progress', slot: slot %>
+              <% end %>
+            </ul>
           </div>
         </div>
       </div>
@@ -78,11 +74,7 @@
 <script>
   function reload_calendar(){
     var source = new Array();
-    var new_rule_link = "<%= new_rule_path %>"
     $('#calendar').fullCalendar({
-      dayClick: function(date, allDay, jsEvent, view) {
-        document.location.href=new_rule_link + "?start_date=" + date;
-      },
         header: {
             left: 'prev,today,next',
             center: 'title',
@@ -95,7 +87,7 @@
         select: this.select,
         eventClick: this.eventClick,
         eventSources: [
-          {url: '<%= activity_path(@activity, format: :json) %>',
+          {url: '<%= schedule_path(activity: params[:activity_id],format: :json) %>',
           error: function() {
             alert('there was an error while fetching events!');
           }}

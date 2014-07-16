@@ -1,3 +1,27 @@
-<% @followings.each do |following| %>
-<%= link_to following.merchant.name, merchant_path(following.merchant) %>
-<% end %>
+<%= render 'layouts/section', title: "關注商戶" %>
+
+<section id="content">
+  <div class="container">
+    <ul class="list-inline portfolio text-center">
+      <% @followings.each do |following| %>
+      <li data-tag="graphics">
+        <div class="thumbs">
+          <% if following.merchant.logo %>
+            <%= cl_image_tag(following.merchant.logo.path, { size: '150x150', crop: :fill}, class: "img-responsive") %>
+          <% else %>
+            <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_150,w_150/v1402566281/Unknown.png" alt="" />
+          <% end %>
+          <%= link_to merchant_path(following.merchant) do %>
+            <span class="title">
+              <span><i class="fa fa-link fa-2x"></i></span>
+            </span>
+          </div>
+          <% end %>
+          <div class="project-title margin-30">
+            <h5><%= following.merchant.name %></h5>
+          </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</section>

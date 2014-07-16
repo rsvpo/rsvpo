@@ -8,7 +8,7 @@
 
     <!-- Messages Dropdown Heading -->
     <li class="dropdown-header">
-      <i class="fa fa-envelope"></i> <%= messages.count %> New Messages
+      <i class="fa fa-envelope"></i> <%= messages.count %> 新訊息
     </li>
 
     <!-- Messages Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
@@ -19,14 +19,17 @@
             <%= link_to message_path(message) do %>
               <div class="row">
                 <div class="col-xs-2">
-                  <img class="img-circle" src="<%= ENV['CF'] %>admin/user-profile-1.jpg" alt="">
+                  <%= render 'layouts/squareimage', square: @merchant.logo, size: "40" %>
+<!--                   <img class="img-circle" src="<%= ENV['CF'] %>admin/user-profile-1.jpg" alt=""> -->
                 </div>
                 <div class="col-xs-10">
                   <p>
                     <strong><%= message.user.name %></strong>: <%= message.content %>
                   </p>
                   <p class="small">
-                    <i class="fa fa-clock-o"></i> <%= message.created_at %>
+                    <abbr class="timeago" title="<%= message.created_at.getutc.iso8601 %>">
+                      <i class="fa fa-clock-o"></i> <%= message.created_at.to_s %>
+                    </abbr>
                   </p>
                 </div>
               </div>
@@ -38,7 +41,7 @@
 
     <!-- Messages Dropdown Footer -->
     <li class="dropdown-footer">
-      <%= link_to "Read All Messages", mailbox_path %>
+      <%= link_to "查看已確認預約", mailbox_path %>
     </li>
 
   </ul>

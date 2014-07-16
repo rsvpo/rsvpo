@@ -10,15 +10,15 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="page-title">
-          <h1>Dashboard
-            <small>Content Overview</small>
+          <h1>控制台
+            <small>活動概要</small>
           </h1>
           <ol class="breadcrumb">
-            <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
+            <li class="active"><i class="fa fa-dashboard"></i> 控制台</li>
             <li class="pull-right">
               <div id="reportrange" class="btn btn-green btn-square date-picker">
                 <i class="fa fa-calendar"></i>
-                <span class="date-range"></span> <i class="fa fa-caret-down"></i>
+                <span class="date-range">過去兩星期</span>
               </div>
             </li>
           </ol>
@@ -40,13 +40,12 @@
           </a>
           <div class="circle-tile-content dark-blue">
             <div class="circle-tile-description text-faded">
-              Users
+              粉絲
             </div>
             <div class="circle-tile-number text-faded">
-              265
-              <span id="sparklineA"></span>
+              <%= @follow_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -59,12 +58,12 @@
           </a>
           <div class="circle-tile-content green">
             <div class="circle-tile-description text-faded">
-              Revenue
+              觀看次數
             </div>
             <div class="circle-tile-number text-faded">
-              $32,384
+              <%= @view_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -77,12 +76,12 @@
           </a>
           <div class="circle-tile-content orange">
             <div class="circle-tile-description text-faded">
-              Alerts
+              確認預約
             </div>
             <div class="circle-tile-number text-faded">
-              9 New
+              <%= @confirm_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -95,13 +94,12 @@
           </a>
           <div class="circle-tile-content blue">
             <div class="circle-tile-description text-faded">
-              Tasks
+              預約要求
             </div>
             <div class="circle-tile-number text-faded">
-              10
-              <span id="sparklineB"></span>
+              <%= @pending_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -114,13 +112,12 @@
           </a>
           <div class="circle-tile-content red">
             <div class="circle-tile-description text-faded">
-              Orders
+              分享
             </div>
             <div class="circle-tile-number text-faded">
-              24
-              <span id="sparklineC"></span>
+              <%= @share_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -133,13 +130,12 @@
           </a>
           <div class="circle-tile-content purple">
             <div class="circle-tile-description text-faded">
-              Mentions
+              訊息
             </div>
             <div class="circle-tile-number text-faded">
-              96
-              <span id="sparklineD"></span>
+              <%= @message_count %>
             </div>
-            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -151,7 +147,7 @@
       <div class="col-lg-3">
         <div class="tile tile-img tile-time" style="height: 320px">
           <p class="time-widget">
-            <span class="time-widget-heading">It Is Currently</span>
+            <span class="time-widget-heading">現在是</span>
             <br>
             <strong>
               <span id="datetime"></span>
@@ -162,15 +158,8 @@
 
       <div class="col-lg-9">
         <div class="tile green" style="height: 320px">
-          <h4><i class="fa fa-usd"></i> Revenue Breakdown <a href="javascript:;"><i class="fa fa-refresh pull-right"></i></a>
-          </h4>
-          <p class="small text-faded">
-            Today:
-            <strong>$324.20 -</strong>
-            Week:
-            <strong>$1,230.43</strong>
-          </p>
-          <div id="morris-chart-dashboard"></div>
+          <h4>觀看次數統計資料</h4>
+          <%= content_tag :div, "", id: "morris-chart-dashboard", data: {views: views_chart_data} %>
         </div>
       </div>
     </div>
@@ -178,23 +167,24 @@
     <div class="row">
       <div class="col-lg-3 col-sm-6">
         <div class="tile orange dash-demo-tile">
-          <h4><i class="fa fa-cloud fa-fw"></i> Data Usage</h4>
-          <div id="easy-pie-1" class="easy-pie-chart" data-percent="86">
+          <h4><i class="fa fa-cloud fa-fw"></i> 預約比例</h4>
+          <div id="easy-pie-1" class="easy-pie-chart" data-percent="92">
             <span class="percent"></span>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="tile blue dash-demo-tile">
-          <h4><i class="fa fa-check fa-fw"></i> Satisfaction Score</h4>
-          <div id="easy-pie-2" class="easy-pie-chart" data-percent="92">
+          <h4><i class="fa fa-check fa-fw"></i> 分享比例</h4>
+          <div id="easy-pie-2" class="easy-pie-chart" data-percent="<%= @distinct_view_count %>">
             <span class="percent"></span>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="tile red dash-demo-tile">
-          <h4><i class="fa fa-arrow-circle-down fa-fw"></i> Bounce Rate</h4>
+          <h4><i class="fa fa-arrow-circle-down fa-fw"></i> 喜愛
+比例</h4>
           <div id="easy-pie-3" class="easy-pie-chart" data-percent="27">
             <span class="percent"></span>
           </div>
@@ -202,7 +192,7 @@
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="tile purple dash-demo-tile">
-          <h4><i class="fa fa-shopping-cart fa-fw"></i> Abandoned Carts</h4>
+          <h4><i class="fa fa-shopping-cart fa-fw"></i> 訪客觀看次數</h4>
           <div id="easy-pie-4" class="easy-pie-chart" data-percent="35">
             <span class="percent"></span>
           </div>
@@ -216,7 +206,7 @@
         <div class="portlet portlet-green">
           <div class="portlet-heading">
             <div class="portlet-title">
-              <h4><i class="fa fa-exchange fa-fw"></i> Recent Transactions</h4>
+              <h4><i class="fa fa-exchange fa-fw"></i> 即將開始的預約時段</h4>
             </div>
             <div class="portlet-widgets">
               <a data-toggle="collapse" data-parent="#accordion" href="#transactionsPortlet"><i class="fa fa-chevron-down"></i></a>
@@ -228,67 +218,34 @@
               <div class="table-responsive dashboard-demo-table">
                 <table class="table table-bordered table-striped table-hover">
                   <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Amount</th>
-                      <th>Status</th>
+                    <tr>               
+                      <th>活動</th>
+                      <th>時間</th>
+                      <th>參加者</th>
+                      <th>狀態</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>6:14 PM</td>
-                      <td>$12.07</td>
-                      <td><a class="btn btn-xs btn-orange disabled"><i class="fa fa-clock-o"></i> Pending</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>6:02 PM</td>
-                      <td>$5.32</td>
-                      <td><a class="btn btn-xs btn-orange disabled"><i class="fa fa-clock-o"></i> Pending</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>5:56 PM</td>
-                      <td>$6.58</td>
-                      <td><a class="btn btn-xs btn-green"><i class="fa fa-arrow-circle-right"></i> View Order</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>5:12 PM</td>
-                      <td>$15.61</td>
-                      <td><a class="btn btn-xs btn-green"><i class="fa fa-arrow-circle-right"></i> View Order</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>5:02 PM</td>
-                      <td>$9.89</td>
-                      <td><a class="btn btn-xs btn-green"><i class="fa fa-arrow-circle-right"></i> View Order</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>4:47 PM</td>
-                      <td>$2.21</td>
-                      <td><a class="btn btn-xs btn-red"><i class="fa fa-warning"></i> Error</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1/31/14</td>
-                      <td>4:32 PM</td>
-                      <td>$5.17</td>
-                      <td><a class="btn btn-xs btn-default"><i class="fa fa-arrow-circle-right"></i> Special Order</a>
-                      </td>
-                    </tr>
+                      <% @mybookings.each do |booking| %>
+                        <tr>
+                          <% book = Booking.find(booking.booking_id) %>
+                          <td><%= book.slot.start %> - <%= book.slot.finish %></td>
+                          <td><%= booking.title %></td>
+                          <td><%= book.name %></td>
+                          <td>
+                            <% if book.confirm %>
+                              <a class="btn btn-xs btn-green"><i class="fa fa-arrow-circle-right"></i> 確認預約</a>
+                            <% else %>
+                              <a class="btn btn-xs btn-orange disabled"><i class="fa fa-clock-o"></i> 取消預約</a>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
                   </tbody>
                 </table>
               </div>
-              <a class="btn btn-green">View All Transactions</a>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path, class: "btn btn-green" %>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path, class: "btn btn-green" %>
             </div>
           </div>
         </div>
@@ -302,64 +259,20 @@
 <!-- /#page-wrapper -->
 <!-- end MAIN PAGE CONTENT -->
 <script>
-  //Morris Area Chart
-  var sales_data = [{
-      date: '2014-1-25',
-      productA: 80.26,
-      productB: 92.26,
-      productC: 79.91,
-      productD: 81.63
-  }, {
-      date: '2014-1-26',
-      productA: 251.34,
-      productB: 115.62,
-      productC: 128.34,
-      productD: 92.35
-  }, {
-      date: '2014-1-27',
-      productA: 90.91,
-      productB: 89.26,
-      productC: 124.48,
-      productD: 152.61
-  }, {
-      date: '2014-1-28',
-      productA: 91.23,
-      productB: 87.94,
-      productC: 250.79,
-      productD: 352.24
-  }, {
-      date: '2014-1-29',
-      productA: 148.26,
-      productB: 151.98,
-      productC: 164.33,
-      productD: 142.43
-  }, {
-      date: '2014-1-30',
-      productA: 74.53,
-      productB: 71.26,
-      productC: 78.91,
-      productD: 76.32
-  }, {
-      date: '2014-1-31',
-      productA: 84.26,
-      productB: 62.87,
-      productC: 156.72,
-      productD: 163.06
-  }, ];
   Morris.Area({
       element: 'morris-chart-dashboard',
-      data: sales_data,
-      xkey: 'date',
+      data: $('#morris-chart-dashboard').data('views'),
+      xkey: 'viewed_at',
       xLabelFormat: function(date) {
           return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
       },
       xLabels: 'day',
-      ykeys: ['productA', 'productB', 'productC', 'productD'],
+      ykeys: ['first_views'<% if @activities.count >1 %>, 'second_views'<% end %><% if @activities.count > 2 %>, 'third_views'<% end %>],
       yLabelFormat: function(y) {
-          return "$" + y;
+          return y;
       },
-      labels: ['Product A', 'Product B', 'Product C', 'Product D'],
-      lineColors: ['#fff', '#fff', '#fff', '#fff'],
+      labels: ['<%= @activities.first.title %>'<% if @activities.count >1 %>, '<%= @activities.second.title %>'<% end %><% if @activities.count > 2 %>, '<%= @activities.third.title %>'<% end %>],
+      lineColors: ['#fff'<% if @activities.count >1 %>, '#fff'<% end %><% if @activities.count > 2 %>, '#fff'<% end %>],
       hideHover: 'auto',
       resize: true,
       gridTextFamily: ['Open Sans'],
@@ -373,5 +286,56 @@
           d = new Date(date);
           return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
       },
+  });
+</script>
+<script>
+  //Moment.js Time Display
+  var datetime = null,
+      date = null;
+
+  var update = function() {
+      date = moment(new Date())
+      datetime.html(date.format('dddd<br>MMMM Do, YYYY<br>h:mm:ss A'));
+  };
+
+  $(document).ready(function() {
+      datetime = $('#datetime')
+      update();
+      setInterval(update, 1000);
+  });
+  
+  //Custom jQuery - Changes background on time tile based on the time of day.
+  $(document).ready(function() {
+      datetoday = new Date(); // create new Date()
+      timenow = datetoday.getTime(); // grabbing the time it is now
+      datetoday.setTime(timenow); // setting the time now to datetoday variable
+      hournow = datetoday.getHours(); //the hour it is
+
+      if (hournow >= 18) // if it is after 6pm
+          $('div.tile-img').addClass('evening');
+      else if (hournow >= 12) // if it is after 12pm
+          $('div.tile-img').addClass('afternoon');
+      else if (hournow >= 6) // if it is after 6am
+          $('div.tile-img').addClass('morning');
+      else if (hournow >= 0) // if it is after midnight
+          $('div.tile-img').addClass('midnight');
+  });
+  
+  //Easy Pie Charts
+  $(function() {
+      $('#easy-pie-1, #easy-pie-2, #easy-pie-3, #easy-pie-4').easyPieChart({
+          barColor: "rgba(255,255,255,.5)",
+          trackColor: "rgba(255,255,255,.5)",
+          scaleColor: "rgba(255,255,255,.5)",
+          lineWidth: 20,
+          animate: 1500,
+          size: 175,
+          onStep: function(from, to, percent) {
+              $(this.el).find('.percent').text(Math.round(percent));
+          }
+      });
+  });
+  jQuery(document).ready(function() {
+    jQuery("abbr.timeago").timeago();
   });
 </script>

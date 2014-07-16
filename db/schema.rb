@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604045958) do
+ActiveRecord::Schema.define(version: 20140618110306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(version: 20140604045958) do
   add_index "activities_addresses", ["activity_id", "address_id"], name: "index_activities_addresses_on_activity_id_and_address_id", using: :btree
   add_index "activities_addresses", ["address_id", "activity_id"], name: "index_activities_addresses_on_address_id_and_activity_id", using: :btree
 
+  create_table "activities_hosts", force: true do |t|
+    t.integer "activity_id"
+    t.integer "host_id"
+  end
+
+  add_index "activities_hosts", ["activity_id"], name: "index_activities_hosts_on_activity_id", using: :btree
+  add_index "activities_hosts", ["host_id"], name: "index_activities_hosts_on_host_id", using: :btree
+
   create_table "addresses", force: true do |t|
     t.string   "address"
     t.string   "phone"
@@ -64,19 +72,15 @@ ActiveRecord::Schema.define(version: 20140604045958) do
     t.decimal  "lat"
     t.decimal  "lng"
     t.integer  "merchant_id"
+    t.integer  "slot_id"
+    t.integer  "rule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "addresses", ["merchant_id"], name: "index_addresses_on_merchant_id", using: :btree
-
-  create_table "addresses_merchants", force: true do |t|
-    t.integer "address_id"
-    t.integer "merchant_id"
-  end
-
-  add_index "addresses_merchants", ["address_id"], name: "index_addresses_merchants_on_address_id", using: :btree
-  add_index "addresses_merchants", ["merchant_id"], name: "index_addresses_merchants_on_merchant_id", using: :btree
+  add_index "addresses", ["rule_id"], name: "index_addresses_on_rule_id", using: :btree
+  add_index "addresses", ["slot_id"], name: "index_addresses_on_slot_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -160,6 +164,17 @@ ActiveRecord::Schema.define(version: 20140604045958) do
   add_index "follows", ["merchant_id"], name: "index_follows_on_merchant_id", using: :btree
   add_index "follows", ["user_id"], name: "index_follows_on_user_id", using: :btree
 
+  create_table "hosts", force: true do |t|
+    t.string   "title"
+    t.string   "job"
+    t.text     "description"
+    t.integer  "merchant_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hosts", ["merchant_id"], name: "index_hosts_on_merchant_id", using: :btree
+
   create_table "identities", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -194,6 +209,10 @@ ActiveRecord::Schema.define(version: 20140604045958) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "description"
+    t.string   "phone"
+    t.string   "site"
+    t.string   "opening"
   end
 
   add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree

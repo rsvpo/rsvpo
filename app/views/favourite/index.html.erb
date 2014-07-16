@@ -1,3 +1,36 @@
-<% @favourites.each do |favourite| %>
-  <%= link_to favourite.activity.title, activity_path(favourite.activity) %>
-<% end %>
+<%= render 'layouts/section', title: "喜愛活動" %>
+
+<section id="content">
+  <div class="container">
+    <section id="favourites">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <ul class="list-inline portfolio text-center">
+            <% @favourites.each do |favourite| %>
+            <li data-tag="graphics">
+              <div class="thumbs">
+                <% if favourite.activity.photos.first %>
+                  <% favourite.activity.photos.each do |photo| %>
+                    <%= cl_image_tag(photo.path, { size: '280x430', crop: :fill}, class: "img-responsive") %>
+                  <% end %>
+                <% else %>
+                  <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_280,w_430/v1402566281/Unknown.png" alt="" />
+                <% end %>
+                <%= link_to favourite.activity do %>
+                  <span class="title">
+                    <span><i class="fa fa-link fa-2x"></i></span>
+                  </span>
+                </div>
+                <% end %>
+                <div class="project-title margin-30">
+                  <h5><%= favourite.activity.title %></h5>
+                  <%= favourite.activity.merchant_name %> <span class="badge pull-right">$ <%= favourite.activity.price %> </span>
+                </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

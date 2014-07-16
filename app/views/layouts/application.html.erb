@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rsvp</title>
+  <meta charset="utf-8">
+  <title>RSVPO</title>
+  <%= render 'layouts/meta' %>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
   <script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=<%= I18n.locale %>"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <%= cloudinary_js_config %>
   <%= csrf_meta_tags %>
+<!--   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53a103b80ed29934"></script> -->
 </head>
-<body class="<%= "#{params[:controller]}_#{params[:action]}" %>">
+<body class="<%= "user_layouts #{params[:controller]}_#{params[:action]}" %>">
   <%= render 'layouts/nav' unless @skip_header %>
-  <%= render 'layouts/flash' %>
   <%= yield %>
 </body>
   <%= render "layouts/footer" unless @skip_footer %>

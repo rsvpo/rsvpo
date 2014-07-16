@@ -1,4 +1,4 @@
-.merchant_layouts {
+
   /* FLEX ADMIN PLUGIN CUSTOMIZATION STYLES */
 
   /* The following styles are used to customize plugins used within the Flex Admin theme. */
@@ -63,105 +63,105 @@
   /* Full Calendar Customization */
 
   .fc-state-default {
-    border-color: #15987e;
-    text-shadow: none;
-    color: #fff;
-    background-color: #16a085;
-    background-image: none;
-    box-shadow: none;
+    border-color: #15987e !important;
+    text-shadow: none !important;
+    color: #fff !important;
+    background-color: #16a085 !important;
+    background-image: none !important;
+    box-shadow: none !important;
   }
 
   .fc-state-hover, .fc-state-down, .fc-state-active, .fc-state-disabled {
-    border-color: #138871;
-    color: #fff;
-    background-color: #149077;
+    border-color: #138871 !important;
+    color: #fff !important;
+    background-color: #149077 !important;
   }
 
   .fc-state-hover {
-    color: #fff;
+    color: #fff !important;
   }
 
   .fc-state-down, .fc-state-active {
-    background-color: #149077;
+    background-color: #149077 !important;
   }
 
   #external-events {
-    text-align: left;
+    text-align: left !important;
   }
 
   .external-event {
-    margin-bottom: 10px;
-    padding: 2px 4px;
-    border-color: #15987e;
-    border-radius: 3px;
-    font-size: .85em;
-    color: #fff;
-    background-color: #16a085;
-    cursor: pointer;
+    margin-bottom: 10px !important;
+    padding: 2px 4px !important;
+    border-color: #15987e !important;
+    border-radius: 3px !important;
+    font-size: .85em !important;
+    color: #fff !important;
+    background-color: #16a085 !important;
+    cursor: pointer !important;
   }
 
   #external-events p {
-    margin: 1.5em 0;
-    font-size: 11px;
-    color: #666;
+    margin: 1.5em 0 !important;
+    font-size: 11px !important;
+    color: #666 !important;
     input {
-      margin: 0;
-      vertical-align: middle;
+      margin: 0 !important;
+      vertical-align: middle !important;
     }
   }
 
   .fc-green, .fc-event {
-    border-color: #15987e;
-    color: #fff;
-    background-color: #16a085;
+    border-color: #15987e !important;
+    color: #fff !important;
+    background-color: #16a085 !important;
   }
 
   .fc-orange {
-    border-color: #e79411;
-    color: #fff;
-    background-color: #f39c12;
+    border-color: #e79411 !important;
+    color: #fff !important;
+    background-color: #f39c12 !important;
   }
 
   .fc-blue {
-    border-color: #2779b0;
-    color: #fff;
-    background-color: #2980b9;
+    border-color: #2779b0 !important;
+    color: #fff !important;
+    background-color: #2980b9 !important;
   }
 
   .fc-red {
-    border-color: #db4839;
-    color: #fff;
-    background-color: #e74c3c;
+    border-color: #db4839 !important;
+    color: #fff !important;
+    background-color: #e74c3c !important;
   }
 
   .fc-purple {
-    border-color: #8741a4;
-    color: #fff;
-    background-color: #8e44ad;
+    border-color: #8741a4 !important;
+    color: #fff !important;
+    background-color: #8e44ad !important;
   }
 
   .fc-default {
-    border-color: #314559;
-    color: #fff;
-    background-color: #34495e;
+    border-color: #314559 !important;
+    color: #fff !important;
+    background-color: #34495e !important;
   }
 
   .fc-white {
-    border-color: #cccccc;
-    color: #333333;
-    background-color: #ffffff;
+    border-color: #cccccc !important;
+    color: #333333 !important;
+    background-color: #ffffff !important;
   }
 
   .fc-header-title h2 {
-    font-size: 1.5em;
+    font-size: 1.5em !important;
   }
 
   @media (max-width: 767px) {
     .fc-header {
       .fc-header-left, .fc-header-center, .fc-header-right {
-        display: block;
-        width: 100%;
-        text-align: center;
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
       }
     }
   }
@@ -355,4 +355,186 @@
       font-size: .8em;
     }
   }
+
+
+.bx-wrapper {
+	position: relative;
+	margin: 0 auto 60px;
+	padding: 0;
+	*zoom: 1;
+}
+
+.bx-wrapper img {
+	max-width: 100%;
+	display: block;
+}
+
+/** THEME
+===================================*/
+
+.bx-wrapper .bx-viewport {
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border: solid #fff 5px;
+	left: -5px;
+	background: #fff;
+}
+
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: -30px;
+	width: 100%;
+}
+
+/* LOADER */
+
+.bx-wrapper .bx-loading {
+	min-height: 50px;
+	background: url(../img/bx_loader.gif) center center no-repeat #fff;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+
+/* PAGER */
+
+.bx-wrapper .bx-pager {
+	text-align: center;
+	font-size: .85em;
+	font-family: Arial;
+	font-weight: bold;
+	color: #666;
+	padding-top: 20px;
+}
+
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+	background: #666;
+	text-indent: -9999px;
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	outline: 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #000;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+.bx-wrapper .bx-prev {
+	left: 10px;
+	background: url(../img/controls.png) no-repeat 0 -32px;
+}
+
+.bx-wrapper .bx-next {
+	right: 10px;
+	background: url(../img/controls.png) no-repeat -43px -32px;
+}
+
+.bx-wrapper .bx-prev:hover {
+	background-position: 0 0;
+}
+
+.bx-wrapper .bx-next:hover {
+	background-position: -43px 0;
+}
+
+.bx-wrapper .bx-controls-direction a {
+	position: absolute;
+	top: 50%;
+	margin-top: -16px;
+	outline: 0;
+	width: 32px;
+	height: 32px;
+	text-indent: -9999px;
+	z-index: 9999;
+}
+
+.bx-wrapper .bx-controls-direction a.disabled {
+	display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.bx-wrapper .bx-controls-auto {
+	text-align: center;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start {
+	display: block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	outline: 0;
+	background: url(../img/controls.png) -86px -11px no-repeat;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start:hover,
+.bx-wrapper .bx-controls-auto .bx-start.active {
+	background-position: -86px 0;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop {
+	display: block;
+	text-indent: -9999px;
+	width: 9px;
+	height: 11px;
+	outline: 0;
+	background: url(../img/controls.png) -86px -44px no-repeat;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop:hover,
+.bx-wrapper .bx-controls-auto .bx-stop.active {
+	background-position: -86px -33px;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+	text-align: left;
+	width: 80%;
+}
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+	right: 0;
+	width: 35px;
+}
+
+/* IMAGE CAPTIONS */
+
+.bx-wrapper .bx-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #666\9;
+	background: rgba(80, 80, 80, 0.75);
+	width: 100%;
+}
+
+.bx-wrapper .bx-caption span {
+	color: #fff;
+	font-family: Arial;
+	display: block;
+	font-size: .85em;
+	padding: 10px;
 }

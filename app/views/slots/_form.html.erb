@@ -1,12 +1,16 @@
-<%= simple_form_for(@slot) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :description %>
-    <%= f.association :activity %>
+<div class="row">
+  <div class="col-lg-12">
+    <%= bootstrap_form_for([@activity, @slot], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
+      <%= f.text_field :start, :label => "開始", :placeholder => "開始" %>
+      <%= f.text_field :finish, :label => "結束", :placeholder => "結束" %>
+      <%= f.number_field :inventory, :label => "空檔", :placeholder => "空檔" %>
+      <%= f.text_area :description, rows: 5, :label => "簡介", :placeholder => "簡介" %>
+      <%= f.form_group :is_all_day do %>
+        <%= f.check_box :is_all_day, label: "全日活動" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= f.submit "確認時段" %>
+      <% end %>
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+</div>

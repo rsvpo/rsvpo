@@ -1,7 +1,7 @@
 <div class="btn-group">
-  <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+  <button class="btn-main dropdown-toggle" type="button" data-toggle="dropdown">
     <% if params[:category].nil? %>
-    All Activities
+    所有活動
     <% else %>
     <%= categories[params[:category].to_i - 1].name %>
     <% end %>

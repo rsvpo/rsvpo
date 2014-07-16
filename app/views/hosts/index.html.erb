@@ -1,0 +1,91 @@
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+  <div class="page-content">
+
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            主持
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            </li>
+            <li class="active">主持</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+
+            <nav class="navbar mailbox-topnav" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <a class="navbar-brand" href="mailbox.html"><i class="fa fa-inbox"></i> 主持</a>
+              </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="mailbox-nav">
+                <%= link_to raw('<i class="fa fa-edit"></i>') + " 新主持", new_host_path, :class => 'btn btn-white' %>
+              </div>
+            </nav>
+
+            <div id="mailbox">
+
+              <div id="mailbox-wrapper">
+
+                <div class="table-responsive mailbox-messages">
+                  <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>名稱</th>
+                        <th>頭銜</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @hosts.each do |host| %>
+                          <tr class="clickableRow" data-link="<%= host_path(host) %>">     
+                              <td><%= host.title %></td>
+                              <td><%= host.job %></td>
+                            <td>
+                              <%= link_to "更新主持", edit_host_path(host), class: "btn btn-info" %>
+                              <%= link_to "刪除主持", host, :method => :delete, class: "btn btn-info" %>
+                            </td>
+                          </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.page-content -->
+
+</div>
+<!-- /#page-wrapper -->
+<!-- end MAIN PAGE CONTENT -->
+
+<script>
+  jQuery(function($) {
+    $("tr[data-link]").click(function() {
+      window.location = this.dataset.link
+    });
+  })
+</script>

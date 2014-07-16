@@ -8,22 +8,27 @@
 
     <!-- Alerts Dropdown Heading -->
     <li class="dropdown-header">
-      <i class="fa fa-bell"></i> <%= alerts.count(:all)  %> New Alerts
+      <i class="fa fa-bell"></i> <%= alerts.count(:all)  %> 新通知
     </li>
 
     <!-- Alerts Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
     <li id="alertScroll">
       <ul class="list-unstyled">
-        <% alerts.first(10).each do |alert| %>
+        <% alerts.each do |alert| %>
           <li>
             <%= link_to booking_path(alert.booking_id) do %>
               <div class="alert-icon green pull-left">
                 <i class="fa fa-money"></i>
               </div>
-              <%= Booking.find(alert.booking_id).user.name %>
+              <% book = Booking.find(alert.booking_id) %>
+              <%= book.user.name %>
               <span class="small pull-right">
                 <strong>
-                  <em>3 mins ago</em>
+                  <em>
+                    <abbr class="timeago" title="<%= book.created_at.getutc.iso8601 %>">
+                      <%= book.created_at.to_s%>
+                    </abbr>
+                  </em>
                 </strong>
               </span>
             <% end %>
@@ -34,7 +39,7 @@
 
     <!-- Alerts Dropdown Footer -->
     <li class="dropdown-footer">
-      <%= link_to "View All Alerts", mybookings_path %>
+      <%= link_to "查看未確認預約", pending_path %>
     </li>
 
   </ul>

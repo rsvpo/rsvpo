@@ -1,0 +1,24 @@
+<ul class="list-inline portfolio text-center">
+  <% activities.each do |activity| %>
+  <li data-tag="graphics">
+    <div class="thumbs">
+      <% if activity.photos.first %>
+        <% activity.photos.each do |photo| %>
+          <%= cl_image_tag(photo.path, { size: '280x430', crop: :fill}, class: "img-responsive") %>
+        <% end %>
+      <% else %>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_280,w_430/v1402566281/Unknown.png" alt="" />
+      <% end %>
+      <%= link_to activity do %>
+        <span class="title">
+          <span><i class="fa fa-link fa-2x"></i></span>
+        </span>
+      </div>
+      <% end %>
+      <div class="project-title margin-30">
+        <h5><%= activity.title %></h5>
+        <%= activity.merchant_name %> <span class="badge pull-right">$ <%= activity.price %> </span>
+      </div>
+  </li>
+  <% end %>
+</ul>

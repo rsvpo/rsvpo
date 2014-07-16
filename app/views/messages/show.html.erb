@@ -1,7 +1,57 @@
-<% @messages.each do |message| %>
-<% if message.mu %><div class="sent"><% else %><div class="receive"><% end %>
-  <%= message.content %>
-  </div>
-<% end %>
+<%= render 'layouts/section', 
+            title: "訊息", 
+            :captured => capture { %>
+              <%= link_to 'Back', inbox_path %>
+            <% } %>
+<%= render 'layouts/flash' %>
 
-<%= link_to 'Back', mailbox_path %>
+<section id="content">
+  <div class="container">
+    <div class="post-comment margin-30">
+      <p class="lead">Leave a Comment</p>
+      <%= bootstrap_form_for(@msg, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
+        <%= f.hidden_field :merchant_id, :value => @merchant.id  %>  
+        <%= f.hidden_field :mu, :value => false  %>
+        <%= f.text_area :content, hide_label: true %>
+        <%= f.form_group do %>
+          <%= f.submit %>
+        <% end %>
+      <% end %>
+    </div>
+    <% @messages.each do |message| %>
+      <div class="row">
+        <% if message.mu %>
+          <div class="col-md-3">
+            <h5 class="sender">
+              <%= render 'layouts/squareimage', square: message.merchant.logo, size: "50" %>
+              <%= message.merchant.name %>
+            </h5>
+          </div>
+        <% end %>
+        <div class="bubble <% if message.mu %>sent<% else %>receive col-md-offset-4<% end %> col-md-5">
+          <h4><%= message.content %></h4>
+          <p>
+            <abbr class="timeago" title="<%= message.created_at.getutc.iso8601 %>">
+              <%= message.created_at.to_s%>
+            </abbr>
+          </p>
+        </div>
+        <% if !message.mu %>
+          <div class="col-md-3">
+            <h5 class="sender">
+              <%= render 'layouts/squareimage', square: message.user.avatar, size: "50" %>
+              <%= message.user.name %>
+            </h5>
+          </div>
+        <% end %>
+      </div>
+    </br>
+    <% end %>
+  </div>
+</section>
+
+<script>
+  jQuery(document).ready(function() {
+    jQuery("abbr.timeago").timeago();
+  });
+</script>

@@ -5,9 +5,13 @@ class Activity < ActiveRecord::Base
   has_many :slots
   has_many :likes
   belongs_to :category
+  has_many :shares
   
   has_many :activities_addresses, :foreign_key => "activity_id", :class_name => "ActivitiesAddresses"
   has_many :addresses, :through => :activities_addresses
+  
+  has_many :activities_hosts, :foreign_key => "activity_id", :class_name => "ActivitiesHosts"
+  has_many :hosts, :through => :activities_hosts
   
   validates :merchant_id, presence: true
 #   default_scope -> { order('created_at DESC') }

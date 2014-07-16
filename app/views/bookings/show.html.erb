@@ -1,64 +1,103 @@
-<p id="notice"><%= notice %></p>
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            <%= @booking.slot.activity.title %>的預約 - <%= @booking.name %>
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            </li>
+            <li class="active"><% if @booking.confirm %>已確認預約<% else %>未確認預約<% end %></li>
+            <li class="active"><%= @booking.slot.activity.title %>的預約 - <%= @booking.name %></li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+    
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+            <div class="row">
+              <div class="col-md-6">
+                <address>
+                  <h3><%= @booking.slot.activity.title %></h3>
+                  <br><%= @booking.slot.address.address %>
+                  <br><%= @booking.slot.address.locality %>
+                  <br>
+                  <abbr title="Phone">P:</abbr><%= @booking.slot.address.phone %>
+                </address>
+              </div>
+              <div class="col-md-6 invoice-terms">
+                <p>
+                  更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
+                  <br>
+                  <strong><span class="text-red">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span></strong>
+                </p>
+              </div>
+            </div>
+            <!-- /.row -->
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
 
-<p>
-  <strong>Merchant:</strong>
-  <%= @booking.slot.activity.merchant.name %>
-</p>
+              </div>
+              <div class="col-md-6 invoice-terms">
+                <h3>參加者</h3>
+                <address>
+                  <strong><%= @booking.name %></strong> <% if @booking.friend %> 由<%= @booking.user.name %>預約<% end %>
+                  <br>
+                  <abbr title="Phone">P:</abbr><%= @booking.phone %>
+                  <br>
+                  <abbr title="Email">E:</abbr><%= @booking.email %>
+                </address>
+                <a class="btn btn-green" href="#">給<%= @booking.user.name %>發訊息</a>
+              </div>
+            </div>
+            <!-- /.row -->
+            <br>
+            <div class="row">
+              <div class="col-lg-12">
+                <p>
+                  <strong>活動時段:</strong>
+                  <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+                </p>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @booking.slot.activity.title %>
-</p>
+                <p>
+                  <strong>其他資料:</strong>
+                  <%= @booking.optional %>
+                </p>
 
-<p>
-  <strong>Slot:</strong>
-  <%= @booking.slot.start %> - <%= @booking.slot.finish %>
-</p>
+                <% if !@booking.confirm %>
+                  <%= form_for(Booking.find(@booking.id), :html => { :method => :put }) do |f| %>
+                    <%= f.hidden_field :confirm, :value => true %>
+                    <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                      確認預約
+                      <% end %>
+                  <% end %>
+                <% elsif @booking.confirm %>
+                  <%= form_for(Booking.find(@booking.id), :html => { :method => :put }) do |f| %>
+                    <%= f.hidden_field :confirm, :value => true %>
+                    <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                      取消預約
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
 
-<p>
-  <strong>Optional:</strong>
-  <%= @booking.optional %>
-</p>
-
-<p>
-  <strong>Cancel:</strong>
-  <%= @booking.cancel %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @booking.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @booking.email %>
-</p>
-
-<p>
-  <strong>Friend:</strong>
-  <%= @booking.friend %>
-</p>
-
-<p>
-  <strong>Confirm:</strong>
-  <%= @booking.confirm %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @booking.phone %>
-</p>
-
-<p>
-  <strong>Slot:</strong>
-  <%= @booking.slot %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @booking.user %>
-</p>
-
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    
+  </div>
+</div>

@@ -1,4 +1,12 @@
 class AddressesController < InheritedResources::Base
+  
+  def index
+    @merchant = current_merchant
+    @messages_dropdown = @merchant.messages.where(:mu => false)
+    @alerts_dropdown = @merchant.activities.select("bookings.id as booking_id").joins(:slots => :bookings).order("bookings.created_at DESC")
+    @addresses = @merchant.addresses
+  end
+  
   def create
     @merchant = current_merchant
     @address = @merchant.addresses.build(safe_params)

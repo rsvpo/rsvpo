@@ -1,25 +1,33 @@
 Rsvp::Application.routes.draw do
+  resources :hosts
+
   resources :bookings
 
   resources :shares
 
   get "mailbox", to: 'mailbox#index'
+  get "inbox", to: 'inbox#index'
   get "upcoming", to: 'upcoming#index'
   get "following", to: 'following#index'
   get "favourite", to: 'favourite#index'
   get "dashboard", to: 'dashboard#index'
   get "schedule", to: 'schedule#index'
   get "mybookings", to: 'mybookings#index'
+  get "myactivities", to: 'myactivities#index'
+  get "pending", to: 'pending#index'
+  get "confirmed", to: 'confirmed#index'
   get 'mailbox/:id', to: 'mailbox#show'
+  get 'inbox/:id', to: 'inbox#show'
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
   resources :messages
   resources :views
   resources :addresses
   resources :categories
-  resources :slots
   resources :rules
-  resources :activities
+  resources :activities do
+    resources :slots
+  end
   resources :rule_instances
 
   root :to => "home#index"

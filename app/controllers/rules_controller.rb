@@ -44,6 +44,7 @@ class RulesController < InheritedResources::Base
   def safe_params
     rule_attributes = [
       :description,
+      :address_id,
       :inventory,
       :is_all_day,
       :from_date,

@@ -1,18 +1,25 @@
-<div class="categories text-center">
-  <%= render 'categories', categories: @categories %>
-</div>
+<%= render 'layouts/section', title: "nav" %>
 
-<%= render 'navigation' %>
-<div class="container">
-  <div class="row">
-    <div class="activities-wrapper">
-      <%= render 'activities', activities: @activities %>
+<section id="content">
+  <div class="container">
+
+    <div class="row margin-20">
+      <div class="col-md-12">
+        <%= render 'navigation' %>
+      </div>
     </div>
+
+    <div class="row">
+      <div class="activities-wrapper">
+        <%= render 'layouts/activities', activities: @activities %>
+      </div>
+    </div>
+    <div class="paginate-wrap text-center">
+      <%= render 'infinity', activities: @activities %>
+    </div>
+
   </div>
-  <div class="paginate-wrap text-center">
-    <%= render 'infinity', activities: @activities %>
-  </div>
-</div>
+</section>
 
 <script>
   $(window).scroll(function() {

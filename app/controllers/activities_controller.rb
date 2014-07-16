@@ -22,6 +22,15 @@ class ActivitiesController < InheritedResources::Base
   
   def show
     @activity = Activity.find(params[:id])
+    @hosts = @activity.hosts
+    @merchant = @activity.merchant
+    @related = @merchant.activities
+    if params[:address]
+      @current_address = Address.find(params[:address])
+    else
+      @current_address = @activity.addresses.first
+    end
+    @addresses = @activity.addresses
     @all_comments = @activity.comments.recent.page(params[:page]).per(2)
     @comment = @activity.comments.build
     @slot_instance = @activity.slots

@@ -1,0 +1,4 @@
+<%= select_tag(:address, options_for_select(@addresses.collect{|c| [c.address,c.id]}, @current_address.id)) %>
+<div class="map-wrap">
+  <div id="map_canvas"></div>
+</div>

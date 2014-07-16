@@ -1,33 +1,53 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/section', title: @slot.activity.title  %>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @slot.activity.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @slot.description %>
-</p>
+<section id="content">
+  <div class="container">
+    <div class="map-wrap">
+      <div id="map_canvas"></div>
+    </div>
+    <h3 class="gray">
+      <%= @slot.address.address %>
+    </h3>
 
-<% if @slot.is_all_day %>
-  <strong>All day</strong>
-<% else %>
-  <p>
-    <strong>Start:</strong>
-    <%= @slot.start %>
-  </p>
-<% end %>
+    <p>
+      <%= @slot.description %>
+    </p>
+    
+    <p>
+      <%= @slot.start %>  
+      <% if !@slot.is_all_day %>
+          - <%= @slot.finish %> 
+      <% end %>
+    </p>
 
-<p>
-  <strong>Finish:</strong>
-  <%= @slot.finish %>
-</p>
+    <p>
+      <strong>Inventory:</strong>
+      <%= @slot.inventory %>
+    </p>
 
-<p>
-  <strong>Inventory:</strong>
-  <%= @slot.inventory %>
-</p>
-
-<%= link_to 'Edit', edit_slot_path(@slot) %> |
-<%= link_to 'Back', slots_path %>
+    <%= link_to 'Edit', edit_slot_path(@slot) %> |
+    <%= link_to 'Back', slots_path %>
+  </div>
+</section>
+<script>
+  $(document).ready(function() {
+    reload_calendar();
+  });
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @slot.address.lat %>;
+  latlng_y = <%= @slot.address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+</script>

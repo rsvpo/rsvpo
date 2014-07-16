@@ -51,6 +51,11 @@
             <div class="form-group">
               <%= select_tag(:activity, options_for_select(@activities.collect{|c| [c.title,c.id]}, @activity.id), { :class => 'form_control' }) %>
             </div>
+            <ul>
+              <% @slots.each do |slot| %>
+                <%= render 'progress', slot: slot %>
+              <% end %>
+            </ul>
           </div>
         </div>
       </div>

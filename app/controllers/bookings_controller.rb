@@ -9,6 +9,15 @@ class BookingsController < InheritedResources::Base
     end
   end
   
+  def update
+    @booking = Booking.find(params[:id])
+    if @booking.update_attributes(safe_params)
+      redirect_to dashboard_path, :notice  => t('notice.success_act_update')
+    else
+      render :action => 'edit'
+    end
+  end
+  
   private
 
   def safe_params
@@ -16,6 +25,7 @@ class BookingsController < InheritedResources::Base
       :name,
       :optional,
       :phone,
+      :confirm,
       :slot_id
     ]
     params.require(:booking).permit(*booking_attributes)

@@ -20,6 +20,7 @@
 
   body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #34495e !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -165,33 +166,20 @@
       }
     }
     .page-content {
-      opacity: 0.3;
       -webkit-transition: opacity .4s linear;
       -moz-transition: opacity .4s linear;
       -o-transition: opacity .4s linear;
       transition: opacity .4s linear;
     }
-    .page-content-ease-in {
-      opacity: 1;
-    }
   }
 
-  /* Top Navigation
-
-    8888888 8888888888 ,o888888o.     8 888888888o             b.             8          .8. `8.`888b           ,8' 
-          8 8888    . 8888     `88.   8 8888    `88.           888o.          8         .888. `8.`888b         ,8'  
-          8 8888   ,8 8888       `8b  8 8888     `88           Y88888o.       8        :88888. `8.`888b       ,8'   
-          8 8888   88 8888        `8b 8 8888     ,88           .`Y888888o.    8       . `88888. `8.`888b     ,8'    
-          8 8888   88 8888         88 8 8888.   ,88'           8o. `Y888888o. 8      .8. `88888. `8.`888b   ,8'     
-          8 8888   88 8888         88 8 888888888P'            8`Y8o. `Y88888o8     .8`8. `88888. `8.`888b ,8'      
-          8 8888   88 8888        ,8P 8 8888                   8   `Y8o. `Y8888    .8' `8. `88888. `8.`888b8'       
-          8 8888   `8 8888       ,8P  8 8888                   8      `Y8o. `Y8   .8'   `8. `88888. `8.`888'        
-          8 8888    ` 8888     ,88'   8 8888                   8         `Y8o.`  .888888888. `88888. `8.`8'         
-          8 8888       `8888888P'     8 8888                   8            `Yo .8'       `8. `88888. `8.`          
-
-  */
+  /* Top Navigation */
 
   .navbar-top {
+    .navbar-brand {
+      padding: 4px !important;
+      margin-left: 10px;
+    }
     margin-left: 0;
     background-color: #2c3e50;
     .navbar-brand a {
@@ -264,7 +252,7 @@
     .dropdown-user {
       left: -80px;
       margin: 0;
-      min-width: 200px;
+      min-width: 200px !important;
     }
     .dropdown-scroll {
       margin: 0;
@@ -472,20 +460,7 @@
     }
   }
 
-  /* Side Navigation
-
-       d888888o.    8 8888 8 888888888o.      8 8888888888             b.             8          .8. `8.`888b           ,8' 
-     .`8888:' `88.  8 8888 8 8888    `^888.   8 8888                   888o.          8         .888. `8.`888b         ,8'  
-     8.`8888.   Y8  8 8888 8 8888        `88. 8 8888                   Y88888o.       8        :88888. `8.`888b       ,8'   
-     `8.`8888.      8 8888 8 8888         `88 8 8888                   .`Y888888o.    8       . `88888. `8.`888b     ,8'    
-      `8.`8888.     8 8888 8 8888          88 8 888888888888           8o. `Y888888o. 8      .8. `88888. `8.`888b   ,8'     
-       `8.`8888.    8 8888 8 8888          88 8 8888                   8`Y8o. `Y88888o8     .8`8. `88888. `8.`888b ,8'      
-        `8.`8888.   8 8888 8 8888         ,88 8 8888                   8   `Y8o. `Y8888    .8' `8. `88888. `8.`888b8'       
-    8b   `8.`8888.  8 8888 8 8888        ,88' 8 8888                   8      `Y8o. `Y8   .8'   `8. `88888. `8.`888'        
-    `8b.  ;8.`8888  8 8888 8 8888    ,o88P'   8 8888                   8         `Y8o.`  .888888888. `88888. `8.`8'         
-     `Y8888P ,88P'  8 8888 8 888888888P'      8 888888888888           8            `Yo .8'       `8. `88888. `8.`          
-
-  */
+  /* Side Navigation */
 
   .navbar-side {
     .navbar-collapse {
@@ -554,7 +529,7 @@
       margin-bottom: 0;
       border-bottom: 1px solid #54677a;
       font-size: 13px;
-      background-color: #34495e;
+      background-color: #34495e !important;
     }
     .navbar-nav > li > a {
       text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -706,146 +681,6 @@
     }
   }
 
-  /* Flex Portlet Styles
-
-    8 888888888o       ,o888888o.     8 888888888o. 8888888 8888888888 8 8888         8 8888888888 8888888 8888888888 d888888o.   
-    8 8888    `88.  . 8888     `88.   8 8888    `88.      8 8888       8 8888         8 8888             8 8888     .`8888:' `88. 
-    8 8888     `88 ,8 8888       `8b  8 8888     `88      8 8888       8 8888         8 8888             8 8888     8.`8888.   Y8 
-    8 8888     ,88 88 8888        `8b 8 8888     ,88      8 8888       8 8888         8 8888             8 8888     `8.`8888.     
-    8 8888.   ,88' 88 8888         88 8 8888.   ,88'      8 8888       8 8888         8 888888888888     8 8888      `8.`8888.    
-    8 888888888P'  88 8888         88 8 888888888P'       8 8888       8 8888         8 8888             8 8888       `8.`8888.   
-    8 8888         88 8888        ,8P 8 8888`8b           8 8888       8 8888         8 8888             8 8888        `8.`8888.  
-    8 8888         `8 8888       ,8P  8 8888 `8b.         8 8888       8 8888         8 8888             8 8888    8b   `8.`8888. 
-    8 8888          ` 8888     ,88'   8 8888   `8b.       8 8888       8 8888         8 8888             8 8888    `8b.  ;8.`8888 
-    8 8888             `8888888P'     8 8888     `88.     8 8888       8 888888888888 8 888888888888     8 8888     `Y8888P ,88P' 
-
-  */
-
-  .portlet {
-    margin-bottom: 15px;
-    border: 1px solid;
-    .portlet-heading {
-      padding: 0 15px;
-      h4 {
-        padding: 1px 0;
-        font-size: 16px;
-      }
-      a {
-        color: #fff;
-        &:hover, &:active, &:focus {
-          outline: none;
-        }
-      }
-    }
-    .portlet-widgets {
-      .dropdown-menu a {
-        color: #333;
-      }
-      ul.dropdown-menu {
-        min-width: 0;
-      }
-    }
-    .portlet-heading {
-      .portlet-title {
-        float: left;
-        h4 {
-          margin: 10px 0;
-        }
-      }
-      .portlet-widgets {
-        float: right;
-        margin: 8px 0;
-        .tabbed-portlets {
-          display: inline;
-        }
-        .divider {
-          margin: 0 5px;
-        }
-      }
-    }
-    .portlet-body {
-      padding: 15px;
-      background: #fff;
-    }
-    .portlet-footer {
-      padding: 10px 15px;
-      background: #e0e7e8;
-      ul {
-        margin: 0;
-      }
-    }
-  }
-
-  .portlet-green {
-    border-color: #16a085;
-    > .portlet-heading {
-      border-color: #16a085;
-      color: #fff;
-      background-color: #16a085;
-    }
-  }
-
-  .portlet-orange {
-    border-color: #f39c12;
-    > .portlet-heading {
-      border-color: #f39c12;
-      color: #fff;
-      background-color: #f39c12;
-    }
-  }
-
-  .portlet-blue {
-    border-color: #2980b9;
-    > .portlet-heading {
-      border-color: #2980b9;
-      color: #fff;
-      background-color: #2980b9;
-    }
-  }
-
-  .portlet-red {
-    border-color: #e74c3c;
-    > .portlet-heading {
-      border-color: #e74c3c;
-      color: #fff;
-      background-color: #e74c3c;
-    }
-  }
-
-  .portlet-purple {
-    border-color: #8e44ad;
-    > .portlet-heading {
-      border-color: #8e44ad;
-      color: #fff;
-      background-color: #8e44ad;
-    }
-  }
-
-  .portlet-default, .portlet-dark-blue, .portlet-default > .portlet-heading, .portlet-dark-blue > .portlet-heading {
-    border-color: #34495e;
-  }
-
-  .portlet-default > .portlet-heading, .portlet-dark-blue > .portlet-heading {
-    color: #fff;
-    background-color: #34495e;
-  }
-
-  .portlet-basic {
-    border-color: #333;
-    > .portlet-heading {
-      border-color: #333;
-      border-bottom: 1px solid #333;
-      color: #333;
-      background-color: #fff;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .portlet {
-      margin-bottom: 30px;
-    }
-  }
-
   /* Flex Tile Styles
 
     8888888 8888888888  8 8888 8 8888         8 8888888888     d888888o.   
@@ -955,6 +790,7 @@
     overflow: hidden;
     text-align: center;
     font-size: 1.75em;
+    line-height: 1.428571429 !important;
   }
 
   .time-widget-heading {

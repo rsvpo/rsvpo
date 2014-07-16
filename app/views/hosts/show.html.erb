@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @host.title %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @host.job %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @host.description %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @host.activity %>
+</p>
+
+<p>
+  <strong>Merchant:</strong>
+  <%= @host.merchant %>
+</p>
+
+<%= link_to 'Edit', edit_host_path(@host) %> |
+<%= link_to 'Back', hosts_path %>

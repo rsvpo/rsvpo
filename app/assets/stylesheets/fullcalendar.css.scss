@@ -1,4 +1,4 @@
-.merchant_layouts {
+
   /*!
  * FullCalendar v1.6.4 Stylesheet
  * Docs & License: http://arshaw.com/fullcalendar/
@@ -55,6 +55,7 @@ html .fc {
   h2 {
     margin-top: 0;
     white-space: nowrap;
+    color: #333 !important;
   }
 }
 
@@ -571,5 +572,4 @@ table.fc-border-separate {
 .fc-agenda .ui-resizable-resizing {
   /* TODO: better selector */
   _overflow: hidden;
-}
 }

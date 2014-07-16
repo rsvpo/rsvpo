@@ -7,9 +7,7 @@ class Merchant < ActiveRecord::Base
   has_many :addresses
   has_many :messages
   has_many :follows
+  has_many :hosts
   
-  has_many :addresses_merchants, :foreign_key => "merchant_id", :class_name => "AddressesMerchants"
-  has_many :addresses, :through => :addresses_merchants
-  
-  has_attachment  :logo, accept: [:jpg, :png, :gif]
+  has_attachment :logo, accept: [:jpg, :png, :gif]
 end

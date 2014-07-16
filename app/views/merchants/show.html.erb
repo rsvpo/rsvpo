@@ -1,3 +1,95 @@
-<h3><%= @merchant.name %></h3>
-<p>Email: <%= @merchant.email if @merchant.email %></p>
-<!-- <%= link_to 'Edit account', edit_merchant_registration_path %> -->
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<!--Page Title-->
+<section id="page-title">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 title-blue">
+        <h2><%= @merchant.name %></h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--About Content-->
+<section id="blue-container">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-6 margin-30">
+        <h3><%= @merchant.phone %></h3>
+        <p class="lead"><%= @merchant.site %> | <%= @merchant.opening %></p>
+        <p class="white"><%= @merchant.description %></p>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <%= render 'layouts/squareimage', square: @merchant.logo %>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="related">
+  <div class="container">
+    <div class="row margin-40">
+      <div class="col-md-12">
+        <h3><span class="blue">Activties</span></h3>
+      </div>
+    </div>
+    <%= render 'layouts/activities', activities: @related %>
+  </div>
+</section>
+
+<!--Message-->
+<section id="address">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 text-center">
+        <%= render 'layouts/mappick' %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Team Section-->
+<section id="team">
+  <div class="container">
+    <div class="row margin-40">
+      <div class="col-md-12">
+        <h3><span class="blue">Meet The Peoples</span></h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <!--Team Member-->
+      <% @merchant.hosts.each do |host| %>
+        <div class="col-sm-3 text-center team-member">
+          <%= render 'layouts/squareimage', square: host.photo %>
+        </div>
+      <% end %>  
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @current_address.lat %>;
+  latlng_y = <%= @current_address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+</script>

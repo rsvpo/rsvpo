@@ -1,5 +1,54 @@
-<h1>New address</h1>
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            加入地址
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            </li>
+            <li class="active">加入地址</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
 
-<%= render 'form' %>
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= link_to 'Back', addresses_path %>
+<script>
+  $(function() {
+    var addresspickerMap = $(".addresspicker_map").addresspicker({
+      regionBias: "fr",
+      updateCallback: showCallback,
+      elements: {
+        map:      "#map",
+        lat:      ".lat",
+        lng:      ".lng",
+        street_number: '.street_number',
+        route: '.route',
+        locality: '.locality',
+        administrative_area_level_2: '.administrative_area_level_2',
+        administrative_area_level_1: '.administrative_area_level_1',
+        country:  '.country',
+        postal_code: '.postal_code',
+        type:    '.type' 
+      }
+    });
+
+    var gmarker = addresspickerMap.addresspicker( "marker");
+    gmarker.setVisible(true);
+    addresspickerMap.addresspicker( "updatePosition");
+
+    function showCallback(geocodeResult, parsedGeocodeResult){
+      $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
+    }
+  });
+</script>
