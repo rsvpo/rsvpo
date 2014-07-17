@@ -18,13 +18,13 @@
     <div class="row">
 
       <div class="col-md-6 margin-30">
-        <h3><%= @merchant.phone %></h3>
-        <p class="lead"><%= @merchant.site %> | <%= @merchant.opening %></p>
+        <h3><i class="fa fa-phone"></i> <%= @merchant.phone.to_s.gsub(/(.{4})/, '\1 ') %> | <i class="fa fa-envelope"></i> <%= @merchant.site %></h3>
+        <p class="lead"><%= @merchant.opening %></p>
         <p class="white"><%= @merchant.description %></p>
       </div>
 
       <div class="col-md-6 text-center">
-        <%= render 'layouts/squareimage', square: @merchant.logo %>
+        <%= render 'layouts/squareimage', square: @merchant.logo, size: "150" %>
       </div>
 
     </div>
@@ -58,7 +58,7 @@
   <div class="container">
     <div class="row margin-40">
       <div class="col-md-12">
-        <h3><span class="blue">Meet The Peoples</span></h3>
+        <h3><span class="blue"><%= @merchant.name %>的主持</span></h3>
       </div>
     </div>
 
@@ -66,7 +66,7 @@
       <!--Team Member-->
       <% @merchant.hosts.each do |host| %>
         <div class="col-sm-3 text-center team-member">
-          <%= render 'layouts/squareimage', square: host.photo %>
+          <%= render 'layouts/squareimage', square: host.photo, size: "50" %>
         </div>
       <% end %>  
     </div>

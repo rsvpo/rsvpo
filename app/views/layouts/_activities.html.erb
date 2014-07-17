@@ -11,13 +11,16 @@
       <% end %>
       <%= link_to activity do %>
         <span class="title">
-          <span><i class="fa fa-link fa-2x"></i></span>
+          <h4><%= activity.title %></h4>
+          <h5><%= activity.merchant_name %></h5>
+          <h5><%= activity.category.name %></h5>
+          <h5><%= activity.duration %>分鐘</h5>
+          <h5>$<%= activity.price %></h5>
         </span>
       </div>
       <% end %>
       <div class="project-title margin-30">
         <h5><%= activity.title %></h5>
-        <%= activity.merchant_name %> <span class="badge pull-right">$ <%= activity.price %> </span>
       </div>
   </li>
   <% end %>

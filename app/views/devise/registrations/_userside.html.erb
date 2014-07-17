@@ -1,0 +1,21 @@
+<%= render 'layouts/section', title: "編輯我的個人資料" %>
+<%= render 'layouts/flash' %>
+
+<section id="content">
+  <div class="container">
+    <div class="sessions_new">
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
+        <%= f.error_notification %>
+        <%= display_base_errors resource %>
+        <label class="control-label" for="avatar">相片</label>
+        <%= f.attachinary_file_field :avatar%>
+        <%= f.input :name, :autofocus => true, :label => "名稱" %>
+        <%= f.input :email, :required => true, :label => "電郵" %>
+        <%= f.input :password, :label => "新密碼", :autocomplete => "off", :required => false %>
+        <%= f.input :password_confirmation, :label => "確認密碼", :required => false %>
+        <%= f.input :current_password, :label => "現在的密碼", :hint => "誧輸入密碼以更改個人資訊，如沒需要更改誧留空", :required => true %>
+        <%= f.button :submit, "確定", :class => 'btn btn-lg btn-primary btn-block' %>
+      <% end %>
+    </div>
+  </div>
+</section>

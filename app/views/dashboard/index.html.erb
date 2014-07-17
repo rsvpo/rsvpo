@@ -229,7 +229,7 @@
                       <% @mybookings.each do |booking| %>
                         <tr>
                           <% book = Booking.find(booking.booking_id) %>
-                          <td><%= book.slot.start %> - <%= book.slot.finish %></td>
+                          <td><%= book.slot.start.strftime("%F, %l:%M %P") %> - <%= book.slot.finish.strftime("%F, %l:%M %P") %></td>
                           <td><%= booking.title %></td>
                           <td><%= book.name %></td>
                           <td>
@@ -337,5 +337,6 @@
   });
   jQuery(document).ready(function() {
     jQuery("abbr.timeago").timeago();
+    moment.lang('zh-TW')
   });
 </script>

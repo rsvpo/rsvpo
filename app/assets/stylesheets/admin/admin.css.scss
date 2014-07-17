@@ -2030,7 +2030,7 @@
   }
 
   input[type="checkbox"]:checked::after, .checkbox input[type="checkbox"]:checked::after, .checkbox-inline input[type="checkbox"]:checked::after {
-    content: url(../img/checkmark.png);
+    content: url("http://res.cloudinary.com/rsvpo/image/upload/v1405559597/checkmark.png");
     display: block;
     position: absolute;
     top: -6px;

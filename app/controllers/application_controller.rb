@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
   
   def merchant_layout
-    if !current_merchant.nil?
+    if try(:current_merchant)
       self.class.layout "merchant" 
       @merchant = current_merchant
       @parent = @merchant.activities

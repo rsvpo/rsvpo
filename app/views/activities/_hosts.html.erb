@@ -1,9 +1,9 @@
 <section id="home-content">
   <div class="container">
-
     <% hosts.each_with_index do |host, index| %>
       <% if index == 0 or index % 3 == 0 %>
-        <div class="row">
+        <div class="row">\
+          <h4 class="white"><%= @activity.title %>的主持</h4>
       <% end %>
       <div class="col-sm-4 text-center home-box">
         <%= render 'layouts/squareimage', square: host.photo, size: 50 %>

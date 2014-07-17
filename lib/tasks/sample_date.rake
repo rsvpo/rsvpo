@@ -72,13 +72,13 @@ end
 def add_details_to_merchants
   merchants = Merchant.all
   merchants.each do |merchant|
-    merchant.phone = "9809" + rand(1000).to_s
+    merchant.phone = "9809" + rand(10000).to_s
     merchant.save
     merchant.description = "Whatever this is don't care, some basic desciption of the company"
     merchant.save
     merchant.site = "www.example" + rand(1000).to_s + ".com"
     merchant.save
-    merchant.opening = "From 9am to 9pm"
+    merchant.opening = "星 期 一 、 三 、 四 及 五 ： 下 午 1 時 至 晚 上 9 時 星 期 六 、 日 及 公 眾 假 期 ： 上 午 10 時 至 晚 上 9 時"
     merchant.save
   end
 end
@@ -158,7 +158,7 @@ def create_categories
               { :en => 'Educational', :HK => '學習' }]
 
   cat_list.each do |n|
-    cat = Category.create!(name: n[:en])
+    cat = Category.create!(name: n[:HK])
   end
 end
 

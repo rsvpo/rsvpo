@@ -1,0 +1,45 @@
+<%= render 'layouts/section', 
+            title: "訊息", 
+            :captured => capture { %>
+              <%= link_to 'Back', inbox_path %>
+            <% } %>
+<%= render 'layouts/flash' %>
+
+<section id="content">
+  <div class="container">
+    <div class="post-comment margin-30">
+      <div class="row">
+        <h3 class="lead col-sm-5 col-md-offset-2 black">回覆</h3>
+      </div>
+      <%= bootstrap_form_for(@msg, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
+        <%= f.hidden_field :merchant_id, :value => @merchant.id  %>  
+        <%= f.hidden_field :mu, :value => false  %>
+        <%= f.text_area :content, hide_label: true %>
+        <%= f.form_group do %>
+          <%= f.submit "送出訊息" %>
+        <% end %>
+      <% end %>
+    </div>
+    <% @messages.each do |message| %>
+      <div class="row margin-15">
+        <div class="<% if message.mu %>col-md-offset-1<% else %>send-wrap col-md-offset-2<% end %> col-md-9">
+          <div class="bubble <% if message.mu %>sent<% else %>receive<% end %>">
+            <h4><%= message.content %></h4>
+            <p>
+              <% if message.mu %>
+                <%= render 'layouts/squareimage', square: message.merchant.logo, size: "25" %>
+                <%= message.merchant.name %>
+              <% else %>
+                <%= render 'layouts/squareimage', square: message.user.avatar, size: "25" %>
+                <%= message.user.name %>
+              <% end %>
+              <abbr class="timeago pull-right" title="<%= message.created_at.getutc.iso8601 %>">
+                <%= message.created_at.to_s%>
+              </abbr>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

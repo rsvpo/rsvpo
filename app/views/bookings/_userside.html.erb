@@ -1,0 +1,94 @@
+<%= render 'layouts/section', title: @booking.slot.activity.title + "的預約" %>
+
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+            <div class="row">
+              <div class="col-md-6">
+
+              </div>
+              <div class="col-md-6 invoice-terms">
+                <p>
+                  更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
+                  <br>
+                  <strong><span class="text-red">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span></strong>
+                </p>
+              </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+              <div class="col-lg-offset-2 col-lg-8">
+                <p>
+                  <strong>參加者:</strong>
+                  <% if @booking.friend %><%= @booking.name %><% else %><%= current_user.name %><% end %>
+                </p>
+                
+                <p>
+                  <strong>活動時段:</strong>
+                  <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+                </p>
+
+                <p>
+                  <strong>其他資料:</strong>
+                  <%= @booking.optional %>
+                </p>
+                
+                <p>
+                  <strong>商戶:</strong>
+                  <%= @booking.slot.activity.merchant.name %>
+                </p>
+                
+                <p>
+                  <strong>電話:</strong>
+                  <%= @booking.slot.address.phone %>
+                </p>
+                
+                <p>
+                  <strong>地址:</strong>
+                  <%= @booking.slot.address.address %>, <%= @booking.slot.address.locality %>
+                </p>
+                
+                <div class="map-wrap">
+                  <div id="map_canvas"></div>
+                </div>
+                <a class="btn btn-green" href="#">給<%= @booking.slot.activity.merchant.name %>發訊息</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+</section>
+
+<script>
+  $(document).ready(function() {
+    reload_calendar();
+    $(".rsvp-btn").click(function() {
+      navigationFn.goToSection('.portlet');
+    });
+  });
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @booking.slot.address.lat %>;
+  latlng_y = <%= @booking.slot.address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+</script>

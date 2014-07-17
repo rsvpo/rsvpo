@@ -30,6 +30,7 @@ gem 'attachinary'
 gem 'acts_as_commentable'
 gem 'kaminari'
 gem 'tire'
+gem 'jquery-turbolinks'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

@@ -16,8 +16,6 @@ Rsvp::Application.routes.draw do
   get "myactivities", to: 'myactivities#index'
   get "pending", to: 'pending#index'
   get "confirmed", to: 'confirmed#index'
-  get 'mailbox/:id', to: 'mailbox#show'
-  get 'inbox/:id', to: 'inbox#show'
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
   resources :messages

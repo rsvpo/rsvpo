@@ -13,27 +13,25 @@
     
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">主頁<b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li<% if current_page? upcoming_path %> class="active"<% end %>><%= link_to "己預約", upcoming_url %></li>
-            <li<% if current_page? favourite_path %> class="active"<% end %>><%= link_to "喜愛活動", favourite_url %></li>
-            <li<% if current_page? following_path %> class="active"<% end %>><%= link_to "關注商戶", following_url %></li>
-            <li<% if current_page? inbox_path %> class="active"<% end %>><%= link_to "訊息", inbox_url %></li>
-          </ul>
-        </li>
-        <% end %>
         <li<% if current_page? activities_path %> class="active"<% end %>><%= link_to "活動", activities_url %></li>
         <li class="sign-up">
           <% if current_user %>
-          <%= link_to destroy_user_session_path, :method => :delete do %>
-          <span class="white"> 登出</span>
-          <% end %>  
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.name %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li<% if current_page? upcoming_path %> class="active"<% end %>><%= link_to "己預約", upcoming_url %></li>
+                <li<% if current_page? favourite_path %> class="active"<% end %>><%= link_to "喜愛活動", favourite_url %></li>
+                <li<% if current_page? following_path %> class="active"<% end %>><%= link_to "關注商戶", following_url %></li>
+                <li<% if current_page? inbox_path %> class="active"<% end %>><%= link_to "訊息", inbox_url %></li>
+                <li class="divider"></li>
+                <li><%= link_to raw('<i class="fa fa-gear"></i>') + "  設定", edit_user_registration_path %></li>
+                <li><%= link_to raw('<i class="fa fa-sign-out"></i>') + "  登出", destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </li>
           <% else %>
-          <%= link_to new_user_session_path do %>
-          <span class="white"> 登入</span>
-          <% end %>  
+            <%= link_to new_user_session_path do %>
+              <span class="white"> 登入</span>
+            <% end %>  
           <% end %>
         </li>
       </ul>

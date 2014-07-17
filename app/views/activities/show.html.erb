@@ -1,4 +1,3 @@
-<script src="<%= ENV['CF'] %>fullcalendar.min.js"></script>
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
  <!--Content Section-->
@@ -11,7 +10,7 @@
           </div><br />
           <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
-              <h1 class="dark-gray"><%= @activity.title %> - <%= @activity.price %> (<%= @activity.duration %> minutes)</h1>
+              <h1 class="dark-gray"><%= @activity.title %> - $<%= @activity.price %></h1>
             </div>
           </div>
         </div>
@@ -24,8 +23,10 @@
               <%= cl_image_tag(@merchant.logo.path, { size: '50x50', crop: :fill}) %>
             </span>
           <% end %>
-          <h3><span class="blue"><%= link_to @merchant.name, @merchant %></span></h3>
           <p class="lead"><%= @activity.about %></p>
+          <h3><span class="blue"><%= link_to @merchant.name, @merchant %></span></h3>
+          <p class="lead"><%= @activity.category.name %></p>
+          <p class="lead"><%= @activity.duration %>分鐘</p>
           <p class="gray">
             <% @addresses.each do |address| %>
               <%= address.address %>
@@ -67,14 +68,14 @@
 <section id="related">
   <div class="row">
     <div class="col-md-10 col-md-offset-1 text-center">
-      <h4 class="gray">Other activities by</h4>
+      <h4 class="gray"><%= @merchant.name %>的其他活動</h4>
       <%= render 'layouts/activities', activities: @related %>
     </div>
   </div>
 </section>
 
 <div class="container">
-  <h2 class="dark-gray margin-30">Comments</h2>    
+  <h2 class="dark-gray margin-30">留言</h2>    
   <div class="comments-wrapper">
 <!--     <%= render 'comments', all_comments: @all_comments %> -->
     <div id="disqus_thread"></div>

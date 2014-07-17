@@ -1,0 +1,65 @@
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            與<%= @user.name %>的對話
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            </li>
+            <li class="active">訊息</li>
+            <li class="active">與<%= @user.name %>的對話</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="post-comment margin-30">
+      <div class="row">
+        <h3 class="lead col-sm-5 col-md-offset-2 black">回覆</h3>
+      </div>
+      <%= bootstrap_form_for(@msg, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
+        <%= f.hidden_field :user_id, :value => @user.id  %>  
+        <%= f.hidden_field :mu, :value => true  %>
+        <%= f.text_area :content, hide_label: true %>
+        <%= f.form_group do %>
+          <%= f.submit "送出訊息" %>
+        <% end %>
+      <% end %>
+    </div>
+    <% @messages.each do |message| %>
+      <div class="row margin-15">
+        <% if message.mu %>
+          <div class="col-md-3">
+            <h5 class="sender">
+              <%= render 'layouts/squareimage', square: message.merchant.logo, size: "50" %>
+              <%= message.merchant.name %>
+            </h5>
+          </div>
+        <% end %>
+        <div class="bubble <% if message.mu %>sent<% else %>receive col-md-offset-4<% end %> col-md-5">
+          <h4><%= message.content %></h4>
+          <p>
+            <abbr class="timeago" title="<%= message.created_at.getutc.iso8601 %>">
+              <%= message.created_at.to_s%>
+            </abbr>
+          </p>
+        </div>
+        <% if !message.mu %>
+          <div class="col-md-3">
+            <h5 class="sender">
+              <%= render 'layouts/squareimage', square: message.user.avatar, size: "50" %>
+              <%= message.user.name %>
+            </h5>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

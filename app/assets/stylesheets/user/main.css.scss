@@ -94,56 +94,6 @@
     border: none;
   }
 
-  /*----------Margins-------------------*/
-
-  .margin-0 {
-    margin-bottom: 0 !important;
-  }
-
-  .margin-10 {
-    margin-bottom: 10px !important;
-  }
-
-  .margin-15 {
-    margin-bottom: 15px !important;
-  }
-
-  .margin-20 {
-    margin-bottom: 20px !important;
-  }
-
-  .margin-30 {
-    margin-bottom: 30px !important;
-  }
-
-  .margin-40 {
-    margin-bottom: 40px !important;
-  }
-
-  .margin-50 {
-    margin-bottom: 50px !important;
-  }
-
-  .margin-60 {
-    margin-bottom: 60px !important;
-  }
-
-  .margin-70 {
-    margin-bottom: 70px !important;
-  }
-
-  .margin-80 {
-    margin-bottom: 80px !important;
-  }
-
-  .margin-90 {
-    margin-bottom: 90px !important;
-  }
-
-  .margin-100 {
-    margin-bottom: 100px !important;
-  }
-
   /*----------Colors-------------------*/
 
   .black {
@@ -677,10 +627,8 @@
     color: #555555;
     display: inline-block;
     font-size: 14px;
-    height: 40px;
     line-height: 20px;
     margin-bottom: 10px;
-    padding: 4px 6px;
     vertical-align: middle;
   }
 
@@ -848,6 +796,10 @@
     background: #E4E9EA;
     padding-top: 40px;
     padding-bottom: 40px;
+    select {
+      padding: 5px !important;
+      background-color: white !important;
+    }
   }
 
   /* ==========================================================================
