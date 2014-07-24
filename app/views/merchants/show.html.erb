@@ -16,15 +16,19 @@
 <section id="blue-container">
   <div class="container">
     <div class="row">
-
-      <div class="col-md-6 margin-30">
-        <h3><i class="fa fa-phone"></i> <%= @merchant.phone.to_s.gsub(/(.{4})/, '\1 ') %> | <i class="fa fa-envelope"></i> <%= @merchant.site %></h3>
-        <p class="lead"><%= @merchant.opening %></p>
-        <p class="white"><%= @merchant.description %></p>
-      </div>
-
-      <div class="col-md-6 text-center">
+      
+      <div class="col-md-3 text-center">
         <%= render 'layouts/squareimage', square: @merchant.logo, size: "150" %>
+      </div>
+      
+      <div class="col-md-9 margin-30">
+        <h3><i class="fa fa-phone"></i> <%= @merchant.phone.to_s.gsub(/(.{4})/, '\1 ') %>   |   <a href="mailto:<%= @merchant.email %>"><i class="fa fa-envelope-o"></i> 電郵</a></h3>
+        <div class="wrapper">
+          <%= link_to raw('<i class="fa fa-globe"></i>') + "我的網頁", "http://#{@merchant.site}", :class => 'btn-main' %>
+        </div>
+        <p class="lead"><%= @merchant.opening %></p>
+        <p class="white big-title">關於<%= @merchant.name %>:</p>
+        <p class="white"><%= @merchant.description %></p>
       </div>
 
     </div>
@@ -35,7 +39,7 @@
   <div class="container">
     <div class="row margin-40">
       <div class="col-md-12">
-        <h3><span class="blue">Activties</span></h3>
+        <h3><span class="blue"><%= @merchant.name %>的活動</span></h3>
       </div>
     </div>
     <%= render 'layouts/activities', activities: @related %>
@@ -47,7 +51,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 text-center">
-        <%= render 'layouts/mappick' %>
+        <%= render 'layouts/mappick', merchant: true %>
       </div>
     </div>
   </div>
@@ -62,14 +66,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <!--Team Member-->
-      <% @merchant.hosts.each do |host| %>
-        <div class="col-sm-3 text-center team-member">
-          <%= render 'layouts/squareimage', square: host.photo, size: "50" %>
-        </div>
-      <% end %>  
-    </div>
+    <%= render 'layouts/hosts', hosts: @merchant.hosts, color: "green" %>
   </div>
 </section>
 

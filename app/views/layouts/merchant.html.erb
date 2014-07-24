@@ -9,6 +9,8 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
+  <script src="<%= ENV['CF'] %>fullcalendar.js"></script>
+  <script src="<%= ENV['CF'] %>admin/morris.js"></script>
   <%= cloudinary_js_config %>
   <%= csrf_meta_tags %>
 </head>
@@ -78,7 +80,7 @@
               </li>
               <li>
                 <a class="logout_open" href="#logout">
-                  <%= link_to destroy_merchant_session_path, :method => :delete do %>
+                  <%= link_to destroy_merchant_session_path, :method => :delete, data: {no_turbolink: true} do %>
                       <i class="fa fa-sign-out"></i> 登出
                   <% end %>
                 </a>
@@ -109,10 +111,10 @@
 
   <%= render 'layouts/scripts' %>
 </body>
-  <script>
-      jQuery(document).ready(function() {
-      jQuery("abbr.timeago").timeago();
-    });
-  </script>
+<script>
+  $(document).on('ready page:load', function () {
+    jQuery("abbr.timeago").timeago();
+  });
+</script>
   <%= render "layouts/footer" unless @skip_footer %>
 </html>

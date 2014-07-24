@@ -57,7 +57,7 @@
     color: #FFFFFF;
     text-decoration: none;
     text-shadow: none;
-    padding: 15px 20px;
+    padding: 13px 17px;
     text-transform: uppercase;
     &:hover {
       background: #fd966d repeat scroll 0 0;
@@ -123,7 +123,31 @@
   .white {
     color: #ffffff;
   }
+  
+  .green {
+    color: #31beb1;
+  }
 
+  .background-green {
+    background-color: rgba(59,196,146,1);
+  }
+
+  .background-red {
+    background-color: #e75967;
+  }
+  
+  .background-yellow {
+    background-color: #e8db4f;
+  }
+  
+  .background-red {
+    background-color: #F16251;
+  }
+  
+  .background-blue {
+    background-color: #6BC6D1;
+  }
+  
   /* ==========================================================================
      Navigation Styles
      ========================================================================== */
@@ -227,6 +251,9 @@
     *border-bottom-width: 0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
+    .fa {
+      width: 20px;
+    }
     border-radius: 0px;
     > li > a {
       color: #778489;
@@ -384,14 +411,14 @@
 
   #home-content {
     background: #38c8e0;
+    padding-top: 40px;
   }
 
   .home-box {
-    padding: 80px 0px 80px 0px;
+    padding: 30px 0px 30px 0px;
     color: #ffffff;
     background-position: center bottom;
     &:hover {
-      background: url("../img/arrow.png") no-repeat scroll center bottom #35a3bc;
       transition: all 0.35s ease-in-out;
       -moz-transition: all 0.35s ease-in-out;
       -webkit-transition: all 0.35s ease-in-out;
@@ -402,6 +429,8 @@
     p {
       padding-left: 30px;
       padding-right: 30px;
+      font-size: 16px;
+      line-height: 23px;
     }
     a {
       color: #ffffff;
@@ -438,6 +467,12 @@
   #page-title {
     background: #3E4549;
     padding-top: 100px;
+    h2 {
+      a {
+        color: grey;
+        font-size: 18px;
+      }
+    }
   }
 
   .title-blue {
@@ -643,6 +678,7 @@
       margin-bottom: 10px;
       padding: 4px 6px;
       vertical-align: middle;
+      width: 100%;
     }
   }
 
@@ -796,10 +832,6 @@
     background: #E4E9EA;
     padding-top: 40px;
     padding-bottom: 40px;
-    select {
-      padding: 5px !important;
-      background-color: white !important;
-    }
   }
 
   /* ==========================================================================

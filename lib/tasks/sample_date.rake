@@ -302,7 +302,7 @@ def follow_merchants
   merchants = Merchant.all
   users = User.all
   merchants.each do |merchant|
-    if rand(5) == 3
+    if rand(3) == 3
       if [true,false][rand(2)]
         users.each do |user|
           follow = user.follows.create!(merchant_id: merchant.id, created_at: rand_time(2.weeks.ago))

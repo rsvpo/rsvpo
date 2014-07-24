@@ -5,6 +5,7 @@ Rsvp::Application.routes.draw do
 
   resources :shares
 
+  get "search", to: 'search#index'
   get "mailbox", to: 'mailbox#index'
   get "inbox", to: 'inbox#index'
   get "upcoming", to: 'upcoming#index'
@@ -16,14 +17,19 @@ Rsvp::Application.routes.draw do
   get "myactivities", to: 'myactivities#index'
   get "pending", to: 'pending#index'
   get "confirmed", to: 'confirmed#index'
+  get "confirmed", to: 'confirmed#index'
+  get '/generator/:id/new', to: 'rules#new', :as => :generate_rule
+  get '/location/:addid/activity/:id', to: 'activities#show', :as => :location_activity
+  get '/location/:addid/merchants/:id', to: 'merchants#show', :as => :location_merchant
+  get '/location/:addid/activity/:activity_id/slots', to: 'slots#index', :as => :address_slot
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
   resources :messages
   resources :views
-  resources :addresses
   resources :categories
   resources :rules
-  resources :activities do
+  resources :addresses
+  resources :activities, shallow: true do 
     resources :slots
   end
   resources :rule_instances

@@ -4,15 +4,18 @@
       <div class="col-md-12 title-white">
         <% if title == "nav" %>
           <div class="categories text-center">
-            <%= render 'categories', categories: @categories %>
+            <%= render 'layouts/categories', categories: @categories %>
           </div>
         <% else %>
-          <h2><%= title %></h2>
-          <% if defined?(captured) %>
-            <%= captured %>
-          <% end %>
+          <h2>
+            <%= title %>
+            <% if defined?(captured) %>
+              <%= captured %>
+            <% end %>
+          </h2>         
         <% end %>
       </div>
     </div>
   </div>
 </section>
+<%= render 'layouts/flash' %>

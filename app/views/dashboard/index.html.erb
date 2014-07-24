@@ -1,4 +1,4 @@
-<script src="<%= ENV['CF'] %>admin/morris.js"></script>
+
 
 <!-- begin MAIN PAGE CONTENT -->
 <div id="page-wrapper">
@@ -45,7 +45,6 @@
             <div class="circle-tile-number text-faded">
               <%= @follow_count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -53,7 +52,7 @@
         <div class="circle-tile">
           <a href="#">
             <div class="circle-tile-heading green">
-              <i class="fa fa-money fa-fw fa-3x"></i>
+              <i class="fa fa-eye fa-fw fa-3x"></i>
             </div>
           </a>
           <div class="circle-tile-content green">
@@ -63,7 +62,6 @@
             <div class="circle-tile-number text-faded">
               <%= @view_count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -71,7 +69,7 @@
         <div class="circle-tile">
           <a href="#">
             <div class="circle-tile-heading orange">
-              <i class="fa fa-bell fa-fw fa-3x"></i>
+              <i class="fa fa-ticket fa-fw fa-3x"></i>
             </div>
           </a>
           <div class="circle-tile-content orange">
@@ -81,7 +79,6 @@
             <div class="circle-tile-number text-faded">
               <%= @confirm_count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -89,7 +86,7 @@
         <div class="circle-tile">
           <a href="#">
             <div class="circle-tile-heading blue">
-              <i class="fa fa-tasks fa-fw fa-3x"></i>
+              <i class="fa fa-question fa-fw fa-3x"></i>
             </div>
           </a>
           <div class="circle-tile-content blue">
@@ -99,7 +96,6 @@
             <div class="circle-tile-number text-faded">
               <%= @pending_count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -107,17 +103,16 @@
         <div class="circle-tile">
           <a href="#">
             <div class="circle-tile-heading red">
-              <i class="fa fa-shopping-cart fa-fw fa-3x"></i>
+              <i class="fa fa-tasks fa-fw fa-3x"></i>
             </div>
           </a>
           <div class="circle-tile-content red">
             <div class="circle-tile-description text-faded">
-              分享
+              活動
             </div>
             <div class="circle-tile-number text-faded">
-              <%= @share_count %>
+              <%= @activities.count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -135,7 +130,6 @@
             <div class="circle-tile-number text-faded">
               <%= @message_count %>
             </div>
-            <a href="#" class="circle-tile-footer">更多 <i class="fa fa-chevron-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -167,33 +161,16 @@
     <div class="row">
       <div class="col-lg-3 col-sm-6">
         <div class="tile orange dash-demo-tile">
-          <h4><i class="fa fa-cloud fa-fw"></i> 預約比例</h4>
+          <h4><i class="fa fa-check fa-fw"></i> 預約比例</h4>
           <div id="easy-pie-1" class="easy-pie-chart" data-percent="92">
             <span class="percent"></span>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
-        <div class="tile blue dash-demo-tile">
-          <h4><i class="fa fa-check fa-fw"></i> 分享比例</h4>
-          <div id="easy-pie-2" class="easy-pie-chart" data-percent="<%= @distinct_view_count %>">
-            <span class="percent"></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
         <div class="tile red dash-demo-tile">
-          <h4><i class="fa fa-arrow-circle-down fa-fw"></i> 喜愛
-比例</h4>
+          <h4><i class="fa fa-heart fa-fw"></i> 喜愛比例</h4>
           <div id="easy-pie-3" class="easy-pie-chart" data-percent="27">
-            <span class="percent"></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6">
-        <div class="tile purple dash-demo-tile">
-          <h4><i class="fa fa-shopping-cart fa-fw"></i> 訪客觀看次數</h4>
-          <div id="easy-pie-4" class="easy-pie-chart" data-percent="35">
             <span class="percent"></span>
           </div>
         </div>
@@ -259,7 +236,8 @@
 <!-- /#page-wrapper -->
 <!-- end MAIN PAGE CONTENT -->
 <script>
-  Morris.Area({
+  function set_morris(){
+    Morris.Area({
       element: 'morris-chart-dashboard',
       data: $('#morris-chart-dashboard').data('views'),
       xkey: 'viewed_at',
@@ -287,42 +265,10 @@
           return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
       },
   });
-</script>
-<script>
-  //Moment.js Time Display
-  var datetime = null,
-      date = null;
-
-  var update = function() {
-      date = moment(new Date())
-      datetime.html(date.format('dddd<br>MMMM Do, YYYY<br>h:mm:ss A'));
   };
-
-  $(document).ready(function() {
-      datetime = $('#datetime')
-      update();
-      setInterval(update, 1000);
-  });
-  
-  //Custom jQuery - Changes background on time tile based on the time of day.
-  $(document).ready(function() {
-      datetoday = new Date(); // create new Date()
-      timenow = datetoday.getTime(); // grabbing the time it is now
-      datetoday.setTime(timenow); // setting the time now to datetoday variable
-      hournow = datetoday.getHours(); //the hour it is
-
-      if (hournow >= 18) // if it is after 6pm
-          $('div.tile-img').addClass('evening');
-      else if (hournow >= 12) // if it is after 12pm
-          $('div.tile-img').addClass('afternoon');
-      else if (hournow >= 6) // if it is after 6am
-          $('div.tile-img').addClass('morning');
-      else if (hournow >= 0) // if it is after midnight
-          $('div.tile-img').addClass('midnight');
-  });
   
   //Easy Pie Charts
-  $(function() {
+  function easy_pie_chart(){
       $('#easy-pie-1, #easy-pie-2, #easy-pie-3, #easy-pie-4').easyPieChart({
           barColor: "rgba(255,255,255,.5)",
           trackColor: "rgba(255,255,255,.5)",
@@ -334,9 +280,41 @@
               $(this.el).find('.percent').text(Math.round(percent));
           }
       });
-  });
-  jQuery(document).ready(function() {
+  };
+</script>
+<script>
+  $(document).ready(function() {
+    easy_pie_chart();
     jQuery("abbr.timeago").timeago();
-    moment.lang('zh-TW')
+    moment.lang('zh-TW');
+    set_morris();
+    
+    //Moment.js Time Display
+    var datetime = null,
+        date = null;
+
+    var update = function() {
+        date = moment(new Date())
+        datetime.html(date.format('dddd<br>MMMM Do, YYYY<br>h:mm:ss A'));
+    };
+
+    datetime = $('#datetime')
+    update();
+    setInterval(update, 1000);
+    
+    //Custom jQuery - Changes background on time tile based on the time of day.
+    datetoday = new Date(); // create new Date()
+    timenow = datetoday.getTime(); // grabbing the time it is now
+    datetoday.setTime(timenow); // setting the time now to datetoday variable
+    hournow = datetoday.getHours(); //the hour it is
+
+    if (hournow >= 18) // if it is after 6pm
+      $('div.tile-img').addClass('evening');
+    else if (hournow >= 12) // if it is after 12pm
+      $('div.tile-img').addClass('afternoon');
+    else if (hournow >= 6) // if it is after 6am
+      $('div.tile-img').addClass('morning');
+    else if (hournow >= 0) // if it is after midnight
+      $('div.tile-img').addClass('midnight');
   });
 </script>

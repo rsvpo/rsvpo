@@ -1,9 +1,9 @@
 <li>
-  <%= link_to edit_activity_slot_path(@activity, slot) do %> 
-    <p>
+  <%= link_to edit_slot_path(slot) do %> 
+    <p class="text-blue">
       <%= slot.start.strftime("%F, %l:%M %P") %>
       <span class="pull-right">
-        <strong><%= slot.bookings.count %> / <%= slot.inventory %></strong>
+        <strong class="text-dark-blue"><%= slot.bookings.count %> / <%= slot.inventory %></strong>
       </span>
     </p>
     <% percentage = 100 * slot.bookings.count / slot.inventory  %>

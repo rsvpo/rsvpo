@@ -1,0 +1,21 @@
+.activities_show, .merchants_show {
+  #address {
+    .btn-main {
+      min-width: 160px;
+    }
+    .btn-group {
+      margin-bottom: 20px !important;
+    }
+    .dropdown-menu {
+      li {
+        color: darkgray;
+        font-weight: normal;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        font-family: 'Open Sans', sans-serif;
+      }
+    }
+  }
+}

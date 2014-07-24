@@ -1,8 +1,8 @@
 <fieldset class="rule_option" id="repeats_weekly_options">
-  <%= f.number_field :repeats_every_n_weeks, :label => "每N日重複"  %>
-  <div class="control-group">
-    <label class="control-label">選擇日期</label>
-    <div class="controls">
+  <%= f.number_field :repeats_every_n_weeks, :label => "每N週重複"  %>
+  <div class="form-group">
+    <label class="control-label col-sm-3">選擇日期</label>
+    <div class="col-sm-8  .col-md-offset-1">
       <% %w[sunday monday tuesday wednesday thursday friday saturday].each do |day_of_the_week| %>
         <%= label_tag "rule_repeats_weekly_each_days_of_the_week_#{day_of_the_week}", day_of_the_week.humanize, :class => 'checkbox-inline' do %>
           <%= check_box_tag "rule[repeats_weekly_each_days_of_the_week][#{day_of_the_week}]", day_of_the_week, f.object.repeats_weekly_each_days_of_the_week.include?(day_of_the_week), {:name => "rule[repeats_weekly_each_days_of_the_week][]"} %>

@@ -13,7 +13,7 @@
     
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li<% if current_page? activities_path %> class="active"<% end %>><%= link_to "活動", activities_url %></li>
+        <li<% if current_page? search_path %> class="active"<% end %>><%= link_to "活動", search_url %></li>
         <li class="sign-up">
           <% if current_user %>
             <li class="dropdown">

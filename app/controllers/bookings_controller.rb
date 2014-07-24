@@ -3,7 +3,7 @@ class BookingsController < InheritedResources::Base
     @user = current_user
     @booking = @user.bookings.build(safe_params)
     if @booking.save
-      redirect_to activities_path, :notice => t('notice.success_act_create')
+      redirect_to upcoming_path, :notice => "已提出預約要求，商戶將儘快回覆"
     else
       render :action => 'new'
     end
@@ -12,7 +12,7 @@ class BookingsController < InheritedResources::Base
   def update
     @booking = Booking.find(params[:id])
     if @booking.update_attributes(safe_params)
-      redirect_to dashboard_path, :notice  => t('notice.success_act_update')
+      redirect_to pending_path, :notice => "已確認預約"
     else
       render :action => 'edit'
     end

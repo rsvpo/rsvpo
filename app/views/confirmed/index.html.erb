@@ -11,7 +11,7 @@
             已確認預約
           </h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path %>
             </li>
             <li class="active">已確認預約</li>
           </ol>
@@ -28,10 +28,7 @@
           <div class="portlet-body">
             <div class="row">
               <nav class="navbar mailbox-topnav" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="mailbox.html"><i class="fa fa-inbox"></i> 已確認預約</a>
-                </div>
+
               </nav>
               <div class="col-lg-12">
                 <div class="table-responsive">
@@ -56,7 +53,7 @@
                           <td>
                             <%= link_to '預約詳情', book, class: "btn btn-info" %>
                             <%= form_for(Booking.find(booking.booking_id), :html => { :method => :put }) do |f| %>
-                              <%= f.hidden_field :confirm, :value => true %>
+                              <%= f.hidden_field :confirm, :value => false %>
                               <%= button_tag(type: 'submit', class: "btn btn-info") do %>
                                 取消預約
                               <% end %>

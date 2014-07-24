@@ -1,11 +1,55 @@
-<%= bootstrap_form_for(@booking, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :optional %>
-  <%= f.number_field :phone %>
+<div class="row margin-30">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="carousel-wrapper">
+      <%= render 'activities/carousel', activity: slot.activity %>
+    </div>
+  </div>
+</div>
+
+<%= bootstrap_form_for(@booking, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8") do |f| %>
+  <div class="form-group">
+    <label class="control-label col-sm-3">商戶</label>
+    <div class="col-sm-8  .col-md-offset-1">
+      <h5><%= slot.activity.merchant.name %></h5>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">時段</label>
+    <div class="col-sm-8  .col-md-offset-1">
+      <h5><%= slot.start.strftime("%F, %l:%M %P")  %> - <%= slot.finish.strftime("%F, %l:%M %P")  %></h5>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">地址</label>
+    <div class="col-sm-8  .col-md-offset-1">
+      <h5><%= slot.address.address %>, <%= slot.address.locality %></h5>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3"></label>
+    <div class="col-sm-8  .col-md-offset-1">
+      <%= f.check_box :friend, :label => "代朋友預約?" %>
+    </div>
+  </div>
+  <span id="name-wrapper">
+    <%= f.text_field :name, :label => "朋友名稱", :placeholder => "朋友名稱" %>
+  </span>
+  <%= f.text_area :optional, :label => "其他資料", :placeholder => slot.activity.bookmsg %>
+  <%= f.number_field :phone, :label => "電話", :placeholder => "電話" %>
   <%= f.hidden_field :slot_id, :value => params[:slot] %>
   <%= f.form_group do %>
-    <%= f.submit %>
+    <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-primary btn-block' %>
   <% end %>
 <% end %>
 
-
+<script type="text/javascript">
+  var checkbox = document.getElementById('booking_friend');
+  var details_div = document.getElementById('name-wrapper');
+  checkbox.onchange = function() {
+     if(this.checked) {
+       details_div.style['display'] = 'block';
+     } else {
+       details_div.style['display'] = 'none';
+     }
+  };
+</script>

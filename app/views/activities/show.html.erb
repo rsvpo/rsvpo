@@ -25,13 +25,8 @@
           <% end %>
           <p class="lead"><%= @activity.about %></p>
           <h3><span class="blue"><%= link_to @merchant.name, @merchant %></span></h3>
-          <p class="lead"><%= @activity.category.name %></p>
-          <p class="lead"><%= @activity.duration %>分鐘</p>
-          <p class="gray">
-            <% @addresses.each do |address| %>
-              <%= address.address %>
-            <% end %>
-          </p><br />
+          <p class="lead"><i class="fa fa-clock-o"></i> <%= @activity.duration %>分鐘</p>
+          <p class="lead"><i class="fa fa-tag"></i> <%= @activity.category.name %></p>
           <div class="actions-wrapper text-center">
             <div class="like_btn_wrapper">
               <%= render 'like', activity: @activity %>
@@ -61,14 +56,17 @@
   <%= render 'calendar', activity: @activity %>
 </section>
 
-<section id="hosts">
-  <%= render 'hosts', hosts: @hosts %>
+<section id="home-content">
+  <div class="container">
+  <h4 class="white text-center"><%= @activity.title %>的主持</h4>
+    <%= render 'layouts/hosts', hosts: @hosts, color: "white" %>
+  </div>
 </section>
 
 <section id="related">
   <div class="row">
     <div class="col-md-10 col-md-offset-1 text-center">
-      <h4 class="gray"><%= @merchant.name %>的其他活動</h4>
+      <h4 class="gray margin-40"><%= @merchant.name %>的其他活動</h4>
       <%= render 'layouts/activities', activities: @related %>
     </div>
   </div>
@@ -77,7 +75,6 @@
 <div class="container">
   <h2 class="dark-gray margin-30">留言</h2>    
   <div class="comments-wrapper">
-<!--     <%= render 'comments', all_comments: @all_comments %> -->
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -101,11 +98,7 @@
 <script>
   function reload_calendar(){
     var source = new Array();
-    var new_rule_link = "<%= new_rule_path %>"
     $('#calendar').fullCalendar({
-      dayClick: function(date, allDay, jsEvent, view) {
-        document.location.href=new_rule_link + "?start_date=" + date;
-      },
         header: {
             left: 'prev,today,next',
             center: 'title',
@@ -118,38 +111,14 @@
         select: this.select,
         eventClick: this.eventClick,
         eventSources: [
-          {url: '<%= activity_path(@activity, format: :json) %>',
+          {url: '<%= location_activity_path(@current_address.id, @activity.id, format: :json) %>',
           error: function() {
             alert('there was an error while fetching events!');
           }}
         ],
-        timeFormat: 'h:mmtt{ - h:mmtt} '
+        timeFormat: 'h:mmtt{-h:mmtt} '
     });
   }
-</script>
-<script>
-  $(document).ready(function() {
-    reload_calendar();
-    $(".rsvp-btn").click(function() {
-      navigationFn.goToSection('.portlet');
-    });
-  });
-  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
-  latlng_x = <%= @current_address.lat %>;
-  latlng_y = <%= @current_address.lng %>;
-  latlng = new google.maps.LatLng(latlng_x, latlng_y);
-  myOptions = {
-    scrollwheel: false,
-    zoom: 17,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  marker = new google.maps.Marker({
-    position: marker_latlng,
-    map: map
-  });
 </script>
 <!-- <script>
   $(document).on('ready page:change', function() {
@@ -189,4 +158,29 @@
         });
     });
 });
+</script>
+<script>
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @current_address.lat %>;
+  latlng_y = <%= @current_address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+  $(document).ready(function() {
+    reload_calendar();
+    $(".rsvp-btn").click(function() {
+      navigationFn.goToSection('.portlet');
+    });
+  });
+  $(document).on('page:load', ready)
 </script>

@@ -7,14 +7,14 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
       when User
-        activities_path
+      search_path
       when Merchant
         dashboard_path
     end    
   end
   
   def merchant_layout
-    if try(:current_merchant)
+    if current_merchant.try(:email)
       self.class.layout "merchant" 
       @merchant = current_merchant
       @parent = @merchant.activities

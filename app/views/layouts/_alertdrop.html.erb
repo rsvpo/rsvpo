@@ -17,10 +17,10 @@
         <% alerts.each do |alert| %>
           <li>
             <%= link_to booking_path(alert.booking_id) do %>
-              <div class="alert-icon green pull-left">
-                <i class="fa fa-money"></i>
-              </div>
               <% book = Booking.find(alert.booking_id) %>
+              <div class="alert-icon pull-left">
+                <%= render 'layouts/squareimage', square: book.user.avatar, size: "20" %>
+              </div>
               <%= book.user.name %>
               <span class="small pull-right">
                 <strong>

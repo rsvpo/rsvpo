@@ -14,13 +14,13 @@
       <!-- begin DASHBOARD LINK -->
       <li>
         <a class="active" href="index.html">
-          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path %>
+          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path, "data-no-turbolink" => true %>
         </a>
       </li>
       <!-- end DASHBOARD LINK -->
       <li class="panel">
         <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#activity">
-          <i class="fa fa-tasks"></i> 活動 <i class="fa fa-caret-down"></i>
+          <i class="fa fa-tasks"></i>活動 <i class="fa fa-caret-down"></i>
         </a>
         <ul class="collapse nav" id="activity">
           <li>
@@ -31,22 +31,55 @@
           </li>
         </ul>
       </li>
+      <!-- begin TABLES DROPDOWN -->
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#bookings">
+          <i class="fa fa-ticket"></i>預約 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="bookings">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path %>
+          </li>
+        </ul>
+      </li>
+      <% if @parent %>
+        <!-- begin SCHEDULE DROPDOWN -->
+        <li class="panel">
+          <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#schedules">
+            <i class="fa fa-calendar"></i>時間表 <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="collapse nav" id="schedules">
+            <li>
+              <% @parent.each do |act| %>
+                <% if act.id %>
+                  <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + act.title, activity_slots_path(act) %>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <!-- end SCHEDULE DROPDOWN -->
+      <% end %>
+      <!-- end TABLES DROPDOWN -->
       <li class="panel">
         <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#address">
-          <i class="fa fa-map-marker"></i> 地址 <i class="fa fa-caret-down"></i>
+          <i class="fa fa-location-arrow"></i>地址 <i class="fa fa-caret-down"></i>
         </a>
         <ul class="collapse nav" id="address">
           <li>
             <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有地址", addresses_path %>
           </li>
           <li>
-            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path %>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path, "data-no-turbolink" => true %>
           </li>
         </ul>
       </li>
       <li class="panel">
         <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#hosts">
-          <i class="fa fa-group"></i> 主持 <i class="fa fa-caret-down"></i>
+          <i class="fa fa-group"></i>主持 <i class="fa fa-caret-down"></i>
         </a>
         <ul class="collapse nav" id="hosts">
           <li>
@@ -62,39 +95,6 @@
         <%= link_to raw('<i class="fa fa-envelope"></i>') + "訊息", mailbox_path %>
       </li>
       <!-- end CALENDAR LINK -->
-      <% if @parent %>
-        <!-- begin SCHEDULE DROPDOWN -->
-        <li class="panel">
-          <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#schedules">
-            <i class="fa fa-ticket"></i> 時間表 <i class="fa fa-caret-down"></i>
-          </a>
-          <ul class="collapse nav" id="schedules">
-            <li>
-              <% @parent.each do |act| %>
-                <% if act.id %>
-                  <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + act.title, activity_slots_path(act) %>
-                <% end %>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-        <!-- end SCHEDULE DROPDOWN -->
-      <% end %>
-      <!-- begin TABLES DROPDOWN -->
-      <li class="panel">
-        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#bookings">
-          <i class="fa fa-ticket"></i> 預約 <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="collapse nav" id="bookings">
-          <li>
-            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path %>
-          </li>
-          <li>
-            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path %>
-          </li>
-        </ul>
-      </li>
-      <!-- end TABLES DROPDOWN -->
     </ul>
   <!-- /.side-nav -->
   </div>

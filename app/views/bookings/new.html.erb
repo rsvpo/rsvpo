@@ -1,5 +1,9 @@
-<h1><%= Slot.find(params[:slot]).activity.title %></h1>
+<% slot = Slot.find(params[:slot]) %>
+<%= render 'layouts/section', title: "RSVP到" + slot.activity.title %>
 
-<%= render 'form' %>
+<section id="content">
+  <div class="container">
+    <%= render 'form', slot: slot %>
+  </div>
+</section>
 
-<%= link_to 'Back', bookings_path %>

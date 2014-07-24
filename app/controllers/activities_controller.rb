@@ -1,23 +1,5 @@
 class ActivitiesController < InheritedResources::Base
   def index
-    if params[:query].present?
-      @activities = Activity.search(params)
-    else
-      @activities = Activity.active.category(params[:category]).page(params[:infinity]).per(12)
-    end
-    @categories =Category.all
-    @skip_footer = true
-
-    respond_to do |format|
-      if params[:infinity]
-        format.js { render :action => 'infinity' }
-      elsif params[:loc]
-        format.js { render :action => 'loc' }
-      else
-        format.js
-      end
-      format.html
-    end
   end
   
   def show
@@ -25,8 +7,8 @@ class ActivitiesController < InheritedResources::Base
     @hosts = @activity.hosts
     @merchant = @activity.merchant
     @related = @merchant.activities
-    if params[:address]
-      @current_address = Address.find(params[:address])
+    if params[:addid]
+      @current_address = Address.find(params[:addid])
     else
       @current_address = @activity.addresses.first
     end
@@ -36,11 +18,7 @@ class ActivitiesController < InheritedResources::Base
     @slot_instance = @activity.slots
     respond_to do |format|
       format.html # index.html.erb
-      if params[:page]
-        format.js { render :action => 'page' }
-      else
-        format.json
-      end
+      format.json
     end
   end
   

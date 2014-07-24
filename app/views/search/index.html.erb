@@ -5,7 +5,7 @@
 
     <div class="row margin-30">
       <div class="col-md-12">
-        <%= render 'navigation' %>
+        <%= render 'layouts/navigation' %>
       </div>
     </div>
 
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="paginate-wrap text-center">
-      <%= render 'infinity', activities: @activities %>
+      <%= render 'layouts/infinity', activities: @activities %>
     </div>
 
   </div>
@@ -26,7 +26,7 @@
     var url;
     url = $('.pagination .next_page a').attr('href');
     if (url && $(window).scrollTop() >= $(document).height() - $(window).height()) {
-      $('.pagination').text(" Loading");
+      $('.pagination').text(" 載入中");
       return $.getScript(url);
     }
   });

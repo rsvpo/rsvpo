@@ -18,11 +18,14 @@
                 <% end %>
                 <%= link_to favourite.activity do %>
                   <span class="title">
-                    <h4><%= favourite.activity.title %></h4>
-                    <h5><%= favourite.activity.merchant_name %></h5>
-                    <h5><%= favourite.activity.category.name %></h5>
-                    <h5><%= favourite.activity.duration %>分鐘</h5>
-                    <h5>$<%= favourite.activity.price %></h5>
+                    <span>
+                      <h4><%= favourite.activity.title %></h4>
+                      <h5><%= favourite.activity.merchant_name %></h5>
+                      <h5><i class="fa fa-tag"></i> <%= favourite.activity.category.name %></h5>
+                      <h5><i class="fa fa-clock-o"></i> <%= favourite.activity.duration %>分鐘</h5>
+                      <h5>$<%= favourite.activity.price %></h5>
+                      <h5><i class="fa fa-map-marker"></i> <%= favourite.activity.addresses.collect(&:locality).uniq.join ", " %></h5> 
+                    </span>
                   </span>
                 </div>
                 <% end %>

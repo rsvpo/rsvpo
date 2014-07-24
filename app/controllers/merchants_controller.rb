@@ -11,8 +11,8 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     @addresses = @merchant.addresses
     @related = @merchant.activities
-    if params[:address]
-      @current_address = Address.find(params[:address])
+    if params[:addid]
+      @current_address = Address.find(params[:addid])
     else
       @current_address = @merchant.addresses.first
     end

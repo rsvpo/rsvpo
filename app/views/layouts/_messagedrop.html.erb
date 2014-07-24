@@ -19,7 +19,7 @@
             <%= link_to message_path(message) do %>
               <div class="row">
                 <div class="col-xs-2">
-                  <%= render 'layouts/squareimage', square: @merchant.logo, size: "40" %>
+                  <%= render 'layouts/squareimage', square: message.user.avatar, size: "40" %>
 <!--                   <img class="img-circle" src="<%= ENV['CF'] %>admin/user-profile-1.jpg" alt=""> -->
                 </div>
                 <div class="col-xs-10">

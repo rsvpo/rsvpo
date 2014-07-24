@@ -9,6 +9,8 @@
 <div class="row">
   <div class="col-lg-12">
     <%= bootstrap_form_for @rule, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1", html: {novalidate: 'novalidate'} do |f| %>
+      <%= f.hidden_field :activity_id, :value => @activity.id %>
+      <%= f.collection_select(:address_id, @activity.addresses.all, :id, :address, :label => "地址", :placeholder => "地址") %>
       <%= f.form_group :is_all_day do %>
         <%= f.check_box :is_all_day, label: "全日活動" %>
       <% end %>
@@ -39,13 +41,12 @@
       <div class="event_time">
         <%= f.hidden_field :time_zone, :value => "Hong Kong" %>
       </div>
-      <%= f.select :repeats, ['永不','每日','每週','每月','每年'], :label => "重複" %>
+      <%= f.select :repeats, ['永不','每日','每週','每月'], :label => "重複" %>
       <%= render partial: 'repeats_daily_options', locals: {f: f} %>
       <%= render partial: 'repeats_weekly_options', locals: {f: f} %>
       <%= render partial: 'repeats_monthly_options', locals: {f: f} %>
-      <%= render partial: 'repeats_yearly_options', locals: {f: f} %>
       <div class="rule_option" id="repeats_options">
-        <%= f.select :repeat_ends, ['never','on'], :label => "完結" %>
+        <%= f.select :repeat_ends, ['永不','完結於'], :label => "完結" %>
         <div id="rule_repeat_ends_on">
           <%= f.date_select :repeat_ends_on, {:label => "完結於"}, {style: 'width:auto;'} %>
         </div>
@@ -59,16 +60,14 @@
   </div>
 </div>
 
-
-
 <script>
-  function toggle_repeats_yearly_on() {
-    if($('#rule_repeats_yearly_on').is(':checked')){
-      $('#rule_repeats_yearly_on_options').show();
-    } else {
-      $('#rule_repeats_yearly_on_options').hide();
-    }
-  }
+//   function toggle_repeats_yearly_on() {
+//     if($('#rule_repeats_yearly_on').is(':checked')){
+//       $('#rule_repeats_yearly_on_options').show();
+//     } else {
+//       $('#rule_repeats_yearly_on_options').hide();
+//     }
+//   }
   function toggle_rule_times() {
     if($('#rule_is_all_day').is(':checked')){
       $('.rule_time').hide();
@@ -115,11 +114,11 @@
   function toggle_repeats_monthly() {
     switch ($('#rule_repeats_monthly').val())
     {
-    case 'each':
+    case '日期':
       $('#rule_repeats_monthly_each').show();
       $('#rule_repeats_monthly_on').hide();
       break;
-    case 'on':
+    case '星期N':
       $('#rule_repeats_monthly_each').hide();
       $('#rule_repeats_monthly_on').show();
       break;
@@ -127,11 +126,11 @@
   }
 </script>
 <script>
-  $(document).ready(function() {
-    toggle_repeats_yearly_on();
-    $('#rule_repeats_yearly_on').on('change',function(){
-      toggle_repeats_yearly_on();
-    });
+  function toggles(){
+//     toggle_repeats_yearly_on();
+//     $('#rule_repeats_yearly_on').on('change',function(){
+//       toggle_repeats_yearly_on();
+//     });
     toggle_rule_times();
     $('#rule_is_all_day').on('change',function(){
       toggle_rule_times();
@@ -149,6 +148,11 @@
       toggle_repeats_monthly();
     });
     $('.timepicker').timepicker();
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+  };
+</script>
+<script>
+  $(document).on('ready page:load', function () {
+    toggles();
   });
 </script>

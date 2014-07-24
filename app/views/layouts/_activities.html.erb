@@ -11,11 +11,14 @@
       <% end %>
       <%= link_to activity do %>
         <span class="title">
-          <h4><%= activity.title %></h4>
-          <h5><%= activity.merchant_name %></h5>
-          <h5><%= activity.category.name %></h5>
-          <h5><%= activity.duration %>分鐘</h5>
-          <h5>$<%= activity.price %></h5>
+          <span>
+            <h4><%= activity.title %></h4>
+            <h5><%= activity.merchant_name %></h5>
+            <h5><i class="fa fa-tag"></i> <%= activity.category.name %></h5>
+            <h5><i class="fa fa-clock-o"></i> <%= activity.duration %>分鐘</h5>
+            <h5>$<%= activity.price %></h5>
+            <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>          
+          </span>
         </span>
       </div>
       <% end %>

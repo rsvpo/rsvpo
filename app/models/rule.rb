@@ -1,7 +1,7 @@
 class Rule < ActiveRecord::Base
   include IceCubeMethods
   belongs_to :activity
-  after_save :add_slots
+  after_create :add_slots
   belongs_to :address
   
   def add_slots

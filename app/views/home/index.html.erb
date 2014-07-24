@@ -9,20 +9,24 @@
           <li>
             <img src="http://res.cloudinary.com/rsvpo/image/upload/v1402972233/header1_ulx1hp.png" alt="Title" />
             <div class="row text-center">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>想立即RSVP到你嘅心水活動？</h1><br />
-                <a class="btn-main" href="about.html">註冊</a>
+              <div class="col-sm-10 col-sm-offset-1 margin-30">
+                <h1>體驗多一點快樂</h1>
               </div>
+            </div>
+            <div class="row text-center">
+              <%= link_to "註冊", new_user_registration_path, class: "btn-main" %>
             </div>
           </li>
 
           <li>
             <img src="http://res.cloudinary.com/rsvpo/image/upload/v1402972234/header2_lpaeeq.png" alt="Title" />
             <div class="row text-center">
-              <div class="col-sm-10 col-sm-offset-1">
-                <h1>想揾啲嘢做吓但又無咩idea？有idea都唔知去邊度搵?</h1><br />
-                <%= link_to "註冊", new_user_registration_path, class: "btn-main" %>
+              <div class="col-sm-10 col-sm-offset-1 margin-30">
+                <h1>立即預約你喜歡的活動</h1>
               </div>
+            </div>
+            <div class="row text-center">
+              <%= link_to "註冊", new_user_registration_path, class: "btn-main" %>
             </div>
           </li>
         </ul>
@@ -39,19 +43,19 @@
     <div class="row">
 
       <div class="col-sm-4 text-center home-box">
-        <i class="fa fa-mobile-phone fa-3x"></i>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-gem.png" alt="Gem" />
         <h3>免費使用</h3>
         <p>網上book同打電話book一樣價錢，絕無附加收費</p>
       </div>
 
       <div class="col-sm-4 text-center home-box">
-        <i class="fa fa-thumbs-up fa-3x"></i>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-map.png" alt="Map" />
         <h3>容易比較</h3>
         <p>所有活動齊集一個地方，方便你比較價錢、細節，唔使再嘥時間google</p>
       </div>
 
       <div class="col-sm-4 text-center home-box">
-        <i class="fa fa-flag fa-3x"></i>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-mac.png" alt="Mac" />
         <h3>一click即book</h3>
         <p>只需從網上預約，就可以book到心水活動</p>
       </div>
@@ -66,14 +70,7 @@
   <div class="container">
     <div class="row margin-50">
       <div class="col-md-12 text-center">
-        <ul class="list-inline home-icons">
-          <li><a href="#"><i class="fa fa-rocket fa-4x blue"></i></a></li>
-          <li><a href="#"><i class="fa fa-heart fa-4x blue"></i></a></li>
-          <li><a href="#"><i class="fa fa-truck fa-4x blue"></i></a></li>
-          <li><a href="#"><i class="fa fa-cogs fa-4x blue"></i></a></li>
-          <li><a href="#"><i class="fa fa-lock fa-4x blue"></i></a></li>
-          <li><a href="#"><i class="fa fa-check fa-4x blue"></i></a></li>
-        </ul>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-target.png" alt="Target"/>
       </div>
     </div>
 
@@ -85,7 +82,7 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
-        <a class="btn-main" href="#">登入/登記</a>       
+        <%= link_to "登入/登記", new_merchant_session_path, class: "btn-main" %>
       </div>
     </div><!--End Row-->
 

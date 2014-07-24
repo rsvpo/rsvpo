@@ -1,4 +1,4 @@
-<%= render 'layouts/section', title: @booking.slot.activity.title + "的預約" %>
+<%= render 'layouts/section', title: @booking.slot.activity.title + "的預約詳情" %>
 
 <section id="content">
   <div class="container">
@@ -6,65 +6,58 @@
       <div class="col-lg-10 col-lg-offset-1 col-md-12">
         <div class="portlet portlet-default">
           <div class="portlet-body">
-            <div class="row">
-              <div class="col-md-6">
-
-              </div>
-              <div class="col-md-6 invoice-terms">
+            
+            <div class="booking-info">
+              <div class="invoice-terms">
                 <p>
                   更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
                   <br>
                   <strong><span class="text-red">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span></strong>
                 </p>
               </div>
-            </div>
-            <!-- /.row -->
+              <p>
+                <strong>參加者:</strong>
+                <% if @booking.friend %><%= @booking.name %><% else %><%= current_user.name %><% end %>
+              </p>
 
-            <div class="row">
-              <div class="col-lg-offset-2 col-lg-8">
-                <p>
-                  <strong>參加者:</strong>
-                  <% if @booking.friend %><%= @booking.name %><% else %><%= current_user.name %><% end %>
-                </p>
-                
-                <p>
-                  <strong>活動時段:</strong>
-                  <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
-                </p>
+              <p>
+                <strong>活動時段:</strong>
+                <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+              </p>
 
-                <p>
-                  <strong>其他資料:</strong>
-                  <%= @booking.optional %>
-                </p>
-                
-                <p>
-                  <strong>商戶:</strong>
-                  <%= @booking.slot.activity.merchant.name %>
-                </p>
-                
-                <p>
-                  <strong>電話:</strong>
-                  <%= @booking.slot.address.phone %>
-                </p>
-                
-                <p>
-                  <strong>地址:</strong>
-                  <%= @booking.slot.address.address %>, <%= @booking.slot.address.locality %>
-                </p>
-                
-                <div class="map-wrap">
-                  <div id="map_canvas"></div>
-                </div>
-                <a class="btn btn-green" href="#">給<%= @booking.slot.activity.merchant.name %>發訊息</a>
+              <p>
+                <strong>其他資料:</strong>
+                <%= @booking.optional %>
+              </p>
+
+              <p>
+                <strong>商戶:</strong>
+                <%= @booking.slot.activity.merchant.name %>
+              </p>
+
+              <p>
+                <strong>電話:</strong>
+                <%= @booking.slot.address.phone %>
+              </p>
+
+              <p>
+                <strong>地址:</strong>
+                <%= @booking.slot.address.address %>, <%= @booking.slot.address.locality %>
+              </p>
+              
+              <div class="map-wrap">
+                <div id="map_canvas"></div>
               </div>
+            </div>
+
+            <div class="btn-wrap text-center">
+              <a class="btn-main" href="#">給<%= @booking.slot.activity.merchant.name %>發訊息</a>
             </div>
           </div>
         </div>
-
       </div>
-      <!-- /.col-lg-12 -->
     </div>
-    <!-- /.row -->
+
   </div>
 </section>
 

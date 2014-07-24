@@ -13,13 +13,10 @@
           <% end %>
           <%= link_to merchant_path(following.merchant) do %>
             <span class="title">
-              <span><i class="fa fa-link fa-2x"></i></span>
+              <span><h5><%= following.merchant.name %></h5></span>
             </span>
           </div>
           <% end %>
-          <div class="project-title margin-30">
-            <h5><%= following.merchant.name %></h5>
-          </div>
       </li>
       <% end %>
     </ul>

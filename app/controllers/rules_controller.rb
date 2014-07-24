@@ -1,8 +1,54 @@
 class RulesController < InheritedResources::Base
+  before_filter :modify_params, :only => [:create, :update]
+  
+  def new
+    @rule = Rule.new
+    @activity = Activity.find(params[:id])
+  end
   
   def create
-    @activity = current_merchant.activities.first
-    @rule = @activity.rules.build(safe_params)
+    @rule = Rule.create!(safe_params)
+    if @rule.save
+      redirect_to activity_slots_path(safe_params[:activity_id]), :notice => t('成功加入時段')
+    else
+      render :action => 'new'
+    end
+  end
+  
+  def update
+    e = Rule.find(params[:id])
+    e.update_attributes(safe_params)
+    redirect_to rules_path, :notice => t('notice.success_rule_update')
+  end
+  
+  private
+  
+  def modify_params
+    if params[:rule][:repeats] == "永不"
+      params[:rule][:repeats] = "never"
+    end
+    if params[:rule][:repeats] == "每日"
+      params[:rule][:repeats] = "daily" 
+    end
+    if params[:rule][:repeats] == "每週"
+      params[:rule][:repeats] = "weekly" 
+    end
+    if params[:rule][:repeats] == "每月"
+      params[:rule][:repeats] = "monthly" 
+    end
+    if params[:rule][:repeat_ends] == "永不"
+      params[:rule][:repeat_ends] = "never" 
+    end
+    if params[:rule][:repeat_ends] == "完結於"
+      params[:rule][:repeat_ends] = "on" 
+    end
+    if params[:rule][:repeats_monthly] == "日期"
+      params[:rule][:repeats_monthly] = "each" 
+    end
+    if params[:rule][:repeats_monthly] == "星期N"
+      params[:rule][:repeats_monthly] = "on" 
+    end
+    
     if params[:rule][:from_date].empty?
       params[:rule][:from_date] = Date.today
     end
@@ -17,30 +63,8 @@ class RulesController < InheritedResources::Base
         params[:rule][:to_time] = Time.now.end_of_day
       end
     end
-    if @rule.save
-#       begin_date = Date.today
-#       last_date = begin_date + 30.days
-#       @rule.schedule.occurrences_between(begin_date,last_date).each do |t|
-#         slot = @activity.slots.create!(description: @rule.description, 
-#           is_all_day: @rule.is_all_day,
-#           start: t,
-#           finish: t + @rule.duration,
-#           description: @rule.description)
-#       end
-      redirect_to rules_path, :notice => t('notice.success_rule_create')
-    else
-      render :action => 'new'
-    end
   end
   
-  def update
-    e = Rule.find(params[:id])
-    e.update_attributes(safe_params)
-    redirect_to rules_path, :notice => t('notice.success_rule_update')
-  end
-  
-  private
-
   def safe_params
     rule_attributes = [
       :description,
@@ -74,6 +98,7 @@ class RulesController < InheritedResources::Base
       {:repeats_yearly_on_days_of_the_week => []},
       :repeat_ends,
       :repeat_ends_on,
+      :activity_id,
       :time_zone
     ]
     params.require(:rule).permit(*rule_attributes)

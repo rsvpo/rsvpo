@@ -1,7 +1,7 @@
 <%= render 'layouts/section', 
             title: "訊息", 
             :captured => capture { %>
-              <%= link_to 'Back', inbox_path %>
+              <%= link_to '(回到收件箱)', inbox_path %>
             <% } %>
 <%= render 'layouts/flash' %>
 
@@ -9,20 +9,20 @@
   <div class="container">
     <div class="post-comment margin-30">
       <div class="row">
-        <h3 class="lead col-sm-5 col-md-offset-2 black">回覆</h3>
+        <h3 class="lead col-sm-5 col-md-offset-2 black">留言</h3>
       </div>
       <%= bootstrap_form_for(@msg, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
         <%= f.hidden_field :merchant_id, :value => @merchant.id  %>  
         <%= f.hidden_field :mu, :value => false  %>
         <%= f.text_area :content, hide_label: true %>
         <%= f.form_group do %>
-          <%= f.submit "送出訊息" %>
+          <%= f.submit "送出訊息", :class => "btn-main" %>
         <% end %>
       <% end %>
     </div>
     <% @messages.each do |message| %>
       <div class="row margin-15">
-        <div class="<% if message.mu %>col-md-offset-1<% else %>send-wrap col-md-offset-2<% end %> col-md-9">
+        <div class="<% if message.mu %>col-md-offset-2<% else %>send-wrap col-md-offset-2<% end %> col-md-8">
           <div class="bubble <% if message.mu %>sent<% else %>receive<% end %>">
             <h4><%= message.content %></h4>
             <p>

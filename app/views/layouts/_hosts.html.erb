@@ -1,0 +1,13 @@
+<% hosts.each_with_index do |host, index| %>
+<% if index == 0 or index % 4 == 0 %>
+<div class="row">
+  <% end %>
+  <div class="col-sm-3 text-center home-box">
+    <%= render 'layouts/squareimage', square: host.photo, size: 50 %>
+    <h3 class="<%= color %>"><%= host.title %></h3>
+    <p class="<%= color %>"><%= host.job %></p>
+  </div>
+  <% if index == 3 or (index + 1) % 4 == 0 %>
+</div>
+<% end %>
+<% end %>

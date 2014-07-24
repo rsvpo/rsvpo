@@ -3,6 +3,6 @@ class Address < ActiveRecord::Base
   has_many :activities, :through => :activities_addresses
 
   belongs_to :merchant  
-  has_many :slot
-  has_many :rule
+  has_many :slots
+  has_many :rules
 end

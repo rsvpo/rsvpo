@@ -1,11 +1,22 @@
 class SlotsController < InheritedResources::Base
-  before_filter :load_parent
   
   def index
-    @slot = @activity.slots
+    @activity = Activity.find(params[:activity_id])
+    if params[:addid]
+      @current_address = Address.find(params[:addid])
+    else
+      @current_address = @activity.addresses.first
+    end
+    @slots = @activity.slots.where(:address_id => @current_address.id)
+    @addresses = @activity.addresses
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json
+    end
   end
   
   def create
+    @activity = Activity.find(params[:activity_id])
     @slot = @activity.slots.build(safe_params)
     if @slot.save
       redirect_to slots_path, :notice => t('notice.success_slot_create')
@@ -15,20 +26,17 @@ class SlotsController < InheritedResources::Base
   end
   
   def show
-    @slot = @activity.slots.find(params[:id])
+    @slot = Slot.find(params[:id])
   end
   
   def update
+    @activity = Activity.find(params[:activity_id])
     e = slot.find(params[:id])
     e.update_attributes(safe_params)
     redirect_to slots_path, :notice => t('notice.success_slot_update')
   end
   
   private
-  
-  def load_parent
-     @activity = Activity.find(params[:activity_id])
-  end
   
   def safe_params
     slot_attributes = [

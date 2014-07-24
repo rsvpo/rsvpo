@@ -31,23 +31,28 @@
   </div>
 </section>
 <script>
-  $(document).ready(function() {
+  function set_map(){
+    var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+    latlng_x = <%= @slot.address.lat %>;
+    latlng_y = <%= @slot.address.lng %>;
+    latlng = new google.maps.LatLng(latlng_x, latlng_y);
+    myOptions = {
+      scrollwheel: false,
+      zoom: 17,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    marker = new google.maps.Marker({
+      position: marker_latlng,
+      map: map
+    });
+  }
+</script>
+<script>
+  $(document).on('ready page:load', function () {
     reload_calendar();
-  });
-  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
-  latlng_x = <%= @slot.address.lat %>;
-  latlng_y = <%= @slot.address.lng %>;
-  latlng = new google.maps.LatLng(latlng_x, latlng_y);
-  myOptions = {
-    scrollwheel: false,
-    zoom: 17,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-  marker = new google.maps.Marker({
-    position: marker_latlng,
-    map: map
+    set_map();
   });
 </script>

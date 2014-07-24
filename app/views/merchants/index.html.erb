@@ -1,9 +1,0 @@
-<h3>Hello, <%= current_merchant.name %></h3>
-<ul class="users">
-  <% @merchants.each do |merchant| %>
-    <li>
-      <%= link_to merchant.name, merchant %> signed up <%= merchant.created_at.to_date %>
-    </li>
-  <% end %>
-</ul>
-<%= link_to "Sign out", destroy_merchant_session_path, :method => :delete  %>
