@@ -1,4 +1,26 @@
 .user_layouts {
+  body {
+    background: #f5f5f5;
+  }
+  .panel-title {
+    color: #6e7172;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+    text-align: left;
+  }
+  
+  .panel-heading {
+    background-color: #edefed !important;
+    border: 1px solid #e2e5e5 !important;
+  }
+  
+  .panel-body {
+    color: #6e7172;
+    text-decoration: none;
+    line-height: 21px;
+  }
+  
   h1, h2, h3, h4, h5, h6, p {
     font-family: 'Open Sans', sans-serif;
   }
@@ -15,8 +37,8 @@
     font-size: 32px;
     line-height: 34px;
     letter-spacing: -2px;
-    font-weight: 300;
-    color: #ffffff;
+    font-weight: 800;
+    color: #31beb1;
   }
 
   h3 {
@@ -50,6 +72,7 @@
 
   .btn-main {
     background: #f98253 repeat scroll 0 0;
+    font-size: 18px;
     border: none;
     font-weight: 400;
     border-radius: 0px;
@@ -60,7 +83,7 @@
     padding: 13px 17px;
     text-transform: uppercase;
     &:hover {
-      background: #fd966d repeat scroll 0 0;
+      opacity: 0.7;
       color: #FFFFFF;
       text-decoration: none;
       transition: all 0.35s ease-in-out;
@@ -101,7 +124,7 @@
   }
 
   .dark-gray {
-    color: #3e4549;
+    color: #edefed;
   }
 
   .gray {
@@ -127,7 +150,20 @@
   .green {
     color: #31beb1;
   }
-
+  
+  .red {
+    color: #e75967;
+  }
+  
+  .green-link {
+    a {
+      color: #1bbc9b;
+      &:hover {
+        color: #31beb1;
+      }
+    }
+  }
+  
   .background-green {
     background-color: rgba(59,196,146,1);
   }
@@ -140,10 +176,6 @@
     background-color: #e8db4f;
   }
   
-  .background-red {
-    background-color: #F16251;
-  }
-  
   .background-blue {
     background-color: #6BC6D1;
   }
@@ -153,28 +185,36 @@
      ========================================================================== */
 
   .navbar {
-    background: #2b3033;
+    background: #39BCE4;
     background-repeat: repeat-x;
-    border-color: #2b3033;
-    border-top: 5px solid #38c8e0;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2b3033', endColorstr='#2b3033', GradientType=0);
-    .nav {
-      margin: 10px 0px 10px 0px;
+    border-color: #2693ba;
+    border-top: 5px solid #2693ba;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2693ba', endColorstr='#2693ba', GradientType=0);
+    li {
+      padding: 0px 8px;
     }
   }
 
   .navbar-brand, .navbar-inverse .navbar-nav > li > a {
-    color: #778489;
+    color: #fff;
     font-family: 'Open Sans', sans-serif;
     text-shadow: 0 0px 0 rgba(0, 0, 0, 0);
     font-weight: normal;
     text-transform: uppercase;
     font-size: 14px;
+    &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+      background-color: transparent;
+      color: #778489;
+    }
   }
 
   .navbar-nav > li > a {
     padding-left: 12px;
     padding-right: 12px;
+    &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+      background-color: transparent;
+      color: #778489;
+    }
   }
 
   .navbar-inverse .nav .active > a {
@@ -182,15 +222,16 @@
     color: #ffffff;
     box-shadow: none;
     &:hover, &:focus {
-      background-color: transparent;
-      color: #ffffff;
+      opacity: 0.7;
       box-shadow: none;
     }
   }
 
   .navbar-brand {
     padding: 6px !important;
-    margin-top: 7px;
+    img {
+      margin-top: 4px !important;
+    }
   }
 
   .navbar-inverse {
@@ -204,23 +245,29 @@
       box-shadow: none;
       &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
         background-color: transparent;
-        color: #FFFFFF;
+        color: #778489;
       }
     }
     .nav-collapse {
       .nav > li > a {
         &:hover, &:focus {
-          background-color: transparent;
+          opacity: 0.7;
         }
       }
       .dropdown-menu a {
         &:hover, &:focus {
-          background-color: transparent;
+          opacity: 0.7;
         }
       }
     }
   }
-
+  
+  .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #2693ba !important
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #333 !important;
+  }
   .nav-collapse {
     .nav > li > a, .dropdown-menu a {
       border-radius: 0px;
@@ -240,10 +287,10 @@
   .navbar-nav > li > .dropdown-menu {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    margin-top: 10px;
   }
 
   .dropdown-menu {
+    min-width: initial !important;
     background-color: #26292B;
     border: 0px solid #ccc;
     border: 0px solid rgba(0, 0, 0, 0.2);
@@ -312,7 +359,6 @@
   }
 
   li.sign-up {
-    background: #38c8e0 repeat scroll 0 0;
     border: none;
     font-weight: 400;
     border-radius: 0px;
@@ -320,7 +366,6 @@
     color: #FFFFFF;
     text-decoration: none;
     text-shadow: none;
-    padding: 0px 8px;
     text-transform: uppercase;
     &:hover {
       background: #63ddf2 repeat scroll 0 0;
@@ -337,8 +382,7 @@
      ========================================================================== */
 
   #header {
-    background: #3e4549;
-    padding-top: 70px;
+    padding-top: 56px;
     padding-bottom: 40px;
     height: 700px;
   }
@@ -355,7 +399,7 @@
     }
     .bx-loading {
       min-height: 50px;
-      background: url(../img/bx_loader.gif) center center no-repeat transparent;
+      background: url("http://res.cloudinary.com/rsvpo/image/upload/v1407044403/bx_loader.gif") center center no-repeat transparent;
       height: 100%;
       width: 100%;
       position: absolute;
@@ -365,11 +409,11 @@
     }
     .bx-prev {
       left: 10px;
-      background: url(../img/controls.png) no-repeat 0 -32px;
+      background: url("http://res.cloudinary.com/rsvpo/image/upload/v1407044765/controls.png") no-repeat 0 -32px;
     }
     .bx-next {
       right: 10px;
-      background: url(../img/controls.png) no-repeat -43px -32px;
+      background: url("http://res.cloudinary.com/rsvpo/image/upload/v1407044765/controls.png") no-repeat -43px -32px;
     }
     .bx-prev:hover {
       background-position: 0 -32px;
@@ -406,67 +450,12 @@
   }
 
   /* ==========================================================================
-     Home Page Styles
-     ========================================================================== */
-
-  #home-content {
-    background: #38c8e0;
-    padding-top: 40px;
-  }
-
-  .home-box {
-    padding: 30px 0px 30px 0px;
-    color: #ffffff;
-    background-position: center bottom;
-    &:hover {
-      transition: all 0.35s ease-in-out;
-      -moz-transition: all 0.35s ease-in-out;
-      -webkit-transition: all 0.35s ease-in-out;
-    }
-    i {
-      padding-bottom: 30px;
-    }
-    p {
-      padding-left: 30px;
-      padding-right: 30px;
-      font-size: 16px;
-      line-height: 23px;
-    }
-    a {
-      color: #ffffff;
-      &:hover {
-        color: #ffffff;
-      }
-    }
-  }
-
-  .inline.home-icons > li {
-    padding-right: 30px;
-    margin-bottom: 40px;
-  }
-
-  #clients {
-    background: #ffffff;
-    padding: 80px 0 60px 0;
-  }
-
-  .clients img {
-    padding-bottom: 25px;
-    &:hover {
-      opacity: 0.5;
-      transition: all 0.35s ease-in-out;
-      -moz-transition: all 0.35s ease-in-out;
-      -webkit-transition: all 0.35s ease-in-out;
-    }
-  }
-
-  /* ==========================================================================
      Content styles
      ========================================================================== */
 
   #page-title {
-    background: #3E4549;
-    padding-top: 100px;
+    background: #EBEBED;
+    padding-top: 80px;
     h2 {
       a {
         color: grey;
@@ -476,24 +465,20 @@
   }
 
   .title-blue {
-    background: url("http://res.cloudinary.com/rsvpo/image/upload/v1402919476/arrow-blue_kgroly.png") no-repeat scroll left 15px bottom #3e4549;
     padding-bottom: 30px;
   }
 
   .title-white {
-    background: url("http://res.cloudinary.com/rsvpo/image/upload/v1402919477/arrow_vausj9.png") no-repeat scroll left 15px bottom #3e4549;
     padding-bottom: 30px;
   }
 
   #blue-container {
-    background: #38c8e0;
+    background: #6abbd9;
     padding-top: 80px;
     padding-bottom: 80px;
   }
 
   #team, #related, #slots {
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-size: cover;
   }
 
@@ -554,7 +539,6 @@
   }
 
   #content {
-    background: #ffffff;
     padding-top: 80px;
     padding-bottom: 80px;
   }
@@ -620,13 +604,12 @@
   .nav-tabs > li.active > a {
     color: #38C8E0;
     &:hover, &:focus {
-      color: #38C8E0;
+      opacity: 0.7;
     }
   }
 
   .nav {
     list-style: none outside none;
-    margin-bottom: 40px;
     margin-left: 0;
   }
 
@@ -638,7 +621,7 @@
     border: 0px solid transparent;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    background-color: #f1f4f5;
+    background-color: #ebe6e2;
   }
 
   input {
@@ -646,7 +629,7 @@
       border: 0px solid transparent;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
       transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-      background-color: #f1f4f5;
+      background-color: #ebe6e2;
     }
   }
 
@@ -654,11 +637,11 @@
     border: 0px solid transparent;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    background-color: #f1f4f5;
+    background-color: #ebe6e2;
   }
 
   select, textarea {
-    border-radius: 0px 0px 0px 0px;
+    border-radius: 5px;
     color: #555555;
     display: inline-block;
     font-size: 14px;
@@ -669,7 +652,7 @@
 
   input {
     &[type="text"], &[type="password"], &[type="datetime"], &[type="datetime-local"], &[type="date"], &[type="month"], &[type="time"], &[type="week"], &[type="number"], &[type="email"], &[type="url"], &[type="search"], &[type="tel"], &[type="color"] {
-      border-radius: 0px 0px 0px 0px;
+      border-radius: 5px;
       color: #555555;
       display: inline-block;
       font-size: 14px;
@@ -683,7 +666,7 @@
   }
 
   .uneditable-input {
-    border-radius: 0px 0px 0px 0px;
+    border-radius: 5px;
     color: #555555;
     display: inline-block;
     font-size: 14px;
@@ -701,8 +684,8 @@
   .alert {
     background-color: #FCF8E3;
     border: 1px solid #FBEED5;
-    border-radius: 0px;
-    margin-bottom: 20px;
+    border-radius: 5px;
+    margin: 2%;
     padding: 8px 35px 8px 14px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   }
@@ -724,7 +707,7 @@
      ========================================================================== */
 
   .form-container {
-    background: #3E4549;
+    background: #edefed;
     padding-top: 20px;
     padding-bottom: 20px;
   }
@@ -772,7 +755,7 @@
       padding: 5px 0 5px 0;
     }
     a {
-      color: #3e4549;
+      color: #edefed;
       text-decoration: none;
       &:hover {
         color: #778489;
@@ -828,7 +811,7 @@
      Message styles
      ========================================================================== */
 
-  #message, #address {
+  #message {
     background: #E4E9EA;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -880,6 +863,9 @@
       margin-left: 0px;
       margin-right: 0px;
     }
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+      color: floralwhite;
+    }
     .navbar-brand {
       margin-top: 0px;
     }
@@ -890,7 +876,7 @@
       height: 500px;
     }
     #page-title {
-      padding-top: 60px;
+      padding-top: 72px;
     }
     .team-member a {
       left: 30%;
@@ -898,12 +884,15 @@
     ul.portfolio li {
       float: left;
       margin-left: 0;
-      width: 48%;
+      width: 50%;
     }
   }
 
   /* Portrait tablet to landscape and desktop */
   @media (min-width: 768px) and (max-width: 979px) {
+    .navbar-nav.navbar-right:last-child {
+      margin-right: -35px !important;
+    }
     .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
       margin-left: 0px;
       margin-right: 0px;
@@ -923,7 +912,7 @@
     ul.portfolio li {
       float: left;
       margin-left: 0;
-      width: 48%;
+      width: 50%;
     }
   }
 

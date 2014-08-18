@@ -4,4 +4,7 @@ json.array! @mybookings do |booking|
   json.end booking.slot.finish
   json.allDay booking.slot.is_all_day
   json.url booking_url(booking)
+  if !booking.confirm
+      json.color '#E9C346'
+  end
 end

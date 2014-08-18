@@ -7,7 +7,7 @@
     <% end %>
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu">
+  <ul class="category-dropdown-menu dropdown-menu">
     <% if !params[:category].nil? %>
     <li><%= link_to "所有活動", params.except(:category) %></li>
     <% end %>

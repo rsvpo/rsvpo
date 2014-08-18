@@ -1,61 +1,40 @@
 <%= render 'layouts/section', title: "收件箱" %>
 
 <section id="content">
-  <div class="container">
-    <div id="mailbox">
-      <div id="mailbox-wrapper">
-        <div class="portlet portlet-purple">
-          <div class="portlet-heading">
-            <div class="portlet-title">
-              <h4>所有對話</h4>
-            </div>
-            <div class="clearfix"></div>
+  <div class="container"> 
+    <%= render 'layouts/flash' %>
+    <ul class="list-inline portfolio text-center">
+      <% @messages.each do |message| %>
+      <li data-tag="graphics">
+        <div class="thumbs">
+          <% merchant = Merchant.find(message) %>
+          <% if merchant.logo %>
+            <%= cl_image_tag(merchant.logo.path, { size: '150x150', crop: :fill}, class: "img-responsive") %>
+          <% else %>
+            <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_150,w_150/v1402566281/Unknown.png" alt="" />
+          <% end %>
+          <% msg = Message.find_by_user_id_and_merchant_id(current_user.id, message) %>
+          <%= link_to message_path(msg) do %>
+            <span class="title">
+              <span><h5>
+                <abbr class="timeago" title="<%= msg.created_at.getutc.iso8601 %>">
+                  <%= msg.created_at.to_s %>
+                </abbr>
+              </h5></span>
+            </span>
           </div>
-          <div class="portlet-body">
-            <div class="table-responsive mailbox-messages">
-              <table class="table table-bordered table-hover">
-                <tbody>
-                  <thead>
-                    <tr>
-                      <th>商戶</th>
-                      <th>訊息</th>
-                      <th>發出時間</th>
-                    </tr>
-                  </thead>
-                  <% @messages.each do |message| %>
-                  <tr class="unread-message clickableRow" data-link="<%= message_path(message) %>">     
-                    <td class="from-col"><%= message.merchant.name %></td>
-                    <td class="msg-col">
-                      <%= message.content %>
-                    </td>
-                    <td class="date-col">
-                      <abbr class="timeago" title="<%= message.created_at.getutc.iso8601 %>">
-                        <%= message.created_at.to_s%>
-                      </abbr>
-                    </td>
-                  </tr>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
+          <% end %>
+          <div class="project-title margin-30">
+            <h5><%= merchant.name %></h5>
           </div>
-        </div>
-        <!-- /.portlet -->
-        
-      </div>
-    </div>
+      </li>
+      <% end %>
+    </ul>
   </div>
 </section>
 
 <script>
-  jQuery(function($) {
-    $("tr[data-link]").click(function() {
-      window.location = this.dataset.link
-    });
-  })
-</script>
-<script>
-  jQuery(document).ready(function() {
+  $(document).on('ready page:load', function () {
     jQuery("abbr.timeago").timeago();
   });
 </script>

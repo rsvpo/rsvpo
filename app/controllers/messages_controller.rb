@@ -28,6 +28,15 @@ class MessagesController < InheritedResources::Base
     end
   end
   
+  def new
+    @message = Message.new
+    if current_merchant
+      @receiver = User.find(params[:id])
+    else
+      @receiver = Merchant.find(params[:id])
+    end
+  end
+  
   private
 
   def safe_params

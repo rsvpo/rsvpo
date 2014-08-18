@@ -65,13 +65,13 @@
               <li>
                 <a href="mailbox.html">
                   <i class="fa fa-envelope"></i> 訊息
-                  <span class="badge green pull-right"><%= @messages_dropdown.count %> </span>
+                  <span class="badge green pull-right"><% if @messages_dropdown %><%= @messages_dropdown.count %><% end %></span>
                 </a>
               </li>
               <li>
                 <a href="#">
                   <i class="fa fa-bell"></i> 通知
-                  <span class="badge orange pull-right"><%= @alerts_dropdown.count(:all)  %></span>
+                  <span class="badge orange pull-right"><% if @alerts_dropdown %><%= @alerts_dropdown.count(:all) %><% end %></span>
                 </a>
               </li>
               <li class="divider"></li>

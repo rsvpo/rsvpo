@@ -3,44 +3,46 @@
     <div class="carousel-wrapper">
       <%= render 'activities/carousel', activity: slot.activity %>
     </div>
+    
+    <%= bootstrap_form_for(@booking, layout: :vertical) do |f| %>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">商戶</label>
+        <h5><%= slot.activity.merchant.name %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">時段</label>
+        <h5><%= slot.start.strftime("%F, %l:%M %P")  %> - <%= slot.finish.strftime("%F, %l:%M %P") %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">地址</label>
+        <h5><%= slot.address.address %>, <%= slot.address.locality %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">還有</label>
+        <h5><%= remaining %>個空位</h5>
+      </div>
+      <div class= "friend-option">
+        <div class="form-group">
+          <label class="control-label" for="booking_phone">代朋友預約?</label>
+          <div class="friend-check">
+            <%= f.check_box :friend, :hide_label => true %>
+          </div>
+        </div>
+        <div class="form-group">
+          <span id="name-wrapper">
+            <%= f.text_field :name, :label => "朋友名稱", :placeholder => "朋友名稱" %>
+          </span>
+        </div>
+      </div>
+      <%= f.text_area :optional, :label => "其他資料", :placeholder => slot.activity.bookmsg %>
+      <%= f.number_field :phone, :label => "電話", :placeholder => " 電話" %>
+      <%= f.hidden_field :slot_id, :value => params[:slot] %>
+      <%= f.form_group do %>
+        <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-main btn-block background-red' %>
+      <% end %>
+    <% end %>
   </div>
 </div>
-
-<%= bootstrap_form_for(@booking, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8") do |f| %>
-  <div class="form-group">
-    <label class="control-label col-sm-3">商戶</label>
-    <div class="col-sm-8  .col-md-offset-1">
-      <h5><%= slot.activity.merchant.name %></h5>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-3">時段</label>
-    <div class="col-sm-8  .col-md-offset-1">
-      <h5><%= slot.start.strftime("%F, %l:%M %P")  %> - <%= slot.finish.strftime("%F, %l:%M %P")  %></h5>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-3">地址</label>
-    <div class="col-sm-8  .col-md-offset-1">
-      <h5><%= slot.address.address %>, <%= slot.address.locality %></h5>
-    </div>
-  </div>
-  <div class="form-group">
-    <label class="control-label col-sm-3"></label>
-    <div class="col-sm-8  .col-md-offset-1">
-      <%= f.check_box :friend, :label => "代朋友預約?" %>
-    </div>
-  </div>
-  <span id="name-wrapper">
-    <%= f.text_field :name, :label => "朋友名稱", :placeholder => "朋友名稱" %>
-  </span>
-  <%= f.text_area :optional, :label => "其他資料", :placeholder => slot.activity.bookmsg %>
-  <%= f.number_field :phone, :label => "電話", :placeholder => "電話" %>
-  <%= f.hidden_field :slot_id, :value => params[:slot] %>
-  <%= f.form_group do %>
-    <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-primary btn-block' %>
-  <% end %>
-<% end %>
 
 <script type="text/javascript">
   var checkbox = document.getElementById('booking_friend');

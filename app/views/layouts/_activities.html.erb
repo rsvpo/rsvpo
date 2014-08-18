@@ -4,26 +4,25 @@
     <div class="thumbs">
       <% if activity.photos.first %>
         <% activity.photos.each do |photo| %>
-          <%= cl_image_tag(photo.path, { size: '280x430', crop: :fill}, class: "img-responsive") %>
+          <%= cl_image_tag(photo.path, { size: '430x280', crop: :fill, class: "img-responsive"}) %>
         <% end %>
       <% else %>
-        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_280,w_430/v1402566281/Unknown.png" alt="" />
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_260,w_430/v1402566281/Unknown.png" alt="" class="img-responsive" />
       <% end %>
       <%= link_to activity do %>
         <span class="title">
           <span>
-            <h4><%= activity.title %></h4>
-            <h5><%= activity.merchant_name %></h5>
+            <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>
             <h5><i class="fa fa-tag"></i> <%= activity.category.name %></h5>
-            <h5><i class="fa fa-clock-o"></i> <%= activity.duration %>分鐘</h5>
-            <h5>$<%= activity.price %></h5>
-            <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>          
+            <h5><i class="fa fa-clock-o"></i> <%= activity.duration %>分鐘</h5>          
           </span>
         </span>
       </div>
       <% end %>
       <div class="project-title margin-30">
         <h5><%= activity.title %></h5>
+        <span class="price">$150</span>
+        <h6><%= activity.merchant_name %></h6>
       </div>
   </li>
   <% end %>

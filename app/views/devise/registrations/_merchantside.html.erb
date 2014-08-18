@@ -8,7 +8,7 @@
             編輯商戶資料
           </h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path, 'data-no-turbolink' => true %>
             </li>
             <li class="active">編輯商戶資料</li>
           </ol>
@@ -19,18 +19,29 @@
     <!-- /.row -->
     <!-- end PAGE TITLE ROW -->
     <div class="sessions_new">
-      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f| %>
-        <%= f.error_notification %>
+      <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
         <%= display_base_errors resource %>
-        <label class="control-label" for="avatar">相片</label>
         <%= f.attachinary_file_field :logo %>
-        <%= f.input :name, :autofocus => true, :label => "公司名稱" %>
-        <%= f.input :email, :required => true, :label => "電郵" %>
-        <%= f.input :password, :label => "新密碼", :autocomplete => "off", :required => false %>
-        <%= f.input :password_confirmation, :label => "確認密碼", :required => false %>
-        <%= f.input :current_password, :label => "現在的密碼", :hint => "誧輸入密碼以更改個人資訊，如沒需要更改誧留空", :required => true %>
-        <%= f.button :submit, "確定", :class => 'btn btn-lg btn-primary btn-block' %>
+        <%= f.text_field :name, :autofocus => true, :label => "公司名稱" %>
+        <%= f.text_area :description, :autofocus => true, :label => "公司簡介" %>
+        <%= f.text_field :phone, :autofocus => true, :label => "電話" %>
+        <%= f.text_field :site, :autofocus => true, :label => "網站" %>
+        <%= f.text_field :opening, :autofocus => true, :label => "營業時間" %>
+      
+        <%= f.text_field :email, :required => true, :label => "電郵" %>
+        <%= f.password_field :password, :label => "新密碼", :autocomplete => "off", :required => false %>
+        <%= f.password_field :password_confirmation, :label => "確認密碼", :required => false %>
+        <%= f.password_field :current_password, :label => "現在的密碼", :hint => "誧輸入密碼以更改個人資訊，如沒需要更改誧留空", :required => true %>
+        <%= f.form_group do %>
+          <%= f.submit "確定"  %>
+        <% end %>
       <% end %>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(document).on('ready page:load', function () {
+   $('.attachinary-input').attachinary()
+   $('label[for=merchant_logo]').text("公司標誌");
+  });
+</script>

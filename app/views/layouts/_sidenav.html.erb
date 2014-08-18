@@ -14,7 +14,7 @@
       <!-- begin DASHBOARD LINK -->
       <li>
         <a class="active" href="index.html">
-          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path, "data-no-turbolink" => true %>
+          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path, 'data-no-turbolink' => true %>
         </a>
       </li>
       <!-- end DASHBOARD LINK -->
@@ -73,7 +73,7 @@
             <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有地址", addresses_path %>
           </li>
           <li>
-            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path, "data-no-turbolink" => true %>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path, 'data-no-turbolink' => true %>
           </li>
         </ul>
       </li>
@@ -90,11 +90,19 @@
           </li>
         </ul>
       </li>
-      <!-- begin CALENDAR LINK -->
-      <li>
-        <%= link_to raw('<i class="fa fa-envelope"></i>') + "訊息", mailbox_path %>
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#messages">
+          <i class="fa fa-envelope"></i>訊息 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="messages">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有訊息", mailbox_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新訊息", client_path %>
+          </li>
+        </ul>
       </li>
-      <!-- end CALENDAR LINK -->
     </ul>
   <!-- /.side-nav -->
   </div>

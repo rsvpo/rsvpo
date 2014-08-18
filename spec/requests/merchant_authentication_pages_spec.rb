@@ -8,9 +8,9 @@ describe "merchant authentication" do
     before { visit new_merchant_session_path }
 
     describe "with invalid information" do
-      before { click_button "Sign in" }
+      before { click_button "登入" }
 
-      it { should have_content('Sign in') }
+      it { should have_content("登入") }
     end
 
     describe "with valid information" do
@@ -18,13 +18,12 @@ describe "merchant authentication" do
       before do
         fill_in "merchant_email",    with: merchant.email.upcase
         fill_in "merchant_password", with: merchant.password
-        click_button "Sign in"
+        click_button "立即登入"
       end
 
       it { should have_content(merchant.name) }
-      it { should_not have_content("Home") }
-      it { should have_link('Sign out',    href: destroy_merchant_session_path) }
-      it { should_not have_link('Sign in', href: new_merchant_session_path) }
+      it { should_not have_content("登入") }
+      it { should have_link('登出',  href: destroy_merchant_session_path) }
     end
   end
   
@@ -37,7 +36,7 @@ describe "merchant authentication" do
 
         describe "visiting the edit page" do
           before { visit edit_merchant_registration_path }
-          it { should have_content('Sign in') }
+          it { should have_content('登入') }
         end
 
         describe "submitting to the update action" do

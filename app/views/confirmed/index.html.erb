@@ -11,7 +11,7 @@
             已確認預約
           </h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path %>
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path, 'data-no-turbolink' => true %>
             </li>
             <li class="active">已確認預約</li>
           </ol>
@@ -23,7 +23,7 @@
     <!-- end PAGE TITLE ROW -->
 
     <div class="row">
-      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+      <div class="col-md-12">
         <div class="portlet portlet-default">
           <div class="portlet-body">
             <div class="row">
@@ -37,8 +37,9 @@
                       <tr>
                         <th>活動名稱</th>
                         <th>地址</th>
-                        <th>時間</th>
+                        <th>開始時間</th>
                         <th>預約人</th>
+                        <th></th>
                         <th></th>
                       </tr>
                     </thead>
@@ -48,13 +49,15 @@
                         <tr>
                           <td><%= booking.title %></td>
                           <td><%= book.slot.address.address %></td>
-                          <td><%= book.slot.start.strftime("%F, %l:%M %P") %> - <%= book.slot.finish.strftime("%F, %l:%M %P") %></td>
+                          <td><%= book.slot.start.strftime("%F, %l:%M %P") %></td>
                           <td><%= book.name %></td>
                           <td>
-                            <%= link_to '預約詳情', book, class: "btn btn-info" %>
-                            <%= form_for(Booking.find(booking.booking_id), :html => { :method => :put }) do |f| %>
+                            <%= link_to '預約詳情', book, class: "btn btn-orange" %>
+                          </td>
+                          <td>
+                            <%= form_for(book, :html => { :method => :put }) do |f| %>
                               <%= f.hidden_field :confirm, :value => false %>
-                              <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                              <%= button_tag(type: 'submit', class: "btn btn-red") do %>
                                 取消預約
                               <% end %>
                             <% end %>

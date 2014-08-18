@@ -1,13 +1,5 @@
-<%= simple_form_for(@message) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :content %>
-    <%= f.association :user %>
-    <%= f.association :merchant %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<% if current_merchant %>
+  <%= render 'merchantform' %>
+<% else %>
+  <%= render 'userform' %>
 <% end %>

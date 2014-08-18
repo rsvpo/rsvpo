@@ -12,9 +12,9 @@ namespace :db do
     create_hosts
     create_activities
     add_addresses_to_activities
+    add_details_to_activities
     add_hosts_to_activities
     add_slots
-    create_comments
     customers_view_activities
     message_semd_to_each_other
     book_activities
@@ -120,6 +120,15 @@ def add_addresses_to_activities
   end
 end
 
+def add_details_to_activities
+  activities = Activity.all
+  activities.each do |activity| 
+    rand(2..4).times do |n|
+      activity.details.create!(title: "Lorem Ipsum", content: "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum")
+    end
+  end
+end
+
 def add_hosts_to_activities
   activities = Activity.all
   activities.each do |activity| 
@@ -132,19 +141,6 @@ def add_hosts_to_activities
           host.activities_hosts.create!(activity_id: activity.id)
         end
       end
-    end
-  end
-end
-
-def create_comments
-  activities = Activity.all
-  activities.each do |commentable|
-    rand(1..15).times do |n|
-      user = User.all.sample
-      comment = commentable.comments.create
-      comment.title = user.id
-      comment.comment = "This is the first comment."
-      comment.save
     end
   end
 end
@@ -302,7 +298,7 @@ def follow_merchants
   merchants = Merchant.all
   users = User.all
   merchants.each do |merchant|
-    if rand(3) == 3
+    if rand(5) == 3
       if [true,false][rand(2)]
         users.each do |user|
           follow = user.follows.create!(merchant_id: merchant.id, created_at: rand_time(2.weeks.ago))
@@ -315,8 +311,9 @@ end
 def confirm_some_bookings
   bookings = Booking.all
   bookings.each do |booking|
-    if rand(3) == 3
+    if rand(3) == 1
       booking.confirm = true
+      booking.save
     end
   end
 end

@@ -1,3 +1,53 @@
+.attachinary_container {
+  li {
+    display: inline !important;
+    margin-right: 20px !important;
+  }
+}
+
+#address {
+  .dropdown-menu {
+    width: 100% !important;
+  }
+}
+
+abbr[title], abbr[data-original-title] {
+  cursor: inherit !important;
+  border-bottom: 0px !important;
+}
+
+/* Fixing margin right */
+html, body { overflow-x: hidden; }
+
+.text-right {
+  text-align: right !important;
+}
+
+.clickable {
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.btn-transparent {
+  background: transparent !important;
+  color: #31beb1 !important;
+  padding: 0px !important;
+}
+
+.curved {
+  border-radius: 15px;
+}
+
+.calendar-wrapper {
+  table {
+    tr {
+      background-color: white !important;
+      font-weight: 200 !important;
+    }
+  }
+}
+
 .shared-links {
   margin-top: 30px;
 }
@@ -6,6 +56,7 @@
   img {
     position: relative !important;
     width: 100% !important;
+    background-color: white;
   }
 }
 
@@ -74,12 +125,35 @@
   }
 
   .project-title {
-    background: #f3f6f7;
-    padding-bottom: 10px;
+    background: #fff;
+    text-align: left;
+    padding-bottom: 1px;
     h5 {
-      margin: 0;
-      font-size: 15px;
+      margin-left: 15px;
       letter-spacing: -0.7px;
+      letter-spacing: -0.7px;
+      color: #808080;
+      font-size: 15px;
+      line-height: 1.3;
+      font-weight: bold;
+    }
+    h6 {
+      color: #C3BFBE;
+      font-size: 10px;
+      height: 16px;
+      overflow: hidden;
+      padding: 0px 54px 0px 14px;
+      text-align: left;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .price {
+      float: right;
+      margin-right: 10px;
+      color: #15BE9C;
+      font-weight: bold;
+      font-size: 13px;
     }
   }
 
@@ -200,17 +274,17 @@
   }
 }
 
-.portlet-purple {
-  border-color: #8e44ad;
+.portlet-pink {
+  border-color: #F16252;
   > .portlet-heading {
-    border-color: #8e44ad;
+    border-color: #F16252;
     color: #fff;
-    background-color: #8e44ad;
+    background-color: #F16252;
   }
 }
 
 .portlet-default, .portlet-dark-blue, .portlet-default > .portlet-heading, .portlet-dark-blue > .portlet-heading {
-  border-color: #34495e;
+  border-color: #DFE2E4;
 }
 
 .portlet-default > .portlet-heading, .portlet-dark-blue > .portlet-heading {
@@ -238,7 +312,7 @@
    Bottom and Footer styles
    ========================================================================== */
 #bottom {
-  background: #3E4549;
+  background: #37464f;
   padding-top: 120px;
   padding-bottom: 80px;
 }

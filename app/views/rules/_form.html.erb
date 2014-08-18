@@ -33,9 +33,9 @@
       <% end %>
       <div class="rule_time">
         <% if params[:start_date] %>
-          <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間", :class => 'timepicker', :value => "#{end_time}"} %>
+        <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間", :value => "#{end_time}"} %>
         <% else %>
-          <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間", :class => 'timepicker'} %>
+        <%= f.text_field :to_time, {:label => "結束時間", :placeholder => "結束時間"} %>
         <% end %>
       </div>
       <div class="event_time">
@@ -61,13 +61,6 @@
 </div>
 
 <script>
-//   function toggle_repeats_yearly_on() {
-//     if($('#rule_repeats_yearly_on').is(':checked')){
-//       $('#rule_repeats_yearly_on_options').show();
-//     } else {
-//       $('#rule_repeats_yearly_on_options').hide();
-//     }
-//   }
   function toggle_rule_times() {
     if($('#rule_is_all_day').is(':checked')){
       $('.rule_time').hide();
@@ -127,10 +120,6 @@
 </script>
 <script>
   function toggles(){
-//     toggle_repeats_yearly_on();
-//     $('#rule_repeats_yearly_on').on('change',function(){
-//       toggle_repeats_yearly_on();
-//     });
     toggle_rule_times();
     $('#rule_is_all_day').on('change',function(){
       toggle_rule_times();
@@ -147,12 +136,33 @@
     $('#rule_repeats_monthly').on('change',function(){
       toggle_repeats_monthly();
     });
+    
+    $('#rule_from_time').on('change',function(){
+      var input_time = $("#rule_from_time").val().split(':');
+      var hours = parseInt(input_time[0]);
+      var mins = parseInt(input_time[1]);
+      
+      var input_date = $("#rule_from_date").val().split('-');
+      var year = parseInt(input_date[0]);
+      var month = parseInt(input_date[1]);
+      var day = parseInt(input_date[2]);
+      
+      var date = new Date(year, month-1, day, hours, mins);
+      date.setMinutes(date.getMinutes() + <%= @activity.duration %>)
+      
+      var time_output = date.getHours()+":"+date.getMinutes();
+      var date_output = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+("0" + date.getDate()).slice(-2)
+      $('#rule_to_time').val(time_output);
+      $('#rule_to_date').val(date_output);
+    });
     $('.timepicker').timepicker();
     $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
   };
 </script>
 <script>
   $(document).on('ready page:load', function () {
+    $('#rule_to_date').prop('readonly', true);
+    $('#rule_to_time').prop('readonly', true);
     toggles();
   });
 </script>

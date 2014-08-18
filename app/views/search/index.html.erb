@@ -1,18 +1,18 @@
 <%= render 'layouts/section', title: "nav" %>
 
 <section id="content">
+  <div id="topsearch">
+    <div class="searchbar">
+      <%= form_tag search_path, method: :get do %>
+        <%= text_field_tag :query, params[:query], class: "form-control", placeholder: " 搜尋"  %>
+      <% end %>
+      <%= render 'layouts/navigation' %>
+    </div> 
+  </div>
   <div class="container">
-
-    <div class="row margin-30">
-      <div class="col-md-12">
-        <%= render 'layouts/navigation' %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="activities-wrapper">
-        <%= render 'layouts/activities', activities: @activities %>
-      </div>
+    <%= render 'layouts/flash' %>
+    <div class="activities-wrapper">
+      <%= render 'layouts/activities', activities: @activities %>
     </div>
     <div class="paginate-wrap text-center">
       <%= render 'layouts/infinity', activities: @activities %>

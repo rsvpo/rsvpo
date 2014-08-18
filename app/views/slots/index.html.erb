@@ -1,4 +1,3 @@
-
 <!-- begin MAIN PAGE CONTENT -->
 <div id="page-wrapper">
 
@@ -20,10 +19,8 @@
               </button>
               <ul class="dropdown-menu" role="menu">
                 <% @addresses.each do |address| %>
-                <% if address.id == @current_address.id %>
-                <li><%= address.address %></li>
-                <% else %>
-                <li><%= link_to address.address, location_merchant_path(address.id, @merchant.id) %></li>
+                <% if address.id != @current_address.id %>
+                <li><%= link_to address.address, address_slot_path(address.id, @activity.id) %></li>
                 <% end %>
                 <% end %>
               </ul>

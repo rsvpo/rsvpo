@@ -11,9 +11,18 @@ class AddressesController < InheritedResources::Base
     @merchant = current_merchant
     @address = @merchant.addresses.build(safe_params)
     if @address.save
-      redirect_to merchants_path, :notice => t('notice.success_act_create')
+      redirect_to addresses_path, :notice => "成功加入地址"
     else
       render :action => 'new'
+    end
+  end
+  
+  def update
+    @address = Address.find(params[:id])
+    if @address.update_attributes(safe_params)
+      redirect_to @address, :notice  => "成功更新地址"
+    else
+      render :action => 'edit'
     end
   end
   

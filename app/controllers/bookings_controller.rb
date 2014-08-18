@@ -9,10 +9,20 @@ class BookingsController < InheritedResources::Base
     end
   end
   
+  def new
+    @booking = Booking.new
+    @slot = Slot.find(params[:slot])
+    @remaining = @slot.inventory - @slot.bookings.count
+    if @remaining < 1
+      redirect_to activity_path(@slot.activity), :notice => "活動已滿"
+    end
+  end
+  
   def update
     @booking = Booking.find(params[:id])
+    session[:return_to] ||= request.referer
     if @booking.update_attributes(safe_params)
-      redirect_to pending_path, :notice => "已確認預約"
+      redirect_to session.delete(:return_to), :notice => "已更新預約狀態"
     else
       render :action => 'edit'
     end

@@ -2,10 +2,11 @@
 
 <section id="content">
   <div class="container">
+    <%= render 'layouts/flash' %>
     <div class="calendar-wrapper container">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">       
-          <div class="portlet portlet-default">
+          <div class="portlet portlet-pink">
             <div class="portlet-heading">
               <div class="portlet-title">
                 <h4><%= current_user.name %>的時間表</h4>
@@ -53,12 +54,8 @@
   }
 </script>
 <script>
-  $(document).ready(function() {
-    reload_calendar();
-  });
-</script>
-<script>
-  jQuery(document).ready(function() {
+  $(document).on('ready page:load', function () {
     jQuery("abbr.timeago").timeago();
   });
+  reload_calendar();
 </script>

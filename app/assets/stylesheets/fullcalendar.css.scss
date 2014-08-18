@@ -56,6 +56,8 @@ html .fc {
     margin-top: 0;
     white-space: nowrap;
     color: #333 !important;
+    font-weight: 200 !important;
+    letter-spacing: -1px !important;
   }
 }
 
@@ -252,9 +254,9 @@ html .fc {
 }
 
 .fc-event {
-  border: 1px solid #3a87ad;
+  border: 1px solid #15987e;
   /* default BORDER color */
-  background-color: #3a87ad;
+  background-color: #15987e;
   /* default BACKGROUND color */
   color: #fff;
   /* default TEXT color */
@@ -282,7 +284,7 @@ a.fc-event {
 }
 
 .fc-event-time, .fc-event-title {
-  padding: 0 1px;
+
 }
 
 .fc .ui-resizable-handle {

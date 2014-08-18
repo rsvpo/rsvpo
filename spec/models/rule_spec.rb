@@ -1,9 +1,12 @@
 require 'spec_helper'
 
 describe Rule do
-  merchant = Merchant.new(name: "Example User", email: "user@example.com",
+  merchant = Merchant.create!(name: "Example User", email: "dontcare@example.com",
         password: "Password", password_confirmation: "Password")
-  activity = merchant.activities.build(title: "Lorem ipsum", about: "Lorem ipsum", price: 10, bookmsg: "Lorem ipsum", duration: 10)
+  category = Category.create!(name: '飲食')
+  address = Address.create!(address: "Address", phone: "MyString", locality: "MyString", province: "MyString", country: "MyString", lat: "9.99", lng: "9.99")
+  activity = address.activities.build(title: "Lorem ipsum", about: "Lorem ipsum", price: 10, bookmsg: "Lorem ipsum", duration: 10, category_id: category.id, merchant_id: merchant.id)
+  activity.save
   
   it "happens one time" do
     rule =  Rule.create!( description: 'Lorem ipsum',
@@ -29,7 +32,7 @@ describe Rule do
   end
   
   it "happens one time all day" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: true,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 00:00:00 UTC',
@@ -52,7 +55,7 @@ describe Rule do
   end
 
   it "happens every 4 days" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -75,7 +78,7 @@ describe Rule do
   end
 
   it "happens every weekday" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -98,7 +101,7 @@ describe Rule do
   end
 
   it "happens every weekend" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -121,7 +124,7 @@ describe Rule do
   end
 
   it "happens every Sunday" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -144,7 +147,7 @@ describe Rule do
   end
 
   it "happens every Monday" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -167,7 +170,7 @@ describe Rule do
   end
 
   it "happens every first of the month" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -193,7 +196,7 @@ describe Rule do
   end
 
   it "happens every first  and 15th of the month" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -219,7 +222,7 @@ describe Rule do
   end
 
   it "happens every second friday of the month" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',
@@ -245,7 +248,7 @@ describe Rule do
   end
 
   it "happens every Dicember" do
-   rule =  Rule.create!( description: '',
+   rule =  Rule.create( description: '',
                            is_all_day: false,
                            from_date: 'Mon, 17 Jun 2013',
                            from_time: '2000-01-01 09:00:00 UTC',

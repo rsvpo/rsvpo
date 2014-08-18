@@ -1,5 +1,3 @@
-
-
 <!-- begin MAIN PAGE CONTENT -->
 <div id="page-wrapper">
 
@@ -35,12 +33,12 @@
         <div class="circle-tile">
           <a href="#">
             <div class="circle-tile-heading dark-blue">
-              <i class="fa fa-users fa-fw fa-3x"></i>
+              <i class="fa fa-bookmark fa-fw fa-3x"></i>
             </div>
           </a>
           <div class="circle-tile-content dark-blue">
             <div class="circle-tile-description text-faded">
-              粉絲
+              收藏
             </div>
             <div class="circle-tile-number text-faded">
               <%= @follow_count %>
@@ -111,7 +109,8 @@
               活動
             </div>
             <div class="circle-tile-number text-faded">
-              <%= @activities.count %>
+              <% act_count = @activities.count %>
+              <%= act_count %>
             </div>
           </div>
         </div>
@@ -152,8 +151,10 @@
 
       <div class="col-lg-9">
         <div class="tile green" style="height: 320px">
-          <h4>觀看次數統計資料</h4>
-          <%= content_tag :div, "", id: "morris-chart-dashboard", data: {views: views_chart_data} %>
+          <h4>觀看次數趨勢</h4>
+          <% if current_merchant.activities.count > 0 %>
+            <%= content_tag :div, "", id: "morris-chart-dashboard", data: {views: views_chart_data} %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -162,7 +163,7 @@
       <div class="col-lg-3 col-sm-6">
         <div class="tile orange dash-demo-tile">
           <h4><i class="fa fa-check fa-fw"></i> 預約比例</h4>
-          <div id="easy-pie-1" class="easy-pie-chart" data-percent="92">
+          <div id="easy-pie-1" class="easy-pie-chart" data-percent="<%= (@confirm_count.to_f  + @pending_count.to_f ) / @view_count.to_f  * 100 %>">
             <span class="percent"></span>
           </div>
         </div>
@@ -170,7 +171,7 @@
       <div class="col-lg-3 col-sm-6">
         <div class="tile red dash-demo-tile">
           <h4><i class="fa fa-heart fa-fw"></i> 喜愛比例</h4>
-          <div id="easy-pie-3" class="easy-pie-chart" data-percent="27">
+          <div id="easy-pie-3" class="easy-pie-chart" data-percent="<%= @follow_count.to_f / @view_count.to_f * 100 %>">
             <span class="percent"></span>
           </div>
         </div>
@@ -203,26 +204,36 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <% @mybookings.each do |booking| %>
-                        <tr>
-                          <% book = Booking.find(booking.booking_id) %>
-                          <td><%= book.slot.start.strftime("%F, %l:%M %P") %> - <%= book.slot.finish.strftime("%F, %l:%M %P") %></td>
-                          <td><%= booking.title %></td>
-                          <td><%= book.name %></td>
-                          <td>
-                            <% if book.confirm %>
-                              <a class="btn btn-xs btn-green"><i class="fa fa-arrow-circle-right"></i> 確認預約</a>
-                            <% else %>
-                              <a class="btn btn-xs btn-orange disabled"><i class="fa fa-clock-o"></i> 取消預約</a>
+                    <% @mybookings.each do |booking| %>
+                    <tr>
+                      <% book = Booking.find(booking.booking_id) %>
+                      <td><%= book.slot.start.strftime("%F, %l:%M %P") %> - <%= book.slot.finish.strftime("%F, %l:%M %P") %></td>
+                      <td><%= booking.title %></td>
+                      <td><% if book.friend %><%= book.name %><% else %><%= book.user.name %><% end %></td>
+                      <td>
+                        <% if book.confirm %>
+                          <%= form_for(book, :html => { :method => :put }) do |f| %>
+                            <%= f.hidden_field :confirm, :value => false %>
+                            <%= button_tag(type: 'submit', class: "btn btn-xs btn-red") do %>
+                              取消預約
                             <% end %>
-                          </td>
-                        </tr>
-                      <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= form_for(book, :html => { :method => :put }) do |f| %>
+                          <%= f.hidden_field :confirm, :value => true %>
+                          <%= button_tag(type: 'submit', class: "btn btn-xs btn-green") do %>
+                              確認預約
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+                    <% end %>
                   </tbody>
                 </table>
               </div>
-              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path, class: "btn btn-green" %>
-              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path, class: "btn btn-green" %>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path, class: "btn btn-orange" %>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path, class: "btn btn-orange" %>
             </div>
           </div>
         </div>
@@ -236,36 +247,38 @@
 <!-- /#page-wrapper -->
 <!-- end MAIN PAGE CONTENT -->
 <script>
-  function set_morris(){
-    Morris.Area({
-      element: 'morris-chart-dashboard',
-      data: $('#morris-chart-dashboard').data('views'),
-      xkey: 'viewed_at',
-      xLabelFormat: function(date) {
-          return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-      },
-      xLabels: 'day',
-      ykeys: ['first_views'<% if @activities.count >1 %>, 'second_views'<% end %><% if @activities.count > 2 %>, 'third_views'<% end %>],
-      yLabelFormat: function(y) {
-          return y;
-      },
-      labels: ['<%= @activities.first.title %>'<% if @activities.count >1 %>, '<%= @activities.second.title %>'<% end %><% if @activities.count > 2 %>, '<%= @activities.third.title %>'<% end %>],
-      lineColors: ['#fff'<% if @activities.count >1 %>, '#fff'<% end %><% if @activities.count > 2 %>, '#fff'<% end %>],
-      hideHover: 'auto',
-      resize: true,
-      gridTextFamily: ['Open Sans'],
-      gridTextColor: ['rgba(255,255,255,0.7)'],
-      fillOpacity: 0.1,
-      pointSize: 0,
-      smooth: true,
-      lineWidth: 2,
-      grid: true,
-      dateFormat: function(date) {
-          d = new Date(date);
-          return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
-      },
-  });
-  };
+  <% if act_count > 0 %>
+    function set_morris(){
+      Morris.Area({
+        element: 'morris-chart-dashboard',
+        data: $('#morris-chart-dashboard').data('views'),
+        xkey: 'viewed_at',
+        xLabelFormat: function(date) {
+            return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+        },
+        xLabels: 'day',
+        ykeys: ['first_views'<% if act_count >1 %>, 'second_views'<% end %><% if act_count > 2 %>, 'third_views'<% end %><% if act_count > 3 %>, 'fourth_views'<% end %><% if act_count > 4 %>, 'fifth_views'<% end %>],
+        yLabelFormat: function(y) {
+            return y;
+        },
+        labels: ['<%= @activities.first.title %>'<% if act_count >1 %>, '<%= @activities.second.title %>'<% end %><% if act_count > 2 %>, '<%= @activities.third.title %>'<% end %><% if act_count > 3 %>, '<%= @activities.fourth.title %>'<% end %><% if act_count > 4 %>, '<%= @activities.fifth.title %>'<% end %>],
+        lineColors: ['#fff'<% if act_count >1 %>, '#fff'<% end %><% if act_count > 2 %>, '#fff'<% end %><% if act_count > 3 %>, '#fff'<% end %><% if act_count > 4 %>, '#fff'<% end %>],
+        hideHover: 'auto',
+        resize: true,
+        gridTextFamily: ['Open Sans'],
+        gridTextColor: ['rgba(255,255,255,0.7)'],
+        fillOpacity: 0.1,
+        pointSize: 0,
+        smooth: true,
+        lineWidth: 2,
+        grid: true,
+        dateFormat: function(date) {
+            d = new Date(date);
+            return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+        },
+    });
+    };
+  <% end %>
   
   //Easy Pie Charts
   function easy_pie_chart(){
@@ -283,11 +296,13 @@
   };
 </script>
 <script>
-  $(document).ready(function() {
+  $(document).on('ready page:load', function () {
     easy_pie_chart();
     jQuery("abbr.timeago").timeago();
     moment.lang('zh-TW');
-    set_morris();
+    <% if current_merchant.activities.count > 0 %>
+      set_morris();
+    <% end %>
     
     //Moment.js Time Display
     var datetime = null,

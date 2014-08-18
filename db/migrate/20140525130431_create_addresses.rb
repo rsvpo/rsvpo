@@ -9,7 +9,6 @@ class CreateAddresses < ActiveRecord::Migration
       t.decimal :lat
       t.decimal :lng
       t.references :merchant, index: true
-      t.references :slot, index: true
       t.references :rule, index: true
 
       t.timestamps

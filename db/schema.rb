@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618110306) do
+ActiveRecord::Schema.define(version: 20140805132202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20140618110306) do
     t.decimal  "lat"
     t.decimal  "lng"
     t.integer  "merchant_id"
-    t.integer  "slot_id"
     t.integer  "rule_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -80,7 +79,6 @@ ActiveRecord::Schema.define(version: 20140618110306) do
 
   add_index "addresses", ["merchant_id"], name: "index_addresses_on_merchant_id", using: :btree
   add_index "addresses", ["rule_id"], name: "index_addresses_on_rule_id", using: :btree
-  add_index "addresses", ["slot_id"], name: "index_addresses_on_slot_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -153,6 +151,16 @@ ActiveRecord::Schema.define(version: 20140618110306) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "details", force: true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.integer  "activity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "details", ["activity_id"], name: "index_details_on_activity_id", using: :btree
 
   create_table "follows", force: true do |t|
     t.integer  "merchant_id"

@@ -1,6 +1,6 @@
 class MailboxController < ApplicationController
   def index
-    @messages = @merchant.messages.where(:mu => false)
+    @messages = @merchant.messages.pluck(:user_id).uniq
   end
  
 end

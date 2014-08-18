@@ -1,10 +1,6 @@
 Rsvp::Application.routes.draw do
-  resources :hosts
-
-  resources :bookings
-
-  resources :shares
-
+  
+  get "client", to: 'client#index'
   get "search", to: 'search#index'
   get "mailbox", to: 'mailbox#index'
   get "inbox", to: 'inbox#index'
@@ -19,12 +15,18 @@ Rsvp::Application.routes.draw do
   get "confirmed", to: 'confirmed#index'
   get "confirmed", to: 'confirmed#index'
   get '/generator/:id/new', to: 'rules#new', :as => :generate_rule
+  get '/messageclient/:id/new', to: 'messages#new', :as => :to_client
+  get '/messagemerchant/:id/new', to: 'messages#new', :as => :to_merchant
   get '/location/:addid/activity/:id', to: 'activities#show', :as => :location_activity
   get '/location/:addid/merchants/:id', to: 'merchants#show', :as => :location_merchant
   get '/location/:addid/activity/:activity_id/slots', to: 'slots#index', :as => :address_slot
   match '/profile/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   
   resources :messages
+  resources :likes
+  resources :follows
+  resources :hosts
+  resources :bookings
   resources :views
   resources :categories
   resources :rules

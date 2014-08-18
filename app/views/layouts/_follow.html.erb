@@ -1,0 +1,14 @@
+<% if current_user.followed?(merchant) %>
+  <%= form_for(@follow, :html => { :method => :delete }) do |f| %>
+    <%= button_tag(type: 'submit', class: "btn-main btn-bookmark background-red") do %>
+      <i class="fa fa-bookmark-o"></i>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.follows.build) do |f| %>
+    <%= f.hidden_field :merchant_id, :value => merchant.id %>
+    <%= button_tag(type: 'submit', class: "btn-main btn-bookmark background-red") do %>
+      <i class="fa fa-bookmark"></i> 收藏
+    <% end %>
+  <% end %>
+<% end %>

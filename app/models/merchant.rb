@@ -10,4 +10,5 @@ class Merchant < ActiveRecord::Base
   has_many :hosts
   
   has_attachment :logo, accept: [:jpg, :png, :gif]
+  has_attachment :background, accept: [:jpg, :png, :gif]
 end

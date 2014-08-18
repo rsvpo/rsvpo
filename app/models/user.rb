@@ -60,4 +60,12 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+  
+  def liked?(activity)
+    likes.find_by_activity_id(activity.id)
+  end
+  
+  def followed?(merchant)
+    follows.find_by_merchant_id(merchant.id)
+  end
 end

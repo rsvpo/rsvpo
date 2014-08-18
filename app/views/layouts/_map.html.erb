@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#mappanel" class="">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        請選擇你想預約的地點
+      </h4>
+    </div>
+  </a>
+  <div id="mappanel" class="panel-collapse in" style="height: auto;">
+    <div class="panel-body">
+      <% if merchant %>
+        <div class="btn-group">
+          <button class="btn background-red white dropdown-toggle" type="button" data-toggle="dropdown">
+            <%= @current_address.address %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <% @addresses.each do |address| %>
+              <% if address.id == @current_address.id %>
+                <li><%= address.address %></li>
+              <% else %>
+                <li><%= link_to address.address, location_merchant_path(address.id, @merchant.id) %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <div class="btn-group">
+          <button class="btn background-red white dropdown-toggle" type="button" data-toggle="dropdown">
+            <%= @current_address.address %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <% @addresses.each do |address| %>
+              <% if address.id == @current_address.id %>
+                <li><%= address.address %></li>
+              <% else %>
+                <li><%= link_to address.address, location_activity_path(address.id, @activity.id) %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="map-wrap">
+      <div id="map_canvas"></div>
+    </div>
+  </div>
+</div>

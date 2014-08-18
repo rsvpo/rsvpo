@@ -1,20 +1,24 @@
 class Activity < ActiveRecord::Base
+#   validate :has_an_address
+  
   belongs_to :merchant
   has_many :rules
   has_many :views
   has_many :slots
+  has_many :details
   has_many :likes
   belongs_to :category
   has_many :shares
   
-  has_many :activities_addresses, :foreign_key => "activity_id", :class_name => "ActivitiesAddresses"
-  has_many :addresses, :through => :activities_addresses
+  has_many :activities_addresses, :foreign_key => "activity_id", :class_name => "ActivitiesAddresses", autosave: true
+  has_many :addresses, :through => :activities_addresses, autosave: true
   
-  has_many :activities_hosts, :foreign_key => "activity_id", :class_name => "ActivitiesHosts"
-  has_many :hosts, :through => :activities_hosts
+  has_many :activities_hosts, :foreign_key => "activity_id", :class_name => "ActivitiesHosts", autosave: true
+  has_many :hosts, :through => :activities_hosts, autosave: true
+  
+  accepts_nested_attributes_for :details
   
   validates :merchant_id, presence: true
-#   default_scope -> { order('created_at DESC') }
   validates :title, presence: true, length: { maximum: 50 }
   validates :about, presence: true, length: { maximum: 500 }
   validates :price, presence: true, :numericality => { :greater_than_or_equal_to => 0 }
@@ -76,5 +80,9 @@ class Activity < ActiveRecord::Base
   
   def address_province
     addresses_province
+  end
+  
+  def has_an_address
+    errors.add(:base, '必須選擇最少一個地址') if self.activities_addresses.blank?
   end
 end

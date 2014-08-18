@@ -8,10 +8,11 @@ class RulesController < InheritedResources::Base
   
   def create
     @rule = Rule.create!(safe_params)
+    session[:return_to] ||= request.referer
     if @rule.save
       redirect_to activity_slots_path(safe_params[:activity_id]), :notice => t('成功加入時段')
     else
-      render :action => 'new'
+      redirect_to session.delete(:return_to)
     end
   end
   

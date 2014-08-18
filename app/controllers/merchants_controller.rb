@@ -11,6 +11,7 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find(params[:id])
     @addresses = @merchant.addresses
     @related = @merchant.activities
+    @follow = Follow.find_by_merchant_id_and_user_id(@merchant.id, current_user.id)
     if params[:addid]
       @current_address = Address.find(params[:addid])
     else

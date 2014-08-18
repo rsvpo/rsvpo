@@ -1,7 +1,4 @@
 class ActivitiesController < InheritedResources::Base
-  def index
-  end
-  
   def show
     @activity = Activity.find(params[:id])
     @hosts = @activity.hosts
@@ -13,8 +10,8 @@ class ActivitiesController < InheritedResources::Base
       @current_address = @activity.addresses.first
     end
     @addresses = @activity.addresses
-    @all_comments = @activity.comments.recent.page(params[:page]).per(2)
-    @comment = @activity.comments.build
+    @like = Like.find_by_activity_id_and_user_id(@activity.id, current_user.id)
+    current_user.views.create!(activity_id: @activity.id)
     @slot_instance = @activity.slots
     respond_to do |format|
       format.html # index.html.erb
@@ -31,16 +28,20 @@ class ActivitiesController < InheritedResources::Base
     @merchant = current_merchant
     @activity = @merchant.activities.build(safe_params)
     if @activity.save
-      redirect_to merchants_path, :notice => t('notice.success_act_create')
+      redirect_to myactivities_path, :notice => "成功加入活動"
     else
       render :action => 'new'
     end
   end
   
+  def edit
+    @activity = Activity.find(params[:id])
+  end
+  
   def update
     @activity = Activity.find(params[:id])
     if @activity.update_attributes(safe_params)
-      redirect_to merchants_path, :notice  => t('notice.success_act_update')
+      redirect_to myactivities_path, :notice  => "成功更新活動"
     else
       render :action => 'edit'
     end
@@ -52,10 +53,14 @@ class ActivitiesController < InheritedResources::Base
     activity_attributes = [
       :title,
       :about,
+      {:address_ids => []},
+      {:host_ids => []},
       :price,
       :bookmsg,
+      :category_id,
       :duration,
       {:photos => []},
+      {:details_attributes => [:title,:content]},
       :active
     ]
     params.require(:activity).permit(*activity_attributes).except!("signature", "created_at", "bytes", "type", "etag", "url", "secure_url", "tags", "pages")

@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#infos" class="">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= merchant.name %>的資料
+      </h4>
+    </div>
+  </a>
+  <div id="infos" class="panel-collapse in" style="height: auto;">
+    <div class="panel-body text-center">
+      <%= render 'layouts/squareimage', square: merchant.logo, size: "70" %>
+      <p class="contacts">
+        <i class="fa fa-phone"></i> <%= merchant.phone.to_s.gsub(/(.{4})/, '\1 ') %> | <a href="mailto:<%= merchant.email %>"><i class="fa fa-envelope-o"></i> 電郵</a> | <%= link_to raw('<i class="fa fa-globe"></i>') + " 網頁", "http://#{merchant.site}" %>
+      </p>
+      <p class="time"><%= merchant.opening %></p>
+    </div>
+  </div>
+</div>

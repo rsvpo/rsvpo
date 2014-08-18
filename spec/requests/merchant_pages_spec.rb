@@ -7,18 +7,16 @@ describe "Merchant pages" do
   describe "merchant signup page" do
     before { visit new_merchant_registration_path }
 
-    it { should have_content('Sign up') }
+    it { should have_content('註冊') }
   end
   
   describe "merchant signup" do
 
     before { visit new_merchant_registration_path }
 
-    let(:submit) { "Create my account" }
-
     describe "with invalid information" do
       it "should not create a merchant" do
-        expect { click_button 'Sign up' }.not_to change(Merchant, :count)
+        expect { click_button '立即註冊' }.not_to change(Merchant, :count)
       end
     end
 
@@ -31,8 +29,9 @@ describe "Merchant pages" do
       end
 
       it "should create a merchant" do
-        expect { click_button 'Sign up' }.to change(Merchant, :count).by(1)
+        expect { click_button '立即註冊' }.to change(Merchant, :count).by(1)
       end
+
     end
   end
 end

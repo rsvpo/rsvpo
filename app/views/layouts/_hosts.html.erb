@@ -1,13 +1,25 @@
-<% hosts.each_with_index do |host, index| %>
-<% if index == 0 or index % 4 == 0 %>
-<div class="row">
-  <% end %>
-  <div class="col-sm-3 text-center home-box">
-    <%= render 'layouts/squareimage', square: host.photo, size: 50 %>
-    <h3 class="<%= color %>"><%= host.title %></h3>
-    <p class="<%= color %>"><%= host.job %></p>
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= title %>的主持    
+      </h4>
+    </div>
+  </a>
+  <div id="collapseThree" class="panel-collapse collapse">
+    <div class="panel-body">
+      <div class="list-wrapper">
+        <% hosts.each_with_index do |host, index| %>
+          <span class="host-item" data-toggle="tooltip" data-placement="bottom" title="<h5><%= host.title %></h5><h7><%= host.job %></h7></br>">
+            <%= render 'layouts/squareimage', square: host.photo, size: 50 %>
+          </span>
+        <% end %>  
+      </div>
+    </div>
   </div>
-  <% if index == 3 or (index + 1) % 4 == 0 %>
 </div>
-<% end %>
-<% end %>
+<script>
+  $(document).ready(function() {
+    $('.host-item').tooltip({html:true})
+  });
+</script>

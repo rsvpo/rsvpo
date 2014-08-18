@@ -2,6 +2,46 @@ html {
   height: 100%;
 }
 
+.home_index {
+  .intro {
+    padding-top: 50px;
+    text-align: left;
+    display: inline-block;
+    img {
+      max-width: 100%;
+    }
+    p {
+      font-size: 23px;
+      line-height: 1.6em;
+      margin-bottom: 40px;
+    }
+  }
+  .login-btn-wrap {
+    margin: 40px 0px 80px 0px;
+  }
+  h1 {
+    font-family: Helvetica, Arial !important;
+    letter-spacing: -1px !important;
+    font-size: 48px !important;
+    line-height: 50px !important;
+    margin-bottom: 14px !important;
+    color: #181818 !important;
+    font-weight: normal !important;
+  }
+  .home-box {
+    padding: 40px 0px;
+    h3 {
+      letter-spacing: -1px;
+      font-size: 32px;
+      color: #181818;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6em;
+    }
+  }
+}
+
 .landing_index {
   height: 100%;
   color: #fff;

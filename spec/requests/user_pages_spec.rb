@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe "Home page" do
 
-  it "should have the content 'Sample App'" do
+  it "should have the content in caurseal" do
     visit root_path
-    expect(page).to have_content('Home')
+    expect(page).to have_css('section#home-content')
   end
 
   it "should have the base title" do
     visit root_path
-    expect(page).to have_title("Rsvp")
+    expect(page).to have_title("RSVPO")
   end
 end
 
@@ -20,7 +20,7 @@ describe "User pages" do
   describe "signup page" do
     before { visit new_user_registration_path }
 
-    it { should have_content('Sign up') }
+    it { should have_content('註冊') }
   end
   
   describe "signup" do
@@ -31,7 +31,7 @@ describe "User pages" do
 
     describe "with invalid information" do
       it "should not create a user" do
-        expect { click_button 'Sign up' }.not_to change(User, :count)
+        expect { click_button '立即註冊' }.not_to change(User, :count)
       end
     end
 
@@ -44,7 +44,7 @@ describe "User pages" do
       end
 
       it "should create a user" do
-        expect { click_button 'Sign up' }.to change(User, :count).by(1)
+        expect { click_button '立即註冊' }.to change(User, :count).by(1)
       end
     end
   end

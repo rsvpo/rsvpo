@@ -1,93 +1,64 @@
-<!--Header Section-->
-<section id="header">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-
-        <!--BxSlider-->
-        <ul class="bxslider">
-          <li>
-            <img src="http://res.cloudinary.com/rsvpo/image/upload/v1402972233/header1_ulx1hp.png" alt="Title" />
-            <div class="row text-center">
-              <div class="col-sm-10 col-sm-offset-1 margin-30">
-                <h1>體驗多一點快樂</h1>
-              </div>
-            </div>
-            <div class="row text-center">
-              <%= link_to "註冊", new_user_registration_path, class: "btn-main" %>
-            </div>
-          </li>
-
-          <li>
-            <img src="http://res.cloudinary.com/rsvpo/image/upload/v1402972234/header2_lpaeeq.png" alt="Title" />
-            <div class="row text-center">
-              <div class="col-sm-10 col-sm-offset-1 margin-30">
-                <h1>立即預約你喜歡的活動</h1>
-              </div>
-            </div>
-            <div class="row text-center">
-              <%= link_to "註冊", new_user_registration_path, class: "btn-main" %>
-            </div>
-          </li>
-        </ul>
-
-      </div><!--End Span12-->
-    </div>
+<div class="container">
+  <div class="login-btn-wrap text-right">
+    <%= link_to "登入", new_user_session_path, class: "btn-main background-yellow" %>
   </div>
-</section>
-
-
-<!--Home Content-->
-<section id="home-content">
-  <div class="container">
-    <div class="row">
-
-      <div class="col-sm-4 text-center home-box">
-        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-gem.png" alt="Gem" />
-        <h3>免費使用</h3>
-        <p>網上book同打電話book一樣價錢，絕無附加收費</p>
+  <!--Home Content-->
+  <section id="home-content">
+    <%= render 'layouts/flash' %>
+    <div class="row margin-100">
+      <div class="col-sm-6 text-center">
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1407844819/front-page-logo.png" alt="Gem" />
       </div>
-
-      <div class="col-sm-4 text-center home-box">
-        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-map.png" alt="Map" />
-        <h3>容易比較</h3>
-        <p>所有活動齊集一個地方，方便你比較價錢、細節，唔使再嘥時間google</p>
+      <div class="col-sm-6 text-center">
+        <div class="intro">
+          <h1><strong>體驗</strong>多一點快樂</h1>
+          <p>立即預約你喜歡的活動</p>
+          <%= link_to "註冊", new_user_registration_path, class: "btn-main background-yellow" %>
+        </div>
       </div>
-
-      <div class="col-sm-4 text-center home-box">
-        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-mac.png" alt="Mac" />
-        <h3>一click即book</h3>
-        <p>只需從網上預約，就可以book到心水活動</p>
-      </div>
-
     </div>
-  </div>
-</section>
+    
+    <div class="explanations margin-100">
+      <div class="row">
+        <div class="col-sm-6 text-center home-box">
+          <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-gem.png" alt="Gem" />
+          <h3>免費使用</h3>
+          <p>網上book同打電話book一樣價錢，絕無附加收費</p>
+        </div>
+        <div class="col-sm-6 text-center home-box">
+          <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-map.png" alt="Map" />
+          <h3>容易比較</h3>
+          <p>所有活動齊集一個地方，方便你比較價錢、細節，唔使再嘥時間google</p>
+        </div>
+      </div>
 
-
-<!--Content Section-->
-<section id="content">
-  <div class="container">
-    <div class="row margin-50">
-      <div class="col-md-12 text-center">
-        <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-target.png" alt="Target"/>
+      <div class="row">
+        <div class="col-sm-6 text-center home-box">
+          <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-mac.png" alt="Mac" />
+          <h3>一click即book</h3>
+          <p>只需從網上預約，就可以book到心水活動</p>
+        </div>
+        <div class="col-sm-6 text-center home-box">
+          <img src="http://res.cloudinary.com/rsvpo/image/upload/v1405746917/icon-target.png" alt="Target"/>
+          <h3>一click即book</h3>
+          <p>只需從網上預約，就可以book到心水活動</p>
+        </div>
       </div>
     </div>
 
     <div class="row margin-30">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h1 class="dark-gray">商户 - 正煩惱怎樣推廣你的活動?</h1>
+        <h1><strong>商户</strong> - 想推廣你的活動?</h1>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row row margin-50">
       <div class="col-md-12 text-center">
-        <%= link_to "登入/登記", new_merchant_session_path, class: "btn-main" %>
+        <%= link_to "登入/登記", new_merchant_session_path, class: "btn-main background-yellow" %>
       </div>
     </div><!--End Row-->
-
-  </div>
-</section> 
+  </section>
+</div>
 
 <script>
   $(document).ready(function(){

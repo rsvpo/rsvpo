@@ -1,5 +1,5 @@
 <% if square %>
-  <%= cl_image_tag(square.path, { size: size, crop: :fill}, class: "img-responsive") %>
+  <%= cl_image_tag(square.path, { size: size, crop: :fill, class: "img-responsive"}) %>
 <% else %>
   <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_<%= size %>,w_<%= size %>/v1402566281/Unknown.png" alt="" />
 <% end %>

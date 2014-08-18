@@ -1,0 +1,16 @@
+<% details.each_with_index do |detail, index| %>
+  <div class="panel panel-default">
+    <a data-toggle="collapse" data-parent="#accordion" href="#title<%= index %>" class="collapsed">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <%= detail.title %>
+        </h4>
+      </div>
+    </a>
+    <div id="title<%= index %>" class="panel-collapse collapse" style="height: 0px;">
+      <div class="panel-body">
+        <%= detail.content %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<span class="like-wrap">
+  <% if current_user.liked?(activity) %>
+		<%= form_for(@like, :html => { :method => :delete }) do |f| %>
+      <%= button_tag(type: 'submit', class: "btn-main btn-transparent") do %>
+        <i class="fa fa-bookmark-o"></i>
+      <% end %>
+		<% end %>
+  <% else %>
+		<%= form_for(current_user.likes.build) do |f| %>
+      <%= f.hidden_field :activity_id, :value => activity.id %>
+        <%= button_tag(type: 'submit', class: "btn-main btn-transparent") do %>
+          <i class="fa fa-bookmark"></i>
+        <% end %>
+		<% end %>
+	<% end %>
+</span> 

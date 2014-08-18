@@ -1,9 +1,8 @@
-<% slot = Slot.find(params[:slot]) %>
-<%= render 'layouts/section', title: "RSVP到" + slot.activity.title %>
+<%= render 'layouts/section', title: "RSVP到" + @slot.activity.title %>
 
 <section id="content">
   <div class="container">
-    <%= render 'form', slot: slot %>
+    <%= render 'form', slot: @slot, remaining: @remaining %>
   </div>
 </section>
 

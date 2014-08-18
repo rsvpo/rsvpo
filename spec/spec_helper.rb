@@ -33,7 +33,13 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.include Devise::TestHelpers, :type => :controller
-    
+#     config.before(:all, callbacks: true) do
+#       ActiveRecord::Base.skip_callbacks = false
+#     end
+
+#     config.after(:all, callbacks: true) do
+#       ActiveRecord::Base.skip_callbacks = true
+#     end
     # ## Mock Framework
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -61,8 +67,9 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
     config.include Capybara::DSL
-    config.fail_fast = true
+    config.fail_fast = false
   end
+  ActiveRecord::Base.skip_callbacks = true
 end
 
 Spork.each_run do

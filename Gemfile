@@ -21,6 +21,7 @@ gem 'simple_form'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'ice_cube'
 gem 'bootstrap_form'
+gem "nested_form"
 gem 'redis'
 gem 'carrierwave'
 gem 'cloudinary'

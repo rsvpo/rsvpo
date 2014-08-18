@@ -19,6 +19,7 @@
 //= require jquery.fileupload
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require jquery_nested_form
 //= require_tree .
 
 var navigationFn = {

@@ -1,4 +1,7 @@
-<%= render 'layouts/section', title: @booking.slot.activity.title + "的預約詳情" %>
+<%= render 'layouts/section', title: @booking.slot.activity.title + "的預約詳情", 
+            :captured => capture { %>
+              <%= link_to '(回到時間表)', upcoming_path %>
+            <% } %>
 
 <section id="content">
   <div class="container">
@@ -8,40 +11,65 @@
           <div class="portlet-body">
             
             <div class="booking-info">
-              <div class="invoice-terms">
-                <p>
-                  更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
-                  <br>
-                  <strong><span class="text-red">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span></strong>
-                </p>
+              <div class="top-right">
+                <div class="block">
+                  <span class="updated-at">更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %></span>
+                </div>
+                <div class="block">
+                  <span class="start-at">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span>
+                </div>
               </div>
-              <p>
-                <strong>參加者:</strong>
+              
+              <div class="booking-label">
+                預約狀態:
+              </div>
+              <p class="booking-content">
+                <% if @booking.confirm %>
+                  已確認
+                <% else %>
+                  待確認
+                <% end %>
+              </p>
+              <div class="booking-label">
+                活動:
+              </div>
+              <p class="booking-content">
+                <%= @booking.slot.activity.title %>
+              </p>
+              <div class="booking-label">
+                參加者:
+              </div>
+              <p class="booking-content">
                 <% if @booking.friend %><%= @booking.name %><% else %><%= current_user.name %><% end %>
               </p>
-
-              <p>
-                <strong>活動時段:</strong>
+              <div class="booking-label">
+                活動時段:
+              </div>
+              <p class="booking-content">
                 <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
               </p>
-
-              <p>
-                <strong>其他資料:</strong>
+              <div class="booking-label">
+                其他資料:
+              </div>
+              <p class="booking-content">
                 <%= @booking.optional %>
               </p>
-
-              <p>
-                <strong>商戶:</strong>
+              <div class="booking-label">
+                商戶:
+              </div>
+              <p class="booking-content">
                 <%= @booking.slot.activity.merchant.name %>
               </p>
-
-              <p>
-                <strong>電話:</strong>
+              <div class="booking-label">
+                電話:
+              </div>
+              <p class="booking-content">
                 <%= @booking.slot.address.phone %>
               </p>
-
-              <p>
-                <strong>地址:</strong>
+              <div class="booking-label">
+                地址:
+              </div>
+              <p class="booking-content">
                 <%= @booking.slot.address.address %>, <%= @booking.slot.address.locality %>
               </p>
               
@@ -51,7 +79,7 @@
             </div>
 
             <div class="btn-wrap text-center">
-              <a class="btn-main" href="#">給<%= @booking.slot.activity.merchant.name %>發訊息</a>
+              <%= link_to raw('<i class="fa fa-envelope"></i> ') + @booking.slot.activity.merchant.name, to_merchant_path(@booking.slot.activity.merchant.id), class: "btn-main background-yellow" %>
             </div>
           </div>
         </div>
@@ -62,12 +90,6 @@
 </section>
 
 <script>
-  $(document).ready(function() {
-    reload_calendar();
-    $(".rsvp-btn").click(function() {
-      navigationFn.goToSection('.portlet');
-    });
-  });
   var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
   latlng_x = <%= @booking.slot.address.lat %>;
   latlng_y = <%= @booking.slot.address.lng %>;

@@ -6,7 +6,7 @@
           <h1>我的活動
           </h1>
           <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path %>
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path, 'data-no-turbolink' => true %>
             </li>
             <li class="active">我的活動</li>
           </ol>
@@ -22,8 +22,7 @@
             <div class="row">
               <nav class="navbar mailbox-topnav" role="navigation">
                 <div class="mailbox-nav pull-right">
-                  <%= link_to raw('<i class="fa fa-edit"></i>') + " 新活動", new_activity_path, :class => 'btn btn-white' %>
-                  <%= link_to raw('<i class="fa fa-edit"></i>') + " 新時段", new_rule_path, :class => 'btn btn-white' %>
+                  <%= link_to raw('<i class="fa fa-plus"></i>') + " 新活動", new_activity_path, :class => 'btn btn-green' %>
                 </div>
               </nav>
               <div class="col-lg-12">
@@ -32,8 +31,10 @@
                     <thead>
                       <tr>
                         <th>活動名稱</th>
-                        <th>價錢</th>
+                        <th>基本資料</th>
+                        <th>補充資料</th>
                         <th>地址</th>
+                        <th>圖片</th>
                         <th>上架</th>
                         <th>時段</th>
                         <th></th>
@@ -43,12 +44,51 @@
                       <% @activities.each do |activity| %>
                         <tr>
                           <td><%= activity.title %></td>
-                          <td><%= activity.price %></td>
-                          <td><%= activity.addresses.count %></td>
-                          <td><%= activity.active %></td>
-                          <td><%= activity.slots.count %></td>
+                          <td class="text-center">
+                            <% if activity.price.blank? or activity.title.blank? or activity.about.blank? or activity.duration.blank? or activity.merchant_id.blank? or activity.category_id.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.details.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.addresses.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.photos.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.active %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.slots.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
                           <td>
-                            <%= link_to '活動詳情', edit_activity_path(activity), class: "btn btn-info" %>
+                            <%= link_to '活動詳情', edit_activity_path(activity), class: "btn btn-orange" %>
+                            <%= link_to raw('<i class="fa fa-plus"></i>') + " 新時段", generate_rule_path(activity.id), class: "btn btn-red", 'data-no-turbolink' => true %>
                           </td>
                         </tr>
                       <% end %>

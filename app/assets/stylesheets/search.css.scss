@@ -1,11 +1,42 @@
 .search_index {
+  #content {
+    padding-top: 0px !important;
+  }
+  #topsearch {
+    background-color: rgba(255, 255, 255, 0.5);
+    display: block;
+    padding: 20px 5%;
+    margin-bottom: 20px;
+    form {
+      display: inline-block !important;
+      width: 50%;
+      margin-right: 15%;
+      margin-bottom: 0px;
+      input {
+        margin-bottom: 0px !important;
+        margin-top: 1px;
+      }
+    }
+    .right {
+      display: inline-block !important;
+      float: right;
+    }
+  }
   .category-btn {
-    font-size: 32px;
+    font-size: 32px !important;
     width: 220px;
     padding: 20px !important;
   }
-  .dropdown-menu {
+  .category-dropdown-menu {
     min-width: 220px !important;
     font-size: 20px !important;
+  }
+  .paginate-wrap {
+    display: none;
+  }
+  input {
+    background-color: #edefed;
+    font-size: 16px;
+    font-weight: bold;
   }
 }

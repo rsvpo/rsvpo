@@ -1,0 +1,20 @@
+<%= render 'layouts/section', title: "留言給" + @receiver.name %>
+
+<section id="content">
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="receiver-photo text-center">
+      <%= render 'layouts/squareimage', square: @receiver.logo, size: "100" %>
+    </div>
+    <div class="new-message">
+      <%= bootstrap_form_for(@message, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
+        <%= f.hidden_field :merchant_id, :value => @receiver.id  %>  
+        <%= f.hidden_field :mu, :value => false  %>
+        <%= f.text_area :content, hide_label: true %>
+        <div class="text-center">
+          <%= f.submit "送出訊息", :class => "btn-main background-yellow" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

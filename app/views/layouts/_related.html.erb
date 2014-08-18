@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <a data-toggle="collapse" data-parent="#accordion" href="#relatedpanel" class="collapsed">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <%= @merchant.name %>的其他活動
+      </h4>
+    </div>
+  </a>
+  <div id="relatedpanel" class="panel-collapse in">
+    <div class="panel-body">
+      <div class="list-wrapper">
+        <% activities.each_with_index do |activity, index| %>
+          <div class="related-item">
+            <%= link_to activity_path(activity) do %>
+              <% if activity.photos.first %>
+                <% activity.photos.each do |photo| %>
+                  <%= cl_image_tag(photo.path, { size: '75x50', crop: :fill}) %>
+                <% end %>
+              <% else %>
+                <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_50,w_75/v1402566281/Unknown.png" alt="" />
+              <% end %>
+            <h7><strong><%= activity.title %></strong></h7>
+            <h7 class="bottom-related"><%= activity.title %></h7>
+            <% end %>
+          </div>
+        <% end %>  
+      </div>
+    </div>
+  </div>
+</div>

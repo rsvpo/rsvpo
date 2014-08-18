@@ -54,8 +54,8 @@
                             <td><%= address.phone %></td>
                             <td><%= address.locality %></td>
                             <td>
-                              <%= link_to "更新地址", edit_address_path(address), class: "btn btn-info" %>
-                              <%= link_to "刪除地址", address, :method => :delete, class: "btn btn-info" %>
+                              <%= link_to "更新地址", edit_address_path(address), class: "btn btn-orange" %>
+                              <%= link_to "刪除地址", address, :method => :delete, class: "btn btn-red" %>
                             </td>
                           </tr>
                       <% end %>
