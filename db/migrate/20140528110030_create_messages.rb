@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.string :content
       t.boolean :mu
+      t.boolean :read, :default => false
       t.references :user, index: true
       t.references :merchant, index: true
 

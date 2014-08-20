@@ -1,5 +1,6 @@
 Rsvp::Application.routes.draw do
-  
+
+  get "terms", to: 'terms#index'
   get "client", to: 'client#index'
   get "search", to: 'search#index'
   get "mailbox", to: 'mailbox#index'

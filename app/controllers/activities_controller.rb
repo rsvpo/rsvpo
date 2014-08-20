@@ -11,7 +11,11 @@ class ActivitiesController < InheritedResources::Base
     end
     @addresses = @activity.addresses
     @like = Like.find_by_activity_id_and_user_id(@activity.id, current_user.id)
-    current_user.views.create!(activity_id: @activity.id)
+    if user_signed_in?
+      current_user.views.create!(activity_id: @activity.id)
+    else
+      View.create!(activity_id: @activity.id)
+    end
     @slot_instance = @activity.slots
     respond_to do |format|
       format.html # index.html.erb

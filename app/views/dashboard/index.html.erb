@@ -296,14 +296,14 @@
   };
 </script>
 <script>
+  <% if current_merchant.activities.count > 0 %>
+    set_morris();
+  <% end %>
   $(document).on('ready page:load', function () {
     easy_pie_chart();
     jQuery("abbr.timeago").timeago();
     moment.lang('zh-TW');
-    <% if current_merchant.activities.count > 0 %>
-      set_morris();
-    <% end %>
-    
+
     //Moment.js Time Display
     var datetime = null,
         date = null;

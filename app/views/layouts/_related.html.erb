@@ -20,7 +20,7 @@
                 <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_50,w_75/v1402566281/Unknown.png" alt="" />
               <% end %>
             <h7><strong><%= activity.title %></strong></h7>
-            <h7 class="bottom-related"><%= activity.title %></h7>
+            <h7 class="bottom-related"><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h7>
             <% end %>
           </div>
         <% end %>  

@@ -22,6 +22,7 @@
         <%= f.link_to_add "加入更多補充資料", :details, :class => "btn btn-orange" %>
       </div>
       <%= f.form_group do %>
+        <%= link_to "刪除活動", @activity, method: :delete, data: { confirm: '確定嗎？' }, class: "btn btn-red" %>
         <%= f.submit "確認活動" %>
       <% end %>
     <% end %>

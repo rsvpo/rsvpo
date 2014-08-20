@@ -19,12 +19,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.name %><b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li<% if current_page? upcoming_path %> class="active"<% end %>><%= link_to "己預約", upcoming_url %></li>
-                <li<% if current_page? favourite_path %> class="active"<% end %>><%= link_to "喜愛活動", favourite_url %></li>
-                <li<% if current_page? following_path %> class="active"<% end %>><%= link_to "關注商戶", following_url %></li>
-                <li<% if current_page? inbox_path %> class="active"<% end %>><%= link_to "訊息", inbox_url %></li>
+                <li<% if current_page? upcoming_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-ticket"></i>') +  " 我的預約", upcoming_url %></li>
+                <li<% if current_page? favourite_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-star"></i>') +  "喜愛活動", favourite_url %></li>
+                <li<% if current_page? following_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-bookmark"></i>') + "關注商戶", following_url %></li>
+                <li<% if current_page? inbox_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-envelope"></i>') +  "我的訊息", inbox_url %></li>
                 <li class="divider"></li>
                 <li><%= link_to raw('<i class="fa fa-gear"></i>') + "  設定", edit_user_registration_path %></li>
+                <li><%= link_to raw('<i class="fa fa-book"></i>') + "  條款", terms_path %></li>
                 <li><%= link_to raw('<i class="fa fa-sign-out"></i>') + "  登出", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </li>
@@ -33,7 +34,6 @@
               <span class="white"> 登入</span>
             <% end %>  
           <% end %>
-        </li>
       </ul>
     </div><!--/.navbar-collapse -->
     

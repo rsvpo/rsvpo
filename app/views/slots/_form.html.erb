@@ -9,6 +9,7 @@
         <%= f.check_box :is_all_day, label: "全日活動" %>
       <% end %>
       <%= f.form_group do %>
+        <%= link_to "刪除時段", @slot, method: :delete, data: { confirm: '確定嗎？' }, class: "btn btn-red" %>
         <%= f.submit "確認時段" %>
       <% end %>
     <% end %>

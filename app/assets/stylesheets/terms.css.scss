@@ -1,0 +1,26 @@
+// Place all the styles related to the Terms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.terms_index {
+  h3 {
+color: #747474;
+font-size: 30px;
+font-weight: bold;
+margin: 40px 0 40px;
+}
+   p {
+line-height: 30px;
+color: #747474;
+font-size: 18px;
+min-height: 0;
+}
+  h5 {
+color: #747474;
+font-size: 32px;
+font-weight: bold;
+line-height: 1.4;
+margin: 10px 0;
+padding: 11px;
+  }
+}

@@ -68,7 +68,9 @@
           <div class="portlet-body">
             <ul>
               <% @slots.each do |slot| %>
-                <%= render 'progress', slot: slot %>
+                <li>
+                  <%= render 'layouts/progress', slot: slot %>
+                </li>
               <% end %>
             </ul>
           </div>
@@ -112,7 +114,5 @@
   }
 </script>
 <script>
-  $(document).on('ready page:load', function () {
-    reload_calendar();
-  });
+  reload_calendar();
 </script>

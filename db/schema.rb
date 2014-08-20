@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 20140805132202) do
   create_table "messages", force: true do |t|
     t.string   "content"
     t.boolean  "mu"
+    t.boolean  "read",        default: false
     t.integer  "user_id"
     t.integer  "merchant_id"
     t.datetime "created_at"

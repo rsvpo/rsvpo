@@ -14,7 +14,7 @@
       <!-- begin DASHBOARD LINK -->
       <li>
         <a class="active" href="index.html">
-          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path, 'data-no-turbolink' => true %>
+          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path %>
         </a>
       </li>
       <!-- end DASHBOARD LINK -->
@@ -55,7 +55,7 @@
             <li>
               <% @parent.each do |act| %>
                 <% if act.id %>
-                  <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + act.title, activity_slots_path(act) %>
+                  <%= link_to act.title, activity_slots_path(act) %>
                 <% end %>
               <% end %>
             </li>
@@ -73,7 +73,7 @@
             <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有地址", addresses_path %>
           </li>
           <li>
-            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path, 'data-no-turbolink' => true %>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path %>
           </li>
         </ul>
       </li>

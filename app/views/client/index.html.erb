@@ -34,15 +34,15 @@
           <% end %>
           <%= link_to to_client_path(client) do %>
             <span class="title">
-              <span><h5>
-                <i class="fa fa-ticket"></i> 參與活動: 
+              <span>
+                <h4><i class="fa fa-ticket"></i> 參與活動:</h4> 
                 <% user.bookings.joins(:slot => :activity).order("bookings.created_at DESC").pluck(:activity_id).uniq.each do |act| %>
-                  <% activity = Activity.find(act) %>
-                  <% if activity.merchant_id == current_merchant.id %>
-                    <%= activity.title %>
-                  <% end %>
+                <% activity = Activity.find(act) %>
+                <% if activity.merchant_id == current_merchant.id %>
+                <h5><%= activity.title %></h5>
                 <% end %>
-              </h5></span>
+                <% end %>
+              </span>
             </span>
           </div>
           <% end %>

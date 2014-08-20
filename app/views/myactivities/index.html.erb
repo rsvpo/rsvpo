@@ -35,8 +35,8 @@
                         <th>補充資料</th>
                         <th>地址</th>
                         <th>圖片</th>
-                        <th>上架</th>
                         <th>時段</th>
+                        <th>上架</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -73,17 +73,17 @@
                             <% end %>
                           </td>
                           <td class="text-center">
-                            <% if activity.active %>
-                              <span class="text-green"><i class="fa fa-circle"></i></span>
-                            <% else %>
-                              <span class="text-red"><i class="fa fa-circle"></i></span>
-                            <% end %>
-                          </td>
-                          <td class="text-center">
                             <% if activity.slots.blank? %>
                               <span class="text-red"><i class="fa fa-circle"></i></span>
                             <% else %>
                               <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.active %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
                             <% end %>
                           </td>
                           <td>

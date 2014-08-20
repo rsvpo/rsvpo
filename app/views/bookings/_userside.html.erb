@@ -16,7 +16,7 @@
                   <span class="updated-at">更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %></span>
                 </div>
                 <div class="block">
-                  <span class="start-at">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span>
+                  <span class="start-at background-yellow">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span>
                 </div>
               </div>
               
@@ -34,7 +34,7 @@
                 活動:
               </div>
               <p class="booking-content">
-                <%= @booking.slot.activity.title %>
+                <%= link_to @booking.slot.activity.title, activity_path(@booking.slot.activity) %>
               </p>
               <div class="booking-label">
                 參加者:
@@ -58,7 +58,7 @@
                 商戶:
               </div>
               <p class="booking-content">
-                <%= @booking.slot.activity.merchant.name %>
+                <%= link_to @booking.slot.activity.merchant.name, merchant_path(@booking.slot.activity.merchant) %>
               </p>
               <div class="booking-label">
                 電話:

@@ -25,56 +25,47 @@
       <div class="col-lg-10 col-lg-offset-1 col-md-12">
         <div class="portlet portlet-default">
           <div class="portlet-body">
-            <div class="row">
+            <div class="row margin-50">
               <div class="col-md-6">
                 <address>
                   <h3><%= @booking.slot.activity.title %></h3>
-                  <br><%= @booking.slot.address.address %>
-                  <br><%= @booking.slot.address.locality %>
-                  <br>
-                  <abbr title="Phone">P:</abbr><%= @booking.slot.address.phone %>
+                  <h4><%= @booking.slot.address.address %></h4>
+                  <h4><%= @booking.slot.address.locality %></h4>
                 </address>
               </div>
               <div class="col-md-6 invoice-terms">
                 <p>
                   更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
-                  <br>
-                  <strong><span class="text-red">活動開始於: <%= @booking.slot.start.strftime("%F, %l:%M %P") %></span></strong>
                 </p>
               </div>
             </div>
-            <!-- /.row -->
-            <hr>
-            <div class="row">
-              <div class="col-md-6">
-
-              </div>
-              <div class="col-md-6 invoice-terms">
-                <h3>參加者</h3>
-                <address>
-                  <strong><%= @booking.name %></strong> <% if @booking.friend %> 由<%= @booking.user.name %>預約<% end %>
-                  <br>
-                  <abbr title="Phone">P:</abbr><%= @booking.phone %>
-                  <br>
-                  <abbr title="Email">E:</abbr><%= @booking.email %>
-                </address>
-                <a class="btn btn-green" href="#">給<%= @booking.user.name %>發訊息</a>
-              </div>
-            </div>
-            <!-- /.row -->
-            <br>
             <div class="row">
               <div class="col-lg-12">
-                <p>
-                  <strong>活動時段:</strong>
-                  <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+                <div class="booking-label">
+                  參加者:
+                </div>
+                <p class="booking-content">
+                   <%= @booking.name %> <% if @booking.friend %> 由<%= @booking.user.name %>預約<% end %>
                 </p>
-
-                <p>
-                  <strong>其他資料:</strong>
+                <div class="booking-label">
+                  活動時段:
+                </div>
+                <p class="booking-content">
+                   <%= @booking.slot.start.strftime("%F, %l:%M %P")  %> - <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+                </p>
+                <div class="booking-label">
+                  其他資料:
+                </div>
+                <p class="booking-content">
                   <%= @booking.optional %>
                 </p>
-
+                <div class="booking-label">
+                  活動時段:
+                </div>
+                <p class="booking-content">
+                  <%= render 'layouts/progress', slot: @booking.slot %>
+                </p>
+                
                 <% if !@booking.confirm %>
                   <%= form_for(Booking.find(@booking.id), :html => { :method => :put }) do |f| %>
                     <%= f.hidden_field :confirm, :value => true %>
@@ -90,6 +81,7 @@
                     <% end %>
                   <% end %>
                 <% end %>
+                <a class="btn btn-green" href="#">給<%= @booking.user.name %>發訊息</a>
               </div>
             </div>
           </div>

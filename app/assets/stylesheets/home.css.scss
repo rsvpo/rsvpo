@@ -3,12 +3,25 @@ html {
 }
 
 .home_index {
+  .big-logo {
+    img {
+      width: 100%;
+    }
+  }
+  .promote {
+    strong {
+      color: #2994e1;
+    }
+  }
   .intro {
     padding-top: 50px;
     text-align: left;
     display: inline-block;
     img {
       max-width: 100%;
+    }
+    strong {
+      color: #1bbc9b;
     }
     p {
       font-size: 23px;
@@ -17,7 +30,7 @@ html {
     }
   }
   .login-btn-wrap {
-    margin: 40px 0px 80px 0px;
+    margin: 80px 0px 80px 0px;
   }
   h1 {
     font-family: Helvetica, Arial !important;
@@ -30,10 +43,23 @@ html {
   }
   .home-box {
     padding: 40px 0px;
+    position: relative;
+    strong {
+      color: lightcoral;
+    }
+    img {
+      margin-left: 15px;
+    }
+    .explanations-wrapper {
+      position: absolute;
+      display: inline-block;
+      padding: 0px 15px 0 25px;
+    }
     h3 {
       letter-spacing: -1px;
       font-size: 32px;
       color: #181818;
+      margin: 0px 0px 20px 0px;
     }
     p {
       font-size: 18px;

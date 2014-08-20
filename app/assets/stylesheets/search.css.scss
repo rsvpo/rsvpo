@@ -3,10 +3,13 @@
     padding-top: 0px !important;
   }
   #topsearch {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #edefed;
     display: block;
-    padding: 20px 5%;
+    padding: 20px 2%;
     margin-bottom: 20px;
+    .dropdown-menu {
+      width: 120px;
+    }
     form {
       display: inline-block !important;
       width: 50%;
@@ -28,7 +31,7 @@
     padding: 20px !important;
   }
   .category-dropdown-menu {
-    min-width: 220px !important;
+    width: 100%;
     font-size: 20px !important;
   }
   .paginate-wrap {

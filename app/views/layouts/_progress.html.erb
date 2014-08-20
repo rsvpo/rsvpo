@@ -1,0 +1,12 @@
+<%= link_to edit_slot_path(slot) do %> 
+<p class="text-blue">
+  <%= slot.start.strftime("%F, %l:%M %P") %>
+  <span class="pull-right">
+    <strong class="text-dark-blue"><%= slot.bookings.count %> / <%= slot.inventory %></strong>
+  </span>
+</p>
+<% percentage = 100 * slot.bookings.count / slot.inventory  %>
+<div class="progress progress-striped active">
+  <div class="progress-bar <% if percentage < 50 %>progress-bar-info<% elsif percentage < 75 %>progress-bar-warning<% else %>progress-bar-danger<% end %>" role="progressbar" aria-valuenow="<%= percentage %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percentage %>%;"></div>
+</div>
+<% end %>

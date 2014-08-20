@@ -4,7 +4,7 @@
 <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 <script src="<%= ENV['CF'] %>addresspicker3.js"></script>
 
-<div id="map" style="height: 300px"></div>
+<div id="map" class="margin-30" style="height: 300px"></div>
 
 <div class="row">
   <div class="col-lg-12">
@@ -50,11 +50,6 @@
     function showCallback(geocodeResult, parsedGeocodeResult){
       $('#callback_result').text(JSON.stringify(parsedGeocodeResult, null, 4));
     }
-  });
-</script>
-<script>
-  $(document).on('ready page:load', function () {
-    reload_calendar();
   });
 </script>
 
