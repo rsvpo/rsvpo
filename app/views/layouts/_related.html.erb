@@ -2,7 +2,11 @@
   <a data-toggle="collapse" data-parent="#accordion" href="#relatedpanel" class="collapsed">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <%= @merchant.name %>的其他活動
+        <% if merchant %>
+          <%= @merchant.name %>的活動
+        <% else %>
+          <%= @merchant.name %>的其他活動
+        <% end %>
       </h4>
     </div>
   </a>
@@ -13,9 +17,7 @@
           <div class="related-item">
             <%= link_to activity_path(activity) do %>
               <% if activity.photos.first %>
-                <% activity.photos.each do |photo| %>
-                  <%= cl_image_tag(photo.path, { size: '75x50', crop: :fill}) %>
-                <% end %>
+                <%= cl_image_tag(activity.photos.sample.path, { size: '75x50', crop: :fill}) %>
               <% else %>
                 <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_50,w_75/v1402566281/Unknown.png" alt="" />
               <% end %>

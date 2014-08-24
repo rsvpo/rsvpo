@@ -10,9 +10,7 @@
             <li data-tag="graphics">
               <div class="thumbs">
                 <% if favourite.activity.photos.first %>
-                  <% favourite.activity.photos.each do |photo| %>
-                    <%= cl_image_tag(photo.path, { size: '280x430', crop: :fill}, class: "img-responsive") %>
-                  <% end %>
+                  <%= cl_image_tag(favourite.activity.photos.sample.path, { size: '280x430', crop: :fill, class: "img-responsive"}) %>
                 <% else %>
                   <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_280,w_430/v1402566281/Unknown.png" alt="" />
                 <% end %>

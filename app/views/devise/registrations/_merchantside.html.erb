@@ -22,6 +22,7 @@
       <%= bootstrap_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put}, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
         <%= display_base_errors resource %>
         <%= f.attachinary_file_field :logo %>
+        <%= f.attachinary_file_field :background %>
         <%= f.text_field :name, :autofocus => true, :label => "公司名稱" %>
         <%= f.text_area :description, :autofocus => true, :label => "公司簡介" %>
         <%= f.text_field :phone, :autofocus => true, :label => "電話" %>
@@ -43,5 +44,6 @@
   $(document).on('ready page:load', function () {
    $('.attachinary-input').attachinary()
    $('label[for=merchant_logo]').text("公司標誌");
+    $('label[for=merchant_background]').text("主頁背景圖片");
   });
 </script>

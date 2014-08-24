@@ -38,8 +38,11 @@
       <%= f.number_field :phone, :label => "電話", :placeholder => " 電話" %>
       <%= f.hidden_field :slot_id, :value => params[:slot] %>
       <%= f.form_group do %>
-        <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-main btn-block background-red' %>
+        <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-main btn-block background-red margin-10' %>
       <% end %>
+      <div class="agree">
+        點擊"立即RSVP"，代表你理解並同意<%= link_to "服務條款", terms_path, class: "green" %>
+      </div>
     <% end %>
   </div>
 </div>

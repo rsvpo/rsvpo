@@ -16,7 +16,7 @@ class HostsController < InheritedResources::Base
   def update
     @host = Host.find(params[:id])
     if @host.update_attributes(safe_params)
-      redirect_to @host, :notice  => "已更新主持"
+      redirect_to hosts_path, :notice  => "已更新主持"
     else
       render :action => 'edit'
     end
@@ -34,7 +34,7 @@ class HostsController < InheritedResources::Base
     host_attributes = [
       :title,
       :job,
-      {:photos => []},
+      :photo,
       :description
     ]
     params.require(:host).permit(*host_attributes)

@@ -27,7 +27,7 @@ class MessagesController < InheritedResources::Base
     end
     session[:return_to] ||= request.referer
     if @message.save
-      redirect_to session[:return_to], :notice => "訊息已被送出"
+      redirect_to session[:return_to], :notice => "已送出訊息"
     else
       redirect_to session[:return_to]
     end

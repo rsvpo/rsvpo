@@ -3,7 +3,7 @@ class ActivitiesController < InheritedResources::Base
     @activity = Activity.find(params[:id])
     @hosts = @activity.hosts
     @merchant = @activity.merchant
-    @related = @merchant.activities
+    @related = @merchant.activities.where.not(id: @activity.id)
     if params[:addid]
       @current_address = Address.find(params[:addid])
     else

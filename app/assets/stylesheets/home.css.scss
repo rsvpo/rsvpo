@@ -3,6 +3,18 @@ html {
 }
 
 .home_index {
+  h2 {
+    font-family: Helvetica, Arial !important;
+    letter-spacing: -1px !important;
+    font-size: 40px !important;
+    line-height: 50px !important;
+    margin-bottom: 14px !important;
+    color: #181818 !important;
+    font-weight: normal !important;
+  }
+  body {
+    background-color: white !important;
+  }
   .big-logo {
     img {
       width: 100%;

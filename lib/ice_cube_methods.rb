@@ -93,7 +93,7 @@ module IceCubeMethods
 
   def from
     if is_all_day
-      ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day
+      ActiveSupport::TimeZone[time_zone].parse(to_date.to_datetime.strftime('%Y-%m-%d')).end_of_day
     else
       ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + from_time.seconds_since_midnight
     end
@@ -101,7 +101,7 @@ module IceCubeMethods
 
   def to
     if is_all_day
-      ActiveSupport::TimeZone[time_zone].parse(to_date.to_datetime.strftime('%Y-%m-%d')).end_of_day
+      ActiveSupport::TimeZone[time_zone].parse(from_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day
     else
       ActiveSupport::TimeZone[time_zone].parse(to_date.to_datetime.strftime('%Y-%m-%d')).beginning_of_day + to_time.seconds_since_midnight
     end

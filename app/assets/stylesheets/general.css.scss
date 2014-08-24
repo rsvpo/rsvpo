@@ -1,3 +1,13 @@
+.no-btn {
+  background: none;
+  outline: 0;
+  border: 0;
+}
+
+.fb-color {
+  background-color: #3b5998 !important;
+}
+
 .attachinary_container {
   li {
     display: inline !important;
@@ -108,9 +118,13 @@ html, body { overflow-x: hidden; }
         padding: 10px;
         span {
           line-height: 17px;
-          color: #FFFFFF;
           vertical-align: middle;
           display: table-cell;
+          h5 {
+            font-size: 20px;
+            color: black;
+            font-weight: bold;
+          }
         }
       }
       &:hover {
@@ -132,7 +146,7 @@ html, body { overflow-x: hidden; }
       margin-left: 15px;
       letter-spacing: -0.7px;
       letter-spacing: -0.7px;
-      color: #F16251;
+      color: #534741;
       font-size: 15px;
       line-height: 1.3;
       font-weight: bold;

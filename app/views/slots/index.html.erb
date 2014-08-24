@@ -1,8 +1,6 @@
 <!-- begin MAIN PAGE CONTENT -->
 <div id="page-wrapper">
-
   <div class="page-content">
-
     <!-- begin PAGE TITLE ROW -->
     <div class="row">
       <div class="col-lg-12">
@@ -73,6 +71,9 @@
                 </li>
               <% end %>
             </ul>
+            <div class="paginate-wrap text-center">
+              <%= paginate @slots, :param_name => :page %>
+            </div>
           </div>
         </div>
       </div>

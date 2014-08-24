@@ -9,7 +9,7 @@
         <div class="thumbs">
           <% merchant = Merchant.find(message) %>
           <% if merchant.logo %>
-            <%= cl_image_tag(merchant.logo.path, { size: '150x150', crop: :fill}, class: "img-responsive") %>
+            <%= cl_image_tag(merchant.logo.path, { size: '150x150', crop: :fill}) %>
           <% else %>
             <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_150,w_150/v1402566281/Unknown.png" alt="" />
           <% end %>

@@ -9,6 +9,8 @@
 <% end %>
 
 <script type="text/javascript">
-  $('.attachinary-input').attachinary();
-  $('label[for=host_photo]').text("相片");
+  $(document).on('ready page:load', function () {
+    $('.attachinary-input').attachinary();
+    $('label[for=host_photo]').text("相片");
+  });
 </script>

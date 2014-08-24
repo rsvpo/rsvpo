@@ -3,4 +3,7 @@ class Slot < ActiveRecord::Base
   has_many :bookings
   belongs_to :address
   
+  def avaliable
+    self.inventory - self.bookings.count
+  end
 end

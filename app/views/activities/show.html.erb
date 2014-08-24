@@ -68,7 +68,7 @@
               <%= render 'layouts/hosts', hosts: @hosts, title: @activity.title %>
               <%= render 'layouts/details', details: @activity.details %>
               <%= render 'layouts/comments' %>
-              <%= render 'layouts/related', activities: @related %>
+              <%= render 'layouts/related', activities: @related, merchant: false  %>
             </div>
           </div>
         </div> 
@@ -119,10 +119,11 @@
     map: map
   });
   $(document).on('ready page:load', function () {
-    addthis.init();
+    loadDisqus();
     $(".rsvp-btn").click(function() {
       navigationFn.goToSection('#address');
     });
   });
   reload_calendar();
+  addthis.init();
 </script>

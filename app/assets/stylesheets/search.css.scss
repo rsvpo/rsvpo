@@ -1,19 +1,37 @@
 .search_index {
+  .panel-title {
+    .dropdown-menu {
+      width: 95px !important;
+      margin-top: 10px !important;
+    }
+  }
+  .background-wrapper {
+    background-size: cover;
+    background-color: black;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-top: 56px;
+    height: 300px;
+    padding-top: 55px;
+  }
   #content {
     padding-top: 0px !important;
   }
   #topsearch {
-    background-color: #edefed;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 276px;
     display: block;
-    padding: 20px 2%;
-    margin-bottom: 20px;
+    left: 0;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    text-align: center;
     .dropdown-menu {
       width: 120px;
     }
     form {
       display: inline-block !important;
       width: 50%;
-      margin-right: 15%;
       margin-bottom: 0px;
       input {
         margin-bottom: 0px !important;

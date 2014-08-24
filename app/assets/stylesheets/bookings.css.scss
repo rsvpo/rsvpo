@@ -3,8 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .bookings_show {
+  .merchantside {
+    .booking-actions {
+      padding: 40px 0px;
+    }
+    form {
+      display: inline;
+    }
+  }
+  .userside {
+    form {
+      padding: 0 5%;
+    }
+  }
   .portlet-body {
     padding: 10% !important;
+    .booking-actions {
+      
+    }
     h3 {
       margin-top: 0px !important;
     }
@@ -45,9 +61,6 @@
     color: #31beb1 !important;
     font-size: 17px !important;
     font-weight: 700 !important;
-  }
-  form {
-    padding: 0 5%;
   }
   .friend-option {
     margin: 35px 0;

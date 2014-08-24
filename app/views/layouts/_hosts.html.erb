@@ -11,7 +11,7 @@
       <div class="list-wrapper">
         <% hosts.each_with_index do |host, index| %>
           <span class="host-item" data-toggle="tooltip" data-placement="bottom" title="<h5><%= host.title %></h5><h7><%= host.job %></h7></br>">
-            <%= render 'layouts/squareimage', square: host.photo, size: 50 %>
+            <%= render 'layouts/squareimage', square: host.photo, size: "50" %>
           </span>
         <% end %>  
       </div>

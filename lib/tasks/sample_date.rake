@@ -97,7 +97,8 @@ def create_activities
         bookmsg: "Whatever this is I really dont care",
         price: (50*rand(1..10)),
         duration: (10*rand(1..10)),
-        category_id: category.id
+        category_id: category.id,
+        active: true
         )
       activity.save
     end

@@ -12,7 +12,7 @@
     <% else %>
       <div id="carousel-example-generic">
         <div class="carousel-inner">
-          <img src="<%= cl_image_tag(@merchant.background.path, { size: '1024x436', crop: :fit }) %>" alt="unkown">
+          <%= cl_image_tag(@merchant.background.path, { size: '1024x436', crop: :fit }) %>
           <div class="carousel-caption">
             <h3><%= @merchant.name %></h3>
           </div>
@@ -27,14 +27,16 @@
           <p class="description"><%= @merchant.description %></p>
           <div class="merchant-action-wrap text-center">
             <%= render 'layouts/follow', merchant: @merchant %>
-            <%= link_to raw('<i class="fa fa-envelope"></i>') + " 留言", to_merchant_path(@merchant.id), class: "btn-main background-yellow" %>
+            <%= link_to raw('<i class="fa fa-envelope"></i>') + " 留言", to_merchant_path(@merchant.id), class: "btn-main background-yellow btn-padding" %>
           </div>
           <%= render 'layouts/merchantinfo', merchant: @merchant %>
-          <%= render 'layouts/map', merchant: true %>
+          <section id="address">
+            <%= render 'layouts/map', merchant: true %>
+          </section>
         </div>
 
         <div class="col-md-5">
-          <%= render 'layouts/related', activities: @related %>
+          <%= render 'layouts/related', activities: @related, merchant: true %>
           <%= render 'layouts/hosts', hosts: @merchant.hosts, title: @merchant.name %>
         </div>
       </div>

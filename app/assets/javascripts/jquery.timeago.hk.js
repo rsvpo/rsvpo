@@ -44,9 +44,9 @@
       cutoff: 0,
       strings: {
         prefixAgo: null,
-        prefixFromNow: "從現在開始",
+        prefixFromNow: null,
         suffixAgo: "前",
-        suffixFromNow: null,
+        suffixFromNow: "後",
         seconds: "不到 1 分鐘",
         minute: "大約 1 分鐘",
         minutes: "%d 分鐘",

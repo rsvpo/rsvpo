@@ -155,14 +155,12 @@
       $('#rule_to_time').val(time_output);
       $('#rule_to_date').val(date_output);
     });
-    $('.timepicker').timepicker();
-    $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
   };
 </script>
 <script>
-  $(document).on('ready page:load', function () {
-    $('#rule_to_date').prop('readonly', true);
-    $('#rule_to_time').prop('readonly', true);
-    toggles();
-  });
+  $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+  $('.timepicker').timepicker();
+  $('#rule_to_date').prop('readonly', true);
+  $('#rule_to_time').prop('readonly', true);
+  toggles();
 </script>

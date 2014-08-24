@@ -3,9 +3,7 @@
   <li data-tag="graphics">
     <div class="thumbs">
       <% if activity.photos.first %>
-        <% activity.photos.each do |photo| %>
-          <%= cl_image_tag(photo.path, { size: '430x280', crop: :fill, class: "img-responsive"}) %>
-        <% end %>
+        <%= cl_image_tag(activity.photos.sample.path, { size: '430x280', crop: :fill, class: "img-responsive"}) %>
       <% else %>
         <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_260,w_430/v1402566281/Unknown.png" alt="" class="img-responsive" />
       <% end %>
@@ -13,8 +11,16 @@
         <span class="title">
           <span>
             <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>
-            <h5><i class="fa fa-tag"></i> <%= activity.category.name %></h5>
-            <h5><i class="fa fa-clock-o"></i> <%= activity.duration %>分鐘</h5>          
+            <% if activity.slots.where("start > ?", Time.now).order('start asc').first %>
+            <h5><i class="fa fa-clock-o"></i> 下一個時段:</h5>
+            <h5>
+              <% next_slot = Slot.find(activity.slots.where("start > ?", Time.now).order('start asc').first).start %>
+              <abbr class="timeago" title="<%= next_slot.getutc.iso8601 %>">
+                <%= next_slot.to_s %>
+              </abbr>
+            </h5>
+            <% else %>
+            <% end %>
           </span>
         </span>
       </div>

@@ -1,4 +1,7 @@
-<%= render 'layouts/section', title: "留言給" + @receiver.name %>
+<%= render 'layouts/section', title: "留言給" + @receiver.name, 
+            :captured => capture { %>
+            <%= link_to '(' + @receiver.name + '的主頁)', merchant_path(@receiver) %>
+            <% } %>
 
 <section id="content">
   <div class="container">

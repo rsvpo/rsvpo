@@ -6,7 +6,7 @@ class CreateActivities < ActiveRecord::Migration
       t.integer :price
       t.text :bookmsg
       t.integer :duration
-      t.boolean :active, :default => true
+      t.boolean :active, :default => false
       t.references :merchant, index: true
       t.references :category, index: true
 
