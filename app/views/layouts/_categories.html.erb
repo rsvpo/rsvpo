@@ -1,16 +1,13 @@
 <div class="btn-group">
   <button class="btn-main background-red category-btn dropdown-toggle" type="button" data-toggle="dropdown">
-    <% if params[:category].nil? %>
-    所有活動
+    <% if params[:query].nil? %>
+      所有活動
     <% else %>
-    <%= categories[params[:category].to_i - 1].name %>
+    <%= categories[params[:query].to_i - 1].name %>
     <% end %>
     <span class="caret"></span>
   </button>
   <ul class="category-dropdown-menu dropdown-menu">
-    <% if !params[:category].nil? %>
-    <li><%= link_to "所有活動", params.except(:category) %></li>
-    <% end %>
     <% categories.each do |catorgory| %>
     <li><%= link_to catorgory.name, params.merge({:query => catorgory.name}) %></li>
     <% end %>

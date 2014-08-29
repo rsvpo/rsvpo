@@ -4,6 +4,7 @@ class CreateSlots < ActiveRecord::Migration
       t.text :description
       t.integer :inventory
       t.boolean :is_all_day
+      t.boolean :avaliable, :default => true
       t.datetime :start
       t.datetime :finish
       t.references :activity, index: true

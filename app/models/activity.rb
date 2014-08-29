@@ -39,9 +39,9 @@ class Activity < ActiveRecord::Base
     indexes :merchant_name
     indexes :category_name
     indexes :address_province
-    indexes :view_count
+    indexes :view_count, type: 'integer'
     indexes :title, boost: 10
-    indexes :price
+    indexes :price, type: 'integer'
     indexes :about # analyzer: 'snowball'
     indexes :created_at, type: 'date'
   end
@@ -52,18 +52,16 @@ class Activity < ActiveRecord::Base
         boolean do
           must { string params[:query], default_operator: "AND" } if params[:query].present?
           must { term :active, true}
-          must { term :category_id, params[:category_id] } if params[:category_id].present?
         end
       end
-      sort { by :view_count, "desc" } if params[:query].blank?
-      sort { by :view_count, "desc" } if params[:order].blank?
-      sort { by :price, "asc" } if (params[:order] == "cheapest")
+      sort { by :view_count, 'desc' } if params[:order].blank?
+      sort { by :price, 'asc' } if (params[:order] == "cheapest")
       sort { by :created_at, "desc" } if (params[:order] == "recent")
     end
   end
   
   def to_indexed_json
-    to_json(methods: [:merchant_name, :category_name, :view_count])
+    to_json(methods: [:merchant_name, :category_name, :view_count, :address_province])
   end
 
   def merchant_name
@@ -79,7 +77,7 @@ class Activity < ActiveRecord::Base
   end
   
   def address_province
-    addresses_province
+    addresses.collect(&:province).join " "
   end
   
   def has_an_address

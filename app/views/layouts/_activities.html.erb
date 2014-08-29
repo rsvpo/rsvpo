@@ -11,10 +11,10 @@
         <span class="title">
           <span>
             <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>
-            <% if activity.slots.where("start > ?", Time.now).order('start asc').first %>
+            <% if activity.slots.where("start > ?", Time.now).where(:avaliable => true).order('start asc').first %>
             <h5><i class="fa fa-clock-o"></i> 下一個時段:</h5>
             <h5>
-              <% next_slot = Slot.find(activity.slots.where("start > ?", Time.now).order('start asc').first).start %>
+              <% next_slot = Slot.find(activity.slots.where("start > ?", Time.now).where(:avaliable => true).order('start asc').first).start %>
               <abbr class="timeago" title="<%= next_slot.getutc.iso8601 %>">
                 <%= next_slot.to_s %>
               </abbr>
@@ -27,7 +27,7 @@
       <% end %>
       <div class="project-title margin-30">
         <h5><%= activity.title %></h5>
-        <span class="price">$150</span>
+        <span class="price">$<%= activity.price %></span>
         <h6><%= activity.merchant_name %></h6>
       </div>
   </li>

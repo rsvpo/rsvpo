@@ -1,10 +1,6 @@
 class SearchController < ApplicationController
   def index
-    if params[:query].present?
-      @activities = Activity.search(params)
-    else
-      @activities = Activity.active.category(params[:category]).page(params[:infinity]).per(12)
-    end
+    @activities = Activity.search(params)
     @categories =Category.all
     @skip_footer = true
 

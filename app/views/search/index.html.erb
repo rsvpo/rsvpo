@@ -1,4 +1,4 @@
-<div class="background-wrapper margin-30" style="background-image: url(https://d129j62do8x4uv.cloudfront.net/rsvpd/Static/stock/category/categories-5.jpg)">
+<div class="background-wrapper margin-30" style="background-image: url(http://res.cloudinary.com/rsvpo/image/upload/v1408774121/background-all.jpg)">
   <div class="categories text-center">
     <%= render 'layouts/categories', categories: @categories %>
   </div>
@@ -30,17 +30,6 @@
 </section>
 
 <script>
-  var disqus_developer = 1;
-  var disqus_shortname = 'rsvpo'; // required: replace example with your forum shortname
-
-  function loadDisqus(){
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  }
-  
   $(window).scroll(function() {
     var url;
     url = $('.pagination .next_page a').attr('href');
@@ -61,8 +50,24 @@
   jQuery(document).ready(function() {
     jQuery.timeago.settings.allowFuture = true;
     jQuery("abbr.timeago").timeago();
-    $('.background-wrapper').css("background-image", "url(https://d129j62do8x4uv.cloudfront.net/rsvpd/Static/stock/category/categories-1.jpg)");  
   });
   var query = getParameterByName('query');
-  loadDisqus();
+  if (query == '休閑') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774128/background-relax.jpg)");  
+  };
+  if (query == '飲食') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774124/background-eat.jpg)");  
+  };
+  if (query == '動態') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774132/background-action.jpg)");  
+  };
+  if (query == '創意') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774118/background-creative.jpg)");  
+  };
+  if (query == '娛樂') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774115/background-entertainment.jpg)");  
+  };
+  if (query == '學習') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774114/background-education.jpg)");  
+  };
 </script>

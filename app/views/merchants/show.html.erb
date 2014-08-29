@@ -43,6 +43,7 @@
     </div>
   </section>
 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53a103b80ed29934"></script>
 <script>
   var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
   latlng_x = <%= @current_address.lat %>;
@@ -60,5 +61,5 @@
     position: marker_latlng,
     map: map
   });
+  addthis.init();
 </script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53a103b80ed29934"></script>

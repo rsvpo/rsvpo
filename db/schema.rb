@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140805132202) do
     t.integer  "price"
     t.text     "bookmsg"
     t.integer  "duration"
-    t.boolean  "active",      default: true
+    t.boolean  "active",      default: false
     t.integer  "merchant_id"
     t.integer  "category_id"
     t.datetime "created_at"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 20140805132202) do
     t.text     "description"
     t.integer  "inventory"
     t.boolean  "is_all_day"
+    t.boolean  "avaliable",   default: true
     t.datetime "start"
     t.datetime "finish"
     t.integer  "activity_id"

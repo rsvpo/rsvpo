@@ -3,7 +3,11 @@ class Slot < ActiveRecord::Base
   has_many :bookings
   belongs_to :address
   
-  def avaliable
-    self.inventory - self.bookings.count
+  after_commit :availability
+  
+  def availability
+    if (self.inventory <= self.bookings.count)
+      self.update_columns(:avaliable => false)
+    end
   end
 end
