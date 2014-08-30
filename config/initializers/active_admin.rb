@@ -163,14 +163,14 @@ ActiveAdmin.setup do |config|
   #
   # To load a stylesheet:
   config.clear_stylesheets!
-  config.register_stylesheet ENV["CF"] + 'active_admin.css'
+  config.register_stylesheet ENV["AACSS"]
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
   config.clear_javascripts!
-  config.register_javascript ENV["CF"] + 'active_admin.js'
+  config.register_javascript ENV["AAJS"]
 
 
   # == CSV options
