@@ -1,0 +1,6 @@
+<h3>User</h3>
+<% if @user.avatar? %>
+    <%= cl_image_tag(@user.avatar.path, { size: '50x50', crop: :fill}) %>
+<% end %>
+<p>User: <%= @user.name %></p>
+<p>Email: <%= @user.email if @user.email %></p>

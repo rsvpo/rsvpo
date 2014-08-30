@@ -1,0 +1,11 @@
+<% if current_merchant %>
+  <%= render 'merchantside' %>
+<% else %>
+  <%= render 'userside' %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).on('ready page:load', function () {
+   $('.attachinary-input').attachinary()
+  });
+</script>

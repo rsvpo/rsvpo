@@ -1,0 +1,112 @@
+<!-- begin SIDE NAVIGATION -->
+<nav class="navbar-side" role="navigation">
+  <div class="navbar-collapse sidebar-collapse collapse">
+    <ul id="side" class="nav navbar-nav side-nav">
+      <!-- begin SIDE NAV USER PANEL -->
+      <li class="side-user hidden-xs">
+        <%= render 'layouts/squareimage', square: @merchant.logo, size: "150" %>
+        <p class="name tooltip-sidebar-logout">
+          <%= @merchant.name %>
+        </p>
+        <div class="clearfix"></div>
+      </li>
+      <!-- end SIDE NAV USER PANEL -->
+      <!-- begin DASHBOARD LINK -->
+      <li>
+        <a class="active" href="index.html">
+          <%= link_to raw('<i class="fa fa-dashboard"></i>') + "控制台", dashboard_path %>
+        </a>
+      </li>
+      <!-- end DASHBOARD LINK -->
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#activity">
+          <i class="fa fa-tasks"></i>活動 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="activity">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "我的活動", myactivities_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新活動", new_activity_path %>
+          </li>
+        </ul>
+      </li>
+      <!-- begin TABLES DROPDOWN -->
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#bookings">
+          <i class="fa fa-ticket"></i>預約 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="bookings">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path %>
+          </li>
+        </ul>
+      </li>
+      <% if @parent %>
+        <!-- begin SCHEDULE DROPDOWN -->
+        <li class="panel">
+          <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#schedules">
+            <i class="fa fa-calendar"></i>時間表 <i class="fa fa-caret-down"></i>
+          </a>
+          <ul class="collapse nav" id="schedules">
+            <li>
+              <% @parent.each do |act| %>
+                <% if act.id %>
+                  <%= link_to act.title, activity_slots_path(act) %>
+                <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <!-- end SCHEDULE DROPDOWN -->
+      <% end %>
+      <!-- end TABLES DROPDOWN -->
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#address">
+          <i class="fa fa-location-arrow"></i>地址 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="address">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有地址", addresses_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新地址", new_address_path %>
+          </li>
+        </ul>
+      </li>
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#hosts">
+          <i class="fa fa-group"></i>主持 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="hosts">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有主持", hosts_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新主持", new_host_path %>
+          </li>
+        </ul>
+      </li>
+      <li class="panel">
+        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#messages">
+          <i class="fa fa-envelope"></i>訊息 <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="collapse nav" id="messages">
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "所有訊息", mailbox_path %>
+          </li>
+          <li>
+            <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "新訊息", client_path %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  <!-- /.side-nav -->
+  </div>
+<!-- /.navbar-collapse -->
+</nav>
+<!-- /.navbar-side -->
+<!-- end SIDE NAVIGATION -->

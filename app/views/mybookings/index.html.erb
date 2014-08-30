@@ -1,0 +1,95 @@
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+
+  <div class="page-content">
+
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            Invoice
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+            </li>
+            <li class="active">Invoice</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h1><i class="fa fa-gears"></i> Flex Admin</h1>
+              </div>
+              <div class="col-md-6 invoice-terms">
+                <h3>Payment Instructions</h3>
+                <p>
+                  Please send a check or money order made out to <strong>FlexCo Inc.</strong> to the P.O. Box listed above or pay online.
+                </p>
+                <a class="btn btn-green" href="#">Pay Online Now</a>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-lg-12">
+                <h3>Items</h3>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Activiity</th>
+                        <th>Address</th>
+                        <th>Time</th>
+                        <th>Customer</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @mybookings.each do |booking| %>
+                        <% book = Booking.find(booking.booking_id) %>
+                        <tr>
+                          <td><%= booking.title %></td>
+                          <td><%= book.slot.address.address %></td>
+                          <td><%= book.slot.start %> - <%= book.slot.finish %></td>
+                          <td><%= book.name %></td>
+                          <td><%= link_to 'Show', book %></td>
+                          <td>
+                            <%= form_for(Booking.find(booking.booking_id), :html => { :method => :put }) do |f| %>
+                              <%= f.hidden_field :confirm, :value => true %>
+                              <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                              OK
+                              <% end %>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+                <a class="btn btn-green"><i class="fa fa-download"></i> Download Invoice as PDF</a>
+              </div>
+            </div>
+            <!-- /.row -->
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.page-content -->
+
+</div>
+<!-- /#page-wrapper -->
+<!-- end MAIN PAGE CONTENT -->

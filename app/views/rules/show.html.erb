@@ -1,0 +1,29 @@
+<div class="span3 pull-right">
+  <%= link_to 'Back To Calendar', root_path, :class => 'btn btn-danger' %>
+  <%= link_to 'Edit', edit_rule_path(@rule), :class => 'btn btn-primary' %>
+</div>
+<strong>Description:</strong>
+  <%= @rule.description %>
+<br/>
+<strong>Address:</strong>
+  <%= @rule.address.address %>
+<br/>
+<strong>From:</strong>
+  <%= @rule.from_date %>
+  <%= @rule.from_time %>
+<br/>
+<strong>To:</strong>
+  <%= @rule.to_date %>
+  <%= @rule.to_time %>
+<br/>
+<strong>Duration:</strong>
+  <%= @rule.schedule.duration %>
+<br/>
+<strong>Schedule:</strong>
+  <%= @rule.schedule %>
+<br/>
+<strong>Upcomming rules:</strong>
+  <% @rule.schedule.first(5).each do |e| %>
+  <br/>
+  <%= e.to_s %>
+<% end %>

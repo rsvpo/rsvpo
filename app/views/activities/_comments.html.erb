@@ -1,0 +1,24 @@
+<span class="comments">
+  <ul class="media-list container">
+    <% if all_comments %>
+    <% all_comments.each do |comment| %>
+    <li class="media">
+      <a class="pull-left" href="#">
+        <% if User.find(comment.title).avatar %>
+        <%= cl_image_tag(User.find(comment.title).avatar.path, { size: '50x50', crop: :fill}) %>
+        <% else %>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_50,w_50/v1402566281/Unknown.png" alt="" style="width:50px; height 50px;"/>
+        <% end %>
+      </a>
+      <div class="media-body">
+        <p class="lead"><%= User.find(comment.title).name %></p>
+        <p class="gray"><%= comment.comment %></p>
+      </div>
+    </li>
+    <% end %>
+    <% end %>
+  </ul>
+  <div class="paginate-wrapper text-center">
+    <%= paginate all_comments, :remote => true %>
+  </div>
+</span>

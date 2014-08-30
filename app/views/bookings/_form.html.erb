@@ -1,0 +1,60 @@
+<div class="row margin-30">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="carousel-wrapper">
+      <%= render 'activities/carousel', activity: slot.activity %>
+    </div>
+    
+    <%= bootstrap_form_for(@booking, layout: :vertical) do |f| %>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">商戶</label>
+        <h5><%= slot.activity.merchant.name %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">時段</label>
+        <h5><%= slot.start.strftime("%F, %l:%M %P")  %> - <%= slot.finish.strftime("%F, %l:%M %P") %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">地址</label>
+        <h5><%= slot.address.address %>, <%= slot.address.locality %></h5>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="booking_phone">還有</label>
+        <h5><%= remaining %>個空位</h5>
+      </div>
+      <div class= "friend-option">
+        <div class="form-group">
+          <label class="control-label" for="booking_phone">代朋友預約?</label>
+          <div class="friend-check">
+            <%= f.check_box :friend, :hide_label => true %>
+          </div>
+        </div>
+        <div class="form-group">
+          <span id="name-wrapper">
+            <%= f.text_field :name, :label => "朋友名稱", :placeholder => "朋友名稱" %>
+          </span>
+        </div>
+      </div>
+      <%= f.text_area :optional, :label => "其他資料", :placeholder => slot.activity.bookmsg %>
+      <%= f.number_field :phone, :label => "電話", :placeholder => " 電話" %>
+      <%= f.hidden_field :slot_id, :value => params[:slot] %>
+      <%= f.form_group do %>
+        <%= f.submit "立即RSVP", :class => 'btn btn-lg btn-main btn-block background-red margin-10' %>
+      <% end %>
+      <div class="agree">
+        點擊"立即RSVP"，代表你理解並同意<%= link_to "服務條款", terms_path, class: "green" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var checkbox = document.getElementById('booking_friend');
+  var details_div = document.getElementById('name-wrapper');
+  checkbox.onchange = function() {
+     if(this.checked) {
+       details_div.style['display'] = 'block';
+     } else {
+       details_div.style['display'] = 'none';
+     }
+  };
+</script>

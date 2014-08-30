@@ -1,0 +1,16 @@
+<%= bootstrap_form_for(@host, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
+  <%= f.attachinary_file_field :photo, :label => "相片" %>
+  <%= f.text_field :title, :label => "名稱" %>
+  <%= f.text_field :job, :label => "頭銜" %>
+  <%= f.text_area :description, :label => "簡介" %>
+  <%= f.form_group do %>
+    <%= f.submit "確認主持" %>
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).on('ready page:load', function () {
+    $('.attachinary-input').attachinary();
+    $('label[for=host_photo]').text("相片");
+  });
+</script>

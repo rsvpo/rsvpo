@@ -1,0 +1,121 @@
+.activities_show, .merchants_show {
+  .panel-default {
+    margin-bottom: 10px;
+  }
+  .comment {
+    margin-top: 5px;
+  }
+  .host-item {
+    margin: 20px;
+  }
+  #relatedpanel {
+    padding-bottom: 15px;
+  }
+  #mappanel {
+    text-align: center;
+  }
+  .related-item {
+    position: relative;
+    border-bottom: 1px solid #dcdbdb !important;
+    padding: 14px 0 !important;
+    h7 {
+      position: absolute;
+      strong {
+        font-weight: 300 !important;
+        font-size: 15px !important;
+        line-height: 21px !important;
+        color: #6e7172 !important;
+      }
+      margin-left: 15px !important;
+    }
+    .bottom-related {
+      bottom: 13px !important;
+      color: #c2c3c4 !important;
+      font-size: 14px !important;
+      font-style: italic !important;
+    }
+  }
+  .main-wrap {
+    border-bottom: 1px solid #dddce2;
+    border-left: 1px solid #dddce2;
+    border-right: 1px solid #dddce2;
+    padding: 4px 28px 0;
+  }
+  .like-wrap {
+    .fa {
+      color: #696969 !important;
+      margin-right: 5px;
+    } 
+    form {
+      display: inline;
+    }
+  }
+  .portfolio  {
+    padding: 0px !important
+  }
+  .info-right {
+    text-align: right;
+    .thumbnail {
+      display: inline-block !important;
+      margin-bottom: 0px !important;
+      h3 {
+        margin-top: 0px !important;
+        font-size: 20px !important;
+      }
+    }
+  }
+  .title {
+    color: #4d565f;
+    font-size: 26px;
+    letter-spacing: -1px;
+  }
+  .price {
+    color: #4D565F;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: right;
+    letter-spacing: -1px;
+  }
+  #header {
+    padding-top: 0px !important;
+    height: inherit !important;
+    padding-bottom: 0px !important;
+  }
+  .rsvp-btn {
+    min-width: 160px !important;
+    background-color: #e8db4f !important;
+    font-size: 18px;
+  }
+  .other-info {
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #898989;
+      i {
+        margin-right: 10px;
+      }
+    }
+  }
+  h3 {
+    letter-spacing: -1px !important;
+  }
+  #address {
+    .dropdown-menu {
+      li {
+        color: darkgray;
+        font-weight: normal;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+        font-family: 'Open Sans', sans-serif;
+      }
+    }
+  }
+}
+
+.activities_edit, .activities_new {
+  .adjusted-padding {
+    padding-left: 7px !important;
+  }
+}

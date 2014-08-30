@@ -1,0 +1,119 @@
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            <%= @activity.title %>的時間表
+            <%= link_to raw('<i class="fa fa-edit"></i>') + " 新時段", generate_rule_path(@activity.id), :class => 'btn btn-green pull-right' %>
+          </h1>
+          <h1>
+            <div class="btn-group">
+              <button class="btn btn-blue dropdown-toggle" type="button" data-toggle="dropdown">
+                <%= @current_address.address %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <% @addresses.each do |address| %>
+                <% if address.id != @current_address.id %>
+                <li><%= link_to address.address, address_slot_path(address.id, @activity.id) %></li>
+                <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path %>
+            </li>
+            <li class="active"><%= @activity.title %>的時間表</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="row">
+
+      <div class="col-lg-8">
+        <div class="portlet portlet-default">
+          <div class="portlet-heading">
+            <div class="portlet-title">
+              <h4><%= @activity.title %>共有 <span class="badge green"><%= @slots.count %></span> 個時段</h4>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="portlet-body">
+            <div class="table-responsive">
+              <div id="calendar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-8 -->
+
+      <div class="col-lg-4">
+        <div class="portlet portlet-default">
+          <div class="portlet-heading">
+            <div class="portlet-title">
+              <h4>各時段的空檔</h4>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="portlet-body">
+            <ul>
+              <% @slots.each do |slot| %>
+                <li>
+                  <%= render 'layouts/progress', slot: slot %>
+                </li>
+              <% end %>
+            </ul>
+            <div class="paginate-wrap text-center">
+              <%= paginate @slots, :param_name => :page %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-4 -->
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.page-content -->
+
+</div>
+<!-- /#page-wrapper -->
+<!-- end MAIN PAGE CONTENT -->
+
+<script>
+  function reload_calendar(){
+    var source = new Array();
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        ignoreTimezone: false,
+        select: this.select,
+        eventClick: this.eventClick,
+        eventSources: [
+          {url: '<%= address_slot_path(@current_address.id, @activity.id ,format: :json) %>',
+          error: function() {
+            alert('there was an error while fetching events!');
+          }}
+        ],
+        timeFormat: 'h:mmtt{ - h:mmtt} '
+    });
+  }
+</script>
+<script>
+  reload_calendar();
+</script>

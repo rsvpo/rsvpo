@@ -1,0 +1,110 @@
+<div id="page-wrapper">
+  <div class="page-content">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>我的活動
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path, 'data-no-turbolink' => true %>
+            </li>
+            <li class="active">我的活動</li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="portlet portlet-default">
+          <div class="portlet-body">
+            <div class="row">
+              <nav class="navbar mailbox-topnav" role="navigation">
+                <div class="mailbox-nav pull-right">
+                  <%= link_to raw('<i class="fa fa-plus"></i>') + " 新活動", new_activity_path, :class => 'btn btn-green' %>
+                </div>
+              </nav>
+              <div class="col-lg-12">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>活動名稱</th>
+                        <th>基本資料</th>
+                        <th>補充資料</th>
+                        <th>地址</th>
+                        <th>圖片</th>
+                        <th>時段</th>
+                        <th>上架</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% @activities.each do |activity| %>
+                        <tr>
+                          <td><%= activity.title %></td>
+                          <td class="text-center">
+                            <% if activity.price.blank? or activity.title.blank? or activity.about.blank? or activity.duration.blank? or activity.merchant_id.blank? or activity.category_id.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.details.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.addresses.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.photos.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.slots.blank? %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if activity.active %>
+                              <span class="text-green"><i class="fa fa-circle"></i></span>
+                            <% else %>
+                              <span class="text-red"><i class="fa fa-circle"></i></span>
+                            <% end %>
+                          </td>
+                          <td>
+                            <%= link_to '活動詳情', edit_activity_path(activity), class: "btn btn-orange" %>
+                            <%= link_to raw('<i class="fa fa-plus"></i>') + " 新時段", generate_rule_path(activity.id), class: "btn btn-red", 'data-no-turbolink' => true %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+            </div>
+            <!-- /.row -->
+          </div>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    
+  </div>
+</div>

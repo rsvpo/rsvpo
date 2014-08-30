@@ -1,0 +1,65 @@
+<!--Content Section-->
+  <section id="content"> 
+    <% if @merchant.background.blank? %>
+      <div id="carousel-example-generic">
+        <div class="carousel-inner">
+          <img src="http://res.cloudinary.com/rsvpo/image/upload/c_pad,h_355,w_1140/v1402566281/Unknown.png" alt="unkown">
+          <div class="carousel-caption">
+            <h3><%= @merchant.name %></h3>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div id="carousel-example-generic">
+        <div class="carousel-inner">
+          <%= cl_image_tag(@merchant.background.path, { size: '1024x436', crop: :fit }) %>
+          <div class="carousel-caption">
+            <h3><%= @merchant.name %></h3>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="container padding-top-40">
+      <%= render 'layouts/flash' %>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="addthis_sharing_toolbox"></div>
+          <p class="description"><%= @merchant.description %></p>
+          <div class="merchant-action-wrap text-center">
+            <%= render 'layouts/follow', merchant: @merchant %>
+            <%= link_to raw('<i class="fa fa-envelope"></i>') + " 留言", to_merchant_path(@merchant.id), class: "btn-main background-yellow btn-padding" %>
+          </div>
+          <%= render 'layouts/merchantinfo', merchant: @merchant %>
+          <section id="address">
+            <%= render 'layouts/map', merchant: true %>
+          </section>
+        </div>
+
+        <div class="col-md-5">
+          <%= render 'layouts/related', activities: @related, merchant: true %>
+          <%= render 'layouts/hosts', hosts: @merchant.hosts, title: @merchant.name %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53a103b80ed29934"></script>
+<script>
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @current_address.lat %>;
+  latlng_y = <%= @current_address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+  addthis.init();
+</script>

@@ -1,0 +1,37 @@
+<% if merchant %>
+  <div class="btn-group">
+    <button class="btn-main category-btn dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @current_address.address %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% @addresses.each do |address| %>
+        <% if address.id == @current_address.id %>
+          <li><%= address.address %></li>
+        <% else %>
+          <li><%= link_to address.address, location_merchant_path(address.id, @merchant.id) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <div class="btn-group">
+    <button class="btn-main background-red category-btn dropdown-toggle" type="button" data-toggle="dropdown">
+      <%= @current_address.address %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <% @addresses.each do |address| %>
+        <% if address.id == @current_address.id %>
+          <li><%= address.address %></li>
+        <% else %>
+          <li><%= link_to address.address, location_activity_path(address.id, @activity.id) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="map-wrap">
+  <div id="map_canvas"></div>
+</div>

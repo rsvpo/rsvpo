@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-lg-12">
+    <%= bootstrap_nested_form_for(@activity, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8 .col-md-offset-1") do |f| %>
+      <%= f.attachinary_file_field :photos %>
+      <%= f.text_field :title, :label => "活動名稱", :placeholder => "活動名稱" %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, :label => "分類", :placeholder => "分類") %>
+      <%= f.collection_check_boxes(:address_ids, @merchant.addresses.all, :id, :address, :label => "地址", :placeholder => "地址") %>
+      <%= f.collection_check_boxes(:host_ids, @merchant.hosts.all, :id, :title, :label => "主持", :placeholder => "主持") %>
+      <%= f.text_area :about, :label => "簡介", :placeholder => "簡介" %>
+   
+      <%= f.number_field :price, :label => "價錢($)", :placeholder => "($)" %>  
+      <%= f.number_field :duration, :label => "活動時間(分鐘)", :placeholder => "(分鐘)" %>
+      <%= f.text_area :bookmsg, :label => "要求參加者資料", :placeholder => "要求參加者資料" %>
+      <%= f.fields_for :details do |task_form| %>
+        <%= task_form.text_field :title, :label => "補充資料標題" %>
+        <%= task_form.text_area :content, :label => "補充資料內容" %>
+        <div class="col-sm-8 col-sm-offset-3 margin-10 adjusted-padding">
+          <%= task_form.link_to_remove "刪除資料", :class => "btn btn-red" %>
+        </div>
+      <% end %>
+      <div class="col-sm-8 col-sm-offset-3 margin-10 adjusted-padding">
+        <%= f.link_to_add "加入更多補充資料", :details, :class => "btn btn-orange" %>
+      </div>
+      <%= f.form_group do %>
+        <%= link_to "刪除活動", @activity, method: :delete, data: { confirm: '確定嗎？' }, class: "btn btn-red" %>
+        <%= f.submit "確認活動" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).on('ready page:load', function () {
+   $('.attachinary-input').attachinary()
+   $('label[for=<%= controller.controller_name.singularize %>_photos]').text("相片");
+  });
+</script>

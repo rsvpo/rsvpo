@@ -1,0 +1,8 @@
+<%= render 'layouts/section', title: "RSVP到" + @slot.activity.title %>
+
+<section id="content">
+  <div class="container">
+    <%= render 'form', slot: @slot, remaining: @remaining %>
+  </div>
+</section>
+

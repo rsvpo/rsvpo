@@ -1,0 +1,29 @@
+// Place all the styles related to the Slots controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.slots_index {
+  li {
+    list-style-type: none !important;
+    padding-left:0 !important;
+  }
+  ul {
+    padding-left: 0px;
+  }
+  .dropdown-menu {
+    padding: 10px;
+  }
+  .badge {
+    font-size: 14px;
+  }
+}
+
+.slots_edit {
+  .rails-bootstrap-forms-datetime-select {
+    select {
+      width: 100px;
+      display: inline;
+      margin-right: 7px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<%= render 'layouts/section', title: "喜愛活動" %>
+
+<section id="content">
+  <div class="container">
+    <section id="favourites">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <ul class="list-inline portfolio text-center">
+            <% @favourites.each do |favourite| %>
+            <li data-tag="graphics">
+              <div class="thumbs">
+                <% if favourite.activity.photos.first %>
+                  <%= cl_image_tag(favourite.activity.photos.sample.path, { size: '280x430', crop: :fill, class: "img-responsive"}) %>
+                <% else %>
+                  <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_280,w_430/v1402566281/Unknown.png" alt="" />
+                <% end %>
+                <%= link_to favourite.activity do %>
+                  <span class="title">
+                    <span>
+                      <h4><%= favourite.activity.title %></h4>
+                      <h5><%= favourite.activity.merchant_name %></h5>
+                      <h5><i class="fa fa-tag"></i> <%= favourite.activity.category.name %></h5>
+                      <h5><i class="fa fa-clock-o"></i> <%= favourite.activity.duration %>分鐘</h5>
+                      <h5>$<%= favourite.activity.price %></h5>
+                      <h5><i class="fa fa-map-marker"></i> <%= favourite.activity.addresses.collect(&:locality).uniq.join ", " %></h5> 
+                    </span>
+                  </span>
+                </div>
+                <% end %>
+                <div class="project-title margin-30">
+                  <h5><%= favourite.activity.title %></h5>
+                </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

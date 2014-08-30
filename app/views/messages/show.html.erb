@@ -1,0 +1,11 @@
+<% if current_merchant %>
+  <%= render 'merchantside' %>
+<% else %>
+  <%= render 'userside' %>
+<% end %>
+
+<script>
+  jQuery(document).ready(function() {
+    jQuery("abbr.timeago").timeago();
+  });
+</script>

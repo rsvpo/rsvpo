@@ -1,0 +1,54 @@
+<% if @alerts_dropdown %>
+<% alerts_count = alerts.count(:all) %>
+<% end %>
+<!-- begin ALERTS DROPDOWN -->
+<li class="dropdown">
+  <a href="#" class="alerts-link dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-bell"></i> 
+    <span class="number"><%= alerts_count %></span><i class="fa fa-caret-down"></i>
+  </a>
+  <ul class="dropdown-menu dropdown-scroll dropdown-alerts">
+
+    <!-- Alerts Dropdown Heading -->
+    <li class="dropdown-header">
+      <i class="fa fa-bell"></i> <%= alerts_count %> 新通知
+    </li>
+
+    <!-- Alerts Dropdown Body - This is contained within a SlimScroll fixed height box. You can change the height using the SlimScroll jQuery features. -->
+    <li id="alertScroll">
+      <ul class="list-unstyled">
+        <% if @alerts_dropdown %>
+          <% alerts.each do |alert| %>
+            <li>
+              <%= link_to booking_path(alert.booking_id) do %>
+                <% book = Booking.find(alert.booking_id) %>
+                <div class="alert-icon pull-left">
+                  <%= render 'layouts/squareimage', square: book.user.avatar, size: "20" %>
+                </div>
+                <%= book.user.name %>
+                <span class="small pull-right">
+                  <strong>
+                    <em>
+                      <abbr class="timeago" title="<%= book.created_at.getutc.iso8601 %>">
+                        <%= book.created_at.to_s%>
+                      </abbr>
+                    </em>
+                  </strong>
+                </span>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </li>
+
+    <!-- Alerts Dropdown Footer -->
+    <li class="dropdown-footer">
+      <%= link_to "查看未確認預約", pending_path %>
+    </li>
+
+  </ul>
+  <!-- /.dropdown-menu -->
+</li>
+<!-- /.dropdown -->
+<!-- end ALERTS DROPDOWN -->

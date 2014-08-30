@@ -1,0 +1,335 @@
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+
+  <div class="page-content">
+
+    <!-- begin PAGE TITLE AREA -->
+    <!-- Use this section for each page's title and breadcrumb layout. In this example a date range picker is included within the breadcrumb. -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>控制台
+            <small>活動概要</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-dashboard"></i> 控制台</li>
+            <li class="pull-right">
+              <div id="reportrange" class="btn btn-green btn-square date-picker">
+                <i class="fa fa-calendar"></i>
+                <span class="date-range">過去兩星期</span>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE AREA -->
+
+    <!-- begin DASHBOARD CIRCLE TILES -->
+    <div class="row">
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading dark-blue">
+              <i class="fa fa-bookmark fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content dark-blue">
+            <div class="circle-tile-description text-faded">
+              收藏
+            </div>
+            <div class="circle-tile-number text-faded">
+              <%= @follow_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading green">
+              <i class="fa fa-eye fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content green">
+            <div class="circle-tile-description text-faded">
+              觀看次數
+            </div>
+            <div class="circle-tile-number text-faded">
+              <%= @view_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading orange">
+              <i class="fa fa-ticket fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content orange">
+            <div class="circle-tile-description text-faded">
+              確認預約
+            </div>
+            <div class="circle-tile-number text-faded">
+              <%= @confirm_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading blue">
+              <i class="fa fa-question fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content blue">
+            <div class="circle-tile-description text-faded">
+              預約要求
+            </div>
+            <div class="circle-tile-number text-faded">
+              <%= @pending_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading red">
+              <i class="fa fa-tasks fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content red">
+            <div class="circle-tile-description text-faded">
+              活動
+            </div>
+            <div class="circle-tile-number text-faded">
+              <% act_count = @activities.count %>
+              <%= act_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-6">
+        <div class="circle-tile">
+          <a href="#">
+            <div class="circle-tile-heading purple">
+              <i class="fa fa-comments fa-fw fa-3x"></i>
+            </div>
+          </a>
+          <div class="circle-tile-content purple">
+            <div class="circle-tile-description text-faded">
+              訊息
+            </div>
+            <div class="circle-tile-number text-faded">
+              <%= @message_count %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end DASHBOARD CIRCLE TILES -->
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <div class="tile tile-img tile-time" style="height: 320px">
+          <p class="time-widget">
+            <span class="time-widget-heading">現在是</span>
+            <br>
+            <strong>
+              <span id="datetime"></span>
+            </strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="tile green" style="height: 320px">
+          <h4>觀看次數趨勢</h4>
+          <% if current_merchant.activities.count > 0 %>
+            <%= content_tag :div, "", id: "morris-chart-dashboard", data: {views: views_chart_data} %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+        <div class="tile orange dash-demo-tile">
+          <h4><i class="fa fa-check fa-fw"></i> 預約比例</h4>
+          <div id="easy-pie-1" class="easy-pie-chart" data-percent="<%= (@confirm_count.to_f  + @pending_count.to_f ) / @view_count.to_f  * 100 %>">
+            <span class="percent"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="tile red dash-demo-tile">
+          <h4><i class="fa fa-heart fa-fw"></i> 喜愛比例</h4>
+          <div id="easy-pie-3" class="easy-pie-chart" data-percent="<%= @follow_count.to_f / @view_count.to_f * 100 %>">
+            <span class="percent"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="portlet portlet-green">
+          <div class="portlet-heading">
+            <div class="portlet-title">
+              <h4><i class="fa fa-exchange fa-fw"></i> 即將開始的預約時段</h4>
+            </div>
+            <div class="portlet-widgets">
+              <a data-toggle="collapse" data-parent="#accordion" href="#transactionsPortlet"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div id="transactionsPortlet" class="panel-collapse collapse in">
+            <div class="portlet-body">
+              <div class="table-responsive dashboard-demo-table">
+                <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>               
+                      <th>活動</th>
+                      <th>時間</th>
+                      <th>參加者</th>
+                      <th>狀態</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @mybookings.each do |booking| %>
+                    <tr>
+                      <% book = Booking.find(booking.booking_id) %>
+                      <td><%= book.slot.start.strftime("%F, %l:%M %P") %> - <%= book.slot.finish.strftime("%F, %l:%M %P") %></td>
+                      <td><%= booking.title %></td>
+                      <td><% if book.friend %><%= book.name %><% else %><%= book.user.name %><% end %></td>
+                      <td>
+                        <% if book.confirm %>
+                          <%= form_for(book, :html => { :method => :put }) do |f| %>
+                            <%= f.hidden_field :confirm, :value => false %>
+                            <%= button_tag(type: 'submit', class: "btn btn-xs btn-red") do %>
+                              取消預約
+                            <% end %>
+                          <% end %>
+                        <% else %>
+                          <%= form_for(book, :html => { :method => :put }) do |f| %>
+                          <%= f.hidden_field :confirm, :value => true %>
+                          <%= button_tag(type: 'submit', class: "btn btn-xs btn-green") do %>
+                              確認預約
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "未確認預約", pending_path, class: "btn btn-orange" %>
+              <%= link_to raw('<i class="fa fa-angle-double-right"></i> ') + "已確認預約", confirmed_path, class: "btn btn-orange" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.page-content -->
+
+</div>
+<!-- /#page-wrapper -->
+<!-- end MAIN PAGE CONTENT -->
+<script>
+  <% if act_count > 0 %>
+    function set_morris(){
+      Morris.Area({
+        element: 'morris-chart-dashboard',
+        data: $('#morris-chart-dashboard').data('views'),
+        xkey: 'viewed_at',
+        xLabelFormat: function(date) {
+            return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+        },
+        xLabels: 'day',
+        ykeys: ['first_views'<% if act_count >1 %>, 'second_views'<% end %><% if act_count > 2 %>, 'third_views'<% end %><% if act_count > 3 %>, 'fourth_views'<% end %><% if act_count > 4 %>, 'fifth_views'<% end %>],
+        yLabelFormat: function(y) {
+            return y;
+        },
+        labels: ['<%= @activities.first.title %>'<% if act_count >1 %>, '<%= @activities.second.title %>'<% end %><% if act_count > 2 %>, '<%= @activities.third.title %>'<% end %><% if act_count > 3 %>, '<%= @activities.fourth.title %>'<% end %><% if act_count > 4 %>, '<%= @activities.fifth.title %>'<% end %>],
+        lineColors: ['#fff'<% if act_count >1 %>, '#fff'<% end %><% if act_count > 2 %>, '#fff'<% end %><% if act_count > 3 %>, '#fff'<% end %><% if act_count > 4 %>, '#fff'<% end %>],
+        hideHover: 'auto',
+        resize: true,
+        gridTextFamily: ['Open Sans'],
+        gridTextColor: ['rgba(255,255,255,0.7)'],
+        fillOpacity: 0.1,
+        pointSize: 0,
+        smooth: true,
+        lineWidth: 2,
+        grid: true,
+        dateFormat: function(date) {
+            d = new Date(date);
+            return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+        },
+    });
+    };
+  <% end %>
+  
+  //Easy Pie Charts
+  function easy_pie_chart(){
+      $('#easy-pie-1, #easy-pie-2, #easy-pie-3, #easy-pie-4').easyPieChart({
+          barColor: "rgba(255,255,255,.5)",
+          trackColor: "rgba(255,255,255,.5)",
+          scaleColor: "rgba(255,255,255,.5)",
+          lineWidth: 20,
+          animate: 1500,
+          size: 175,
+          onStep: function(from, to, percent) {
+              $(this.el).find('.percent').text(Math.round(percent));
+          }
+      });
+  };
+</script>
+<script>
+  <% if current_merchant.activities.count > 0 %>
+    set_morris();
+  <% end %>
+  $(document).on('ready page:load', function () {
+    easy_pie_chart();
+    jQuery("abbr.timeago").timeago();
+    moment.lang('zh-TW');
+
+    //Moment.js Time Display
+    var datetime = null,
+        date = null;
+
+    var update = function() {
+        date = moment(new Date())
+        datetime.html(date.format('dddd<br>MMMM Do, YYYY<br>h:mm:ss A'));
+    };
+
+    datetime = $('#datetime')
+    update();
+    setInterval(update, 1000);
+    
+    //Custom jQuery - Changes background on time tile based on the time of day.
+    datetoday = new Date(); // create new Date()
+    timenow = datetoday.getTime(); // grabbing the time it is now
+    datetoday.setTime(timenow); // setting the time now to datetoday variable
+    hournow = datetoday.getHours(); //the hour it is
+
+    if (hournow >= 18) // if it is after 6pm
+      $('div.tile-img').addClass('evening');
+    else if (hournow >= 12) // if it is after 12pm
+      $('div.tile-img').addClass('afternoon');
+    else if (hournow >= 6) // if it is after 6am
+      $('div.tile-img').addClass('morning');
+    else if (hournow >= 0) // if it is after midnight
+      $('div.tile-img').addClass('midnight');
+  });
+</script>

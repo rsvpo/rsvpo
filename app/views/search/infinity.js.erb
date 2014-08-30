@@ -1,0 +1,4 @@
+$('.activities-wrapper').append('<%=j render 'layouts/activities', activities: @activities %>');
+$('.pagination').remove();
+$('.paginate-wrap').append('<%=j render 'layouts/infinity', activities: @activities %>');
+jQuery("abbr.timeago").timeago();

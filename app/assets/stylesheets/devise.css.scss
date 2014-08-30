@@ -1,0 +1,63 @@
+.attachinary-input {
+  margin-bottom: 15px !important;
+}
+
+.sessions_new {
+  a {
+    font-weight: normal;
+  }
+  form {
+    padding: 0 10%;
+    .btn-block {
+      margin-top: 10px;
+    }
+  }
+  .form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .form-signin-heading {
+    margin-bottom: 30px;
+  }
+  .checkbox {
+    font-weight: normal;
+    margin: 0px !important;
+    display: inline-block;
+  }
+  .controls {
+    .string, .password {
+      width: 100%;
+      position: relative;
+      height: auto;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      padding: 10px;
+      font-size: 16px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+  .user_remember_me, .merchant_remember_me {
+    margin-top: 10px;
+  }
+  .boolean {
+    text-align: center;
+    .controls {
+      vertical-align: middle;
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+  .controls:focus {
+    z-index: 2;
+  }
+  .label {
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .shared_links {
+    padding: 20px 0 20px 0;
+  }
+}

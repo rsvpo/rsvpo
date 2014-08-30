@@ -1,0 +1,35 @@
+<ul class="list-inline portfolio text-center">
+  <% activities.each do |activity| %>
+  <li data-tag="graphics">
+    <div class="thumbs">
+      <% if activity.photos.first %>
+        <%= cl_image_tag(activity.photos.sample.path, { size: '430x280', crop: :fill, class: "img-responsive"}) %>
+      <% else %>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_260,w_430/v1402566281/Unknown.png" alt="" class="img-responsive" />
+      <% end %>
+      <%= link_to activity do %>
+        <span class="title">
+          <span>
+            <h5><i class="fa fa-map-marker"></i> <%= activity.addresses.collect(&:locality).uniq.join ", " %></h5>
+            <% if activity.slots.where("start > ?", Time.now).where(:avaliable => true).order('start asc').first %>
+            <h5><i class="fa fa-clock-o"></i> 下一個時段:</h5>
+            <h5>
+              <% next_slot = Slot.find(activity.slots.where("start > ?", Time.now).where(:avaliable => true).order('start asc').first).start %>
+              <abbr class="timeago" title="<%= next_slot.getutc.iso8601 %>">
+                <%= next_slot.to_s %>
+              </abbr>
+            </h5>
+            <% else %>
+            <% end %>
+          </span>
+        </span>
+      </div>
+      <% end %>
+      <div class="project-title margin-30">
+        <h5><%= activity.title %></h5>
+        <span class="price">$<%= activity.price %></span>
+        <h6><%= activity.merchant_name %></h6>
+      </div>
+  </li>
+  <% end %>
+</ul>

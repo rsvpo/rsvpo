@@ -1,0 +1,61 @@
+<%= render 'layouts/section', title: "我的預約" %>
+
+<section id="content">
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="calendar-wrapper container">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">       
+          <div class="portlet portlet-pink">
+            <div class="portlet-heading">
+              <div class="portlet-title">
+                <h4><%= current_user.name %></h4>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div id="defaultPortlet" class="panel-collapse collapse in">
+              <div class="portlet-body">
+                <div class="calendar-wrapper">
+                  <div id='calendar'></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function reload_calendar(){
+    var source = new Array();
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        ignoreTimezone: false,
+        select: this.select,
+        eventClick: this.eventClick,
+        eventSources: [
+          {url: '<%= upcoming_path(@mybookings, format: :json) %>',
+          error: function() {
+            alert('there was an error while fetching events!');
+          }}
+        ],
+        timeFormat: 'h:mmtt{ - h:mmtt}'
+    });
+  }
+</script>
+<script>
+  $(document).on('ready page:load', function () {
+    jQuery("abbr.timeago").timeago();
+  });
+  reload_calendar();
+</script>

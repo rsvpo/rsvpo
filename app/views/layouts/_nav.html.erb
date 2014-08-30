@@ -1,0 +1,41 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_url(:subdomain => false), :class => "navbar-brand" do %>
+        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_scale,h_30/v1407666062/RSVPO-logo-white.png" alt="RSVPO"/>
+      <% end %>
+    </div>
+    
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li<% if current_page? search_path %> class="active"<% end %>><%= link_to "活動", search_url %></li>
+        <li class="sign-up">
+          <% if current_user %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= current_user.name %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li<% if current_page? upcoming_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-ticket"></i>') +  " 我的預約", upcoming_url %></li>
+                <li<% if current_page? favourite_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-star"></i>') +  "喜愛活動", favourite_url %></li>
+                <li<% if current_page? following_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-bookmark"></i>') + "關注商戶", following_url %></li>
+                <li<% if current_page? inbox_path %> class="active"<% end %>><%= link_to raw('<i class="fa fa-envelope"></i>') +  "我的訊息", inbox_url %></li>
+                <li class="divider"></li>
+                <li><%= link_to raw('<i class="fa fa-gear"></i>') + "  設定", edit_user_registration_path %></li>
+                <li><%= link_to raw('<i class="fa fa-book"></i>') + "  條款", terms_path %></li>
+                <li><%= link_to raw('<i class="fa fa-sign-out"></i>') + "  登出", destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <%= link_to new_user_session_path do %>
+              <span class="white"> 登入</span>
+            <% end %>  
+          <% end %>
+      </ul>
+    </div><!--/.navbar-collapse -->
+    
+  </div>
+</div>

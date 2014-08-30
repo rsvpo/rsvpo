@@ -1,0 +1,38 @@
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            發訊息給<%= @receiver.name %>
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> <%= link_to "控制台", dashboard_path %>
+            </li>
+            <li><%= link_to "訊息", mailbox_path %></li>
+            <li class="active">發訊息給<%= @receiver.name %></li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+
+    <div class="post-comment margin-30">
+<!--       <div class="row">
+        <h3 class="lead col-sm-5 col-md-offset-2 black">回覆</h3>
+      </div> -->
+      <%= bootstrap_form_for(@message, layout: :horizontal, control_col: "col-sm-8  .col-md-offset-4") do |f| %>
+        <%= f.hidden_field :user_id, :value => @receiver.id  %>  
+        <%= f.hidden_field :mu, :value => true  %>
+        <%= f.text_area :content, hide_label: true %>
+        <%= f.form_group do %>
+          <%= f.submit "送出訊息" %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

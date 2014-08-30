@@ -1,0 +1,105 @@
+<!-- begin MAIN PAGE CONTENT -->
+<div id="page-wrapper">
+  <div class="page-content">
+    <!-- begin PAGE TITLE ROW -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-title">
+          <h1>
+            <%= @booking.slot.activity.title %>的預約 - <%= @booking.name %>
+          </h1>
+          <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i>  <a href="index.html">控制台</a>
+            </li>
+            <li class="active"><% if @booking.confirm %>已確認預約<% else %>未確認預約<% end %></li>
+            <li class="active"><%= @booking.slot.activity.title %>的預約 - <%= @booking.name %></li>
+          </ol>
+        </div>
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <!-- end PAGE TITLE ROW -->
+    
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 col-md-12">
+        <div class="portlet portlet-default merchantside">
+          <div class="portlet-body">
+            <div class="row margin-50">
+              <div class="col-md-6">
+                <address>
+                  <h3><%= @booking.slot.activity.title %></h3>
+                  <h4><%= @booking.slot.address.address %></h4>
+                  <h4><%= @booking.slot.address.locality %></h4>
+                </address>
+              </div>
+              <div class="col-md-6 invoice-terms">
+                <p>
+                  更新於: <%= @booking.updated_at.strftime("%F, %l:%M %P") %>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="booking-label">
+                  預約狀態:
+                </div>
+                <p class="booking-content">
+                  <% if @booking.confirm %>已確認<% else %>正等待確認<% end %>
+                </p>
+                <div class="booking-label">
+                  參加者:
+                </div>
+                <p class="booking-content">
+                  <% if @booking.friend %> <%= @booking.name %> 由<%= @booking.user.name %>預約<% else %><%= @booking.user.name %><% end %>
+                </p>
+                <div class="booking-label">
+                  活動時段:
+                </div>
+                <div class="booking-content">
+                  <p>
+                    <%= render 'layouts/progress', slot: @booking.slot %>
+                  </p>
+                </div>
+                <div class="booking-label">
+                  結束時間:
+                </div>
+                <p class="booking-content">
+                   <%= @booking.slot.finish.strftime("%F, %l:%M %P")  %>
+                </p>
+                <div class="booking-label">
+                  其他資料: (<%= @booking.slot.activity.bookmsg %>)
+                </div>
+                <p class="booking-content">
+                  <%= @booking.optional %>
+                </p>
+                
+                <div class="booking-actions text-center">
+                  <% if !@booking.confirm %>
+                    <%= form_for(Booking.find(@booking.id), :html => { :method => :put }) do |f| %>
+                      <%= f.hidden_field :confirm, :value => true %>
+                      <%= button_tag(type: 'submit', class: "btn btn-info") do %>
+                        確認預約
+                        <% end %>
+                    <% end %>
+                  <% elsif @booking.confirm %>
+                    <%= form_for(Booking.find(@booking.id), :html => { :method => :put }) do |f| %>
+                      <%= f.hidden_field :confirm, :value => true %>
+                        <%= button_tag(type: 'submit', class: "btn btn-red") do %>
+                        取消預約
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <%= link_to raw('<i class="fa fa-envelope"></i>') + @booking.user.name, to_client_path(@booking.user), class: "btn btn-green" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    
+  </div>
+</div>

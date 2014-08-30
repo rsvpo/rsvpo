@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: rsvpo
+  api_key: <%= ENV["CLOUNDINARY_API_KEY"] %>
+  api_secret: <%= ENV["CLOUNDINARY_API_SECRET"] %>
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: rsvpo
+  api_key: <%= ENV["CLOUNDINARY_API_KEY"] %>
+  api_secret: <%= ENV["CLOUNDINARY_API_SECRET"] %>
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: rsvpo
+  api_key: <%= ENV["CLOUNDINARY_API_KEY"] %>
+  api_secret: <%= ENV["CLOUNDINARY_API_SECRET"] %>
+  enhance_image_tag: true
+  static_image_support: false

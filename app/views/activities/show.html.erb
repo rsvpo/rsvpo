@@ -1,0 +1,128 @@
+<!--Content Section-->
+  <section id="content">
+    <div class="container">
+      
+      <section id="header">
+        <%= render 'layouts/flash' %>
+        <div class="row">
+          <div class="col-md-7">
+            <div class="panel-heading">
+              <h4 class="panel-title text-right">
+                <%= render 'layouts/like', activity: @activity %>
+              </h4>
+            </div>
+            <div class="carousel-wrapper">
+              <%= render 'carousel', activity: @activity %>
+            </div>
+            
+            <div class="main-wrap margin-10">
+              <div class="row">
+                <div class="col-xs-9">
+                  <h1 class="title"><%= @activity.title %></h1>
+                  <div class="addthis_sharing_toolbox margin-20"></div>
+                </div>
+                <div class="col-xs-3">
+                  <h1 class="price">$<%= @activity.price %></h1>
+                </div>
+              </div>
+              <p class="lead margin-30"><%= @activity.about %></p>
+              <div class="row margin-20">
+                <div class="col-xs-6">
+                  <div class ="other-info">
+                    <p><i class="fa fa-clock-o"></i> <%= @activity.duration %>分鐘</p>
+                    <p><i class="fa fa-tag"></i> <%= @activity.category.name %></p>
+                  </div>
+                </div>
+                <div class="col-xs-6 info-right">
+                  <%= link_to @merchant, class: "clickable" do %>
+                    <span class="thumbnail">
+                      <% if @merchant.logo? %>     
+                        <%= cl_image_tag(@merchant.logo.path, { size: '50x50', crop: :fill}) %>
+                      <% else %>
+                        <img src="http://res.cloudinary.com/rsvpo/image/upload/c_lfill,h_50,w_50/v1402566281/Unknown.png" alt="" />
+                      <% end %>
+                    </span>
+                  <% end %>
+                </div>
+              </div><!--End Row-->  
+              <div class="row margin-30 text-center">
+                <span class="rsvp-btn-wrapper">
+                  <button class="btn-main rsvp-btn">
+                    RSVP
+                  </button>
+                </span>
+              </div>
+            </div>
+
+            <section id="address">
+              <%= render 'layouts/map', merchant: false %>
+            </section>
+
+            <section id="slots">
+              <%= render 'calendar', activity: @activity %>
+            </section>
+          </div>
+
+          <div class="col-md-5">
+            <div class="panel-group" id="accordion">
+              <%= render 'layouts/hosts', hosts: @hosts, title: @activity.title %>
+              <%= render 'layouts/details', details: @activity.details %>
+              <%= render 'layouts/comments' %>
+              <%= render 'layouts/related', activities: @related, merchant: false  %>
+            </div>
+          </div>
+        </div> 
+      </section>
+    </div> 
+  </section>
+<script>
+  function reload_calendar(){
+    var source = new Array();
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,today,next',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        selectable: true,
+        selectHelper: false,
+        editable: false,
+        ignoreTimezone: false,
+        select: this.select,
+        eventClick: this.eventClick,
+        eventSources: [
+          {url: '<%= location_activity_path(@current_address.id, @activity.id, format: :json) %>',
+          error: function() {
+            alert('there was an error while fetching events!');
+          }}
+        ],
+        timeFormat: 'h:mmtt{-h:mmtt} '
+    });
+  }
+</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53a103b80ed29934"></script>
+<script>
+  var latlng, latlng_x, latlng_y, map, marker, marker_latlng, myOptions;
+  latlng_x = <%= @current_address.lat %>;
+  latlng_y = <%= @current_address.lng %>;
+  latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  myOptions = {
+    scrollwheel: false,
+    zoom: 17,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  marker_latlng = new google.maps.LatLng(latlng_x, latlng_y);
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+  marker = new google.maps.Marker({
+    position: marker_latlng,
+    map: map
+  });
+  $(document).on('ready page:load', function () {
+    $(".rsvp-btn").click(function() {
+      navigationFn.goToSection('#address');
+    });
+  });
+  reload_calendar();
+  addthis.init();
+</script>

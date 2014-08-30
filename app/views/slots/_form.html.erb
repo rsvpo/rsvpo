@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-lg-12">
+    <%= bootstrap_form_for([@activity, @slot], layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-8  .col-md-offset-1") do |f| %>
+      <%= f.datetime_select :start, :label => "開始", :placeholder => "開始" %>
+      <%= f.datetime_select :finish, :label => "結束", :placeholder => "結束" %>
+      <%= f.number_field :inventory, :label => "空檔", :placeholder => "空檔" %>
+      <%= f.text_area :description, rows: 5, :label => "簡介", :placeholder => "簡介" %>
+      <%= f.form_group :is_all_day do %>
+        <%= f.check_box :is_all_day, label: "全日活動" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= link_to "刪除時段", @slot, method: :delete, data: { confirm: '確定嗎？' }, class: "btn btn-red" %>
+        <%= f.submit "確認時段" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

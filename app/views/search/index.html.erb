@@ -1,0 +1,73 @@
+<div class="background-wrapper margin-30" style="background-image: url(http://res.cloudinary.com/rsvpo/image/upload/v1408774121/background-all.jpg)">
+  <div class="categories text-center">
+    <%= render 'layouts/categories', categories: @categories %>
+  </div>
+</div>
+<div id="topsearch">
+  <div class="searchbar">
+    <%= form_tag search_path, method: :get do %>
+    <%= text_field_tag :query, params[:query], class: "form-control", placeholder: " 搜尋"  %>
+    <% end %>
+  </div> 
+</div>
+
+<section id="content">
+  <div class="container">
+    <%= render 'layouts/flash' %>
+    <div class="panel-heading margin-30">
+      <h4 class="panel-title">
+        <%= render 'layouts/navigation' %>
+      </h4>
+    </div>
+    <div class="activities-wrapper">
+      <%= render 'layouts/activities', activities: @activities %>
+    </div>
+    <div class="paginate-wrap text-center">
+      <%= render 'layouts/infinity', activities: @activities %>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  $(window).scroll(function() {
+    var url;
+    url = $('.pagination .next_page a').attr('href');
+    if (url && $(window).scrollTop() >= $(document).height() - $(window).height()) {
+      $('.pagination').text(" 載入中");
+      return $.getScript(url);
+    }
+  });
+  function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+</script>
+<script>
+  $(window).scroll();
+  jQuery(document).ready(function() {
+    jQuery.timeago.settings.allowFuture = true;
+    jQuery("abbr.timeago").timeago();
+  });
+  var query = getParameterByName('query');
+  if (query == '休閑') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774128/background-relax.jpg)");  
+  };
+  if (query == '飲食') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774124/background-eat.jpg)");  
+  };
+  if (query == '動態') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774132/background-action.jpg)");  
+  };
+  if (query == '創意') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774118/background-creative.jpg)");  
+  };
+  if (query == '娛樂') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774115/background-entertainment.jpg)");  
+  };
+  if (query == '學習') {
+    $('.background-wrapper').css("background-image", "url(http://res.cloudinary.com/rsvpo/image/upload/v1408774114/background-education.jpg)");  
+  };
+</script>
