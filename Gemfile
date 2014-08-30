@@ -15,7 +15,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-linkedin'
-gem 'figaro', :github=>"laserlemon/figaro"
+gem "figaro"
 gem 'pg'
 gem 'simple_form'
 gem 'activeadmin', github: 'gregbell/active_admin'
@@ -31,6 +31,7 @@ gem 'attachinary'
 gem 'acts_as_commentable'
 gem 'kaminari'
 gem 'tire'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
