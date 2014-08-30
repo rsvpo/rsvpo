@@ -46,6 +46,7 @@ group :development, :test do
 end
 group :production do
   gem 'unicorn'
+  gem 'asset_sync'
 end
 group :test do
   gem 'capybara'
