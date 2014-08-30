@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "http://d129j62do8x4uv.cloudfront.net"
+  config.action_controller.asset_host = "http://d2bwekuxtwqi9l.cloudfront.net"
   config.assets.prefix = "/production/assets"
 
   # Precompile additional assets.
