@@ -7,7 +7,7 @@
         <div class="page-title">
           <h1>
             <%= @activity.title %>的時間表
-            <%= link_to raw('<i class="fa fa-edit"></i>') + " 新時段", generate_rule_path(@activity.id), :class => 'btn btn-green pull-right' %>
+            <%= link_to raw('<i class="fa fa-edit"></i>') + " 新時段", generate_rule_path(@activity.id), :class => 'btn btn-green pull-right', 'data-no-turbolink' => true %>
           </h1>
           <h1>
             <div class="btn-group">
@@ -65,14 +65,14 @@
           </div>
           <div class="portlet-body">
             <ul>
-              <% @slots.each do |slot| %>
+              <% @slots_paginated.each do |slot| %>
                 <li>
                   <%= render 'layouts/progress', slot: slot %>
                 </li>
               <% end %>
             </ul>
             <div class="paginate-wrap text-center">
-              <%= paginate @slots, :param_name => :page %>
+              <%= paginate @slots_paginated, :param_name => :page %>
             </div>
           </div>
         </div>

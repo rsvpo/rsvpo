@@ -12,30 +12,4 @@
   $(".portlet-widgets .fa-chevron-down, .portlet-widgets .fa-chevron-up").click(function() {
       $(this).toggleClass("fa-chevron-down fa-chevron-up");
   });
-
-  //Slim Scroll
-  $(function() {
-      $('#messageScroll, #alertScroll').slimScroll({
-          height: '200px',
-          alwaysVisible: true,
-          disableFadeOut: true,
-          touchScrollStep: 50
-      });
-  });
-
-//   //Easing Script for Smooth Page Transitions
-//   $(function() {
-//       $('.page-content').addClass('page-content-ease-in');
-//   });
-
-  //Tooltips
-  $(function() {
-
-      // Tooltips for sidebar toggle and sidebar logout button
-      $('.tooltip-sidebar-toggle, .tooltip-sidebar-logout').tooltip({
-          selector: "[data-toggle=tooltip]",
-          container: "body"
-      })
-
-  })
 </script>

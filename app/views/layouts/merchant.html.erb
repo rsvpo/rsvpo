@@ -9,8 +9,8 @@
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic' rel="stylesheet" type="text/css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel="stylesheet" type="text/css">
-  <script src="<%= ENV['CF'] %>fullcalendar.js"></script>
-  <script src="<%= ENV['CF'] %>admin/morris.js"></script>
+  <script src="<%= ENV['STATIC'] %>fullcalendar.js"></script>
+  <script src="<%= ENV['STATIC'] %>morris.js"></script>
   <%= cloudinary_js_config %>
   <%= csrf_meta_tags %>
 </head>
@@ -37,7 +37,7 @@
 
         <!-- begin LEFT SIDE WIDGETS -->
         <ul class="nav navbar-left">
-          <li class="tooltip-sidebar-toggle">
+          <li class="sidebar-toggle">
             <a href="#" id="sidebar-toggle" data-toggle="tooltip" data-placement="right" title="顯示選項">
               <i class="fa fa-bars"></i>
             </a>
@@ -106,10 +106,5 @@
 
   <%= render 'layouts/scripts' %>
 </body>
-<script>
-  $(document).on('ready page:load', function () {
-    jQuery("abbr.timeago").timeago();
-  });
-</script>
   <%= render "layouts/footer" unless @skip_footer %>
 </html>

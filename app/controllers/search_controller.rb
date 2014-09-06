@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+  
   def index
     @activities = Activity.search(params)
     @categories =Category.all

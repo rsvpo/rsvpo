@@ -1,4 +1,6 @@
 class ActivitiesController < InheritedResources::Base
+  load_and_authorize_resource
+  
   def show
     @activity = Activity.find(params[:id])
     @hosts = @activity.hosts

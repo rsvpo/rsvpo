@@ -7,7 +7,8 @@ class SlotsController < InheritedResources::Base
     else
       @current_address = @activity.addresses.first
     end
-    @slots = @activity.slots.where(:address_id => @current_address.id).order('start asc').page(params[:page]).per(12)
+    @slots = @activity.slots.where(:address_id => @current_address.id).order('start asc')
+    @slots_paginated = @slots.page(params[:page]).per(12)
     @addresses = @activity.addresses
     respond_to do |format|
       format.html # index.html.erb

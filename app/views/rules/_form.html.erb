@@ -1,6 +1,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-<script src="<%= ENV['CF'] %>jquery.ui.timepicker.js"></script>
+<script src="<%= ENV['STATIC'] %>jquery.ui.timepicker.js"></script>
 
 <% start_date = params[:start_date].to_datetime.strftime('%F') if params[:start_date] %>
 <% start_time = params[:start_date].to_datetime.strftime('%I:%M %p') if params[:start_date] %>

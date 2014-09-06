@@ -6,7 +6,11 @@ class Rule < ActiveRecord::Base
   
   def add_slots
     begin_date = Date.today
-    last_date = begin_date + 30.days
+    if self.repeat_ends_on.blank?
+      last_date = begin_date + 90.days
+    else
+      last_date = self.repeat_ends_on
+    end
     self.schedule.occurrences_between(begin_date,last_date).each do |t|
       slot = self.activity.slots.create!(description: self.description, 
         is_all_day: self.is_all_day,

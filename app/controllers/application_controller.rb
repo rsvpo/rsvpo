@@ -14,6 +14,18 @@ class ApplicationController < ActionController::Base
     end    
   end
   
+  def current_ability
+    if current_merchant
+      @current_ability ||= Ability.new(current_merchant)
+    else
+      @current_ability ||= Ability.new(current_user)
+    end
+  end
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+  
   def merchant_variables
     if merchant_signed_in?
       @merchant = current_merchant

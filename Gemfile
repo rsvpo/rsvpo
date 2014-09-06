@@ -31,6 +31,7 @@ gem 'attachinary'
 gem 'acts_as_commentable'
 gem 'kaminari'
 gem 'tire'
+gem 'cancancan'
 
 group :development do
   gem 'better_errors'
