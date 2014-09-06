@@ -8,7 +8,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find_by_subdomain!(request.subdomain)
     @addresses = @merchant.addresses
     @related = @merchant.activities
     @follow = Follow.find_by_merchant_id_and_user_id(@merchant.id, current_user.id)

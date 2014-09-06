@@ -34,7 +34,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6 info-right">
-                  <%= link_to @merchant, class: "clickable" do %>
+                  <%= link_to, root_url(subdomain: @merchant.subdomain), class: "clickable" do %>
                     <span class="thumbnail">
                       <% if @merchant.logo? %>     
                         <%= cl_image_tag(@merchant.logo.path, { size: '50x50', crop: :fill}) %>

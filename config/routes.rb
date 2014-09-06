@@ -44,5 +44,6 @@ Rsvp::Application.routes.draw do
   ActiveAdmin.routes(self)
   resources :users, :only => [:index, :show]
   resources :merchants
+  match '', to: 'merchants#show', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   mount Attachinary::Engine => "/attachinary"
 end
